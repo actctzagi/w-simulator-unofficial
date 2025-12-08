@@ -1,7 +1,6 @@
 /* ============================
    全体のページスタイル
 ============================ */
-
 body {
     background: radial-gradient(circle at top, #182034, #090d16);
     color: black;
@@ -21,13 +20,10 @@ body {
     background-position: center;
 }
 
-
 .top-line {
     height: 1px;            /* 線の太さ */
     background-color: black; /* 線の色 */
 }
-
-
 
 
 /* ============================
@@ -69,14 +65,6 @@ body {
   pointer-events: none;
   display: block;
 }
-
-
-
-
-
-
-
-
 
 
 /* ============================
@@ -146,7 +134,6 @@ body {
               opacity   0.45s ease-out;
 }
 
-
 .layout {
     position: relative;
     width: 100%;
@@ -157,9 +144,8 @@ body {
 
 
 /* ============================
-   Viewer
+   viewer
 ============================ */
-
 .layer {
     position: absolute;
     width: 417px;
@@ -234,13 +220,9 @@ body {
 }
 
 
-
-
-
 /* ============================
    左上のフォーム名表示
 ============================ */
-
 .formNameWrapper {
     position: absolute; 
     top: 10px;        
@@ -268,8 +250,6 @@ body {
     background: black;
     padding: 2px 4px; 
 }
-
-
 
 
 /* ============================
@@ -316,6 +296,66 @@ body {
 }
 
 
+/* ============================
+   Xボタン
+============================ */
+#shareBtn {
+  position: relative;
+  border: none;
+  padding: 0;
+  background: none;
+  cursor: pointer;
+  display: inline-block;
+}
+
+#shareBtn img {
+  display: block;
+  width: 170px;
+  height: auto;
+  pointer-events: none;
+}
+
+#shareBtn .btn-text {
+  position: absolute;
+  top: 50%;
+  left: 55%;
+  transform: translate(-50%, -50%);
+  color: #FFFFFF;
+  font-size: 11px;
+  font-weight: bold;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-style: oblique;
+  text-align: center;
+  white-space: nowrap;
+  pointer-events: none;
+  letter-spacing: 1px;
+}
+
+#shareBtn:hover {
+    transform: scale(1.1);
+}
+
+#shareBtn:active {
+    transform: scale(0.95);
+}
+
+
+/* ▼ 武器ボタンと共有ボタンを横並びにする */
+.button-row {
+  display: flex;
+  justify-content: center;  /* 中央揃え */
+  align-items: center;      /* 高さ中央 */
+  gap: 16px;                /* ボタン同士の間隔 */
+  flex-wrap: wrap;          /* スマホで折り返し */
+  margin: 10px 0;
+}
+
+/* 元の inline style を無効化 */
+#toggleWeaponsWrapper {
+  text-align: initial;
+  margin: 0;
+}
+
 
 
 /* ============================
@@ -354,11 +394,6 @@ body {
 .selector-btn-img, .swap-icon, .selector-btn-label {
     transition: none;
 }
-
-
-
-
-
 
 
 /* ============================
@@ -417,8 +452,6 @@ body {
     text-decoration: underline;
 }
 
-
-
 @keyframes pulse-button {
   0%   { transform: scale(1.0); }
   50%  { transform: scale(1.1); }
@@ -426,7 +459,7 @@ body {
 }
 
 .selector-btn-label {
-  position: absolute;  /* 画像の中央に重ねる */
+  position: absolute; 
   top: 50%;
   left: 52%;
   transform: translate(-50%, -50%);
@@ -436,10 +469,10 @@ body {
   font-weight: 700;
   font-style: oblique;
   text-align: center;
-  pointer-events: none; /* 文字がクリックを邪魔しないように */
-  white-space: nowrap;        /* 一行に固定 */
-  text-overflow: ellipsis;    /* はみ出たら「…」で省略 */
-  max-width: 80%;             /* ボタン内で文字がはみ出さない幅 */
+  pointer-events: none; 
+  white-space: nowrap;     
+  text-overflow: ellipsis;  
+  max-width: 80%;          
 }
 
 /* 左ボタン用の枠 */
@@ -459,8 +492,6 @@ body {
 }
 
 
-
-
 /* ============================
     入れ替えボタン
 ============================ */
@@ -478,7 +509,6 @@ body {
     transition: transform 0.15s ease, filter 0.15s ease;
 }
 
-
 /* swap ボタンの画像 */
 .swap-icon {
     width: 100%;
@@ -487,19 +517,11 @@ body {
     transition: transform 0.15s ease, filter 0.15s ease;
 }
 
-
 /* クリックで押し込まれる感じ */
 .swap-button:active .swap-icon {
     transform: translateY(1px) scale(0.95);
     filter: brightness(0.8);
 }
-
-
-
-
-
-
-
 
 
 /* ============================
@@ -591,7 +613,6 @@ body {
 }
 
 
-
 /* ============================
    モーダル内のボタン
 ============================ */
@@ -630,13 +651,6 @@ body {
   filter: brightness(0.5);    /* 暗くなる */
   transition: filter 0.1s ease; 
 }
-
-
-
-
-
-
-
 
 
 /* ============================
@@ -693,13 +707,10 @@ body {
     z-index: 10;
 }
 
-
-
 .button-wrapper.selected img,
 .button-wrapper.hovered img {
     filter: brightness(50%);
 }
-
 
 .button-wrapper.selected .button-label,
 .button-wrapper.hovered .button-label {
@@ -707,10 +718,8 @@ body {
 }
 
 
-
-
 /* ============================
-   左右のパネル（今は使ってない）
+   左右のパネル（非表示だが不可欠）
 ============================ */
 
 /* 左パネル */
@@ -783,13 +792,6 @@ body {
 }
 
 
-
-
-
-
-
-
-
 /* ============================
     変身エフェクト
 ============================ */
@@ -812,12 +814,8 @@ body {
 }
 
 
-
-
-
-
 /* ============================
-    文章形式
+    文章
 ============================ */
 .form-name {
     font-family: "Noto Sans JP", sans-serif; 
@@ -853,9 +851,6 @@ body {
   50% { opacity: 0; }
   100% { opacity: 1; }
 }
-
-
-
 
 .info-panel {
     width: 80vw;
@@ -902,13 +897,9 @@ body {
 }
 
 
-
-
-
 /* ============================
     フッター
 ============================ */
-
 .site-footer {
   position: relative;
   width: 100vw;
@@ -987,9 +978,6 @@ body {
 }
 
 
-
-
-
 /* ============================
    スマホ用: 画面幅600px以下の時
 ============================ */
@@ -1024,7 +1012,6 @@ html, body {
     height: 100%;
 }
 
-
 .form-selector-bar {
     display: flex;
     justify-content: space-between; /* 左右端に配置 */
@@ -1045,13 +1032,11 @@ html, body {
     height: auto;
 }
 
-
   .nav-button {
     width: 32px;
     height: 32px;
   }
 
-  /* 説明文が viewer に重ならない */
   .description {
     margin-top: 16px;
     padding: 0 12px;

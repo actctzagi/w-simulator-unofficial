@@ -30,11 +30,6 @@ const forms = [
   { value: "zone", label: "ゾーン" }
 ];
 
-
-
-
-
-
 /* =============================
    メモリ解説文
 ============================= */
@@ -77,11 +72,6 @@ function updateMemoryDescriptions() {
     if(leftBox)  leftBox.textContent  = memoryDescriptions[left]  || "";
     if(rightBox) rightBox.textContent = memoryDescriptions[right] || "";
 }
-
-
-
-
-
 
 /* =============================
    左右のパネルにボタンを生成（非表示だが不可欠）
@@ -162,9 +152,6 @@ function createButtons() {
     rightPanel.appendChild(rightWrapper);
   });
 
-
-
-
   // 初期状態設定
   leftPanel.querySelectorAll(".button-wrapper").forEach(w => {
       if (w.querySelector("img").dataset.value === "cyclone") w.classList.add("selected");
@@ -178,7 +165,6 @@ function createButtons() {
   updateHalf();
 }
 
-
 function updateButtonHighlight(side, selectedValue) {
     const panel = side === "left" ? document.getElementById("leftPanel")
                                   : document.getElementById("rightPanel");
@@ -191,12 +177,7 @@ function updateButtonHighlight(side, selectedValue) {
 }
 
 
-
-
-let weaponsVisible = true; // ボタンで切り替える状態を保持
-
-
-
+let weaponsVisible = true; 
 
 
 /* =============================
@@ -271,10 +252,6 @@ function updateHalf() {
         "ocean", "puppeteer", "queen", "rocket", "skull", "trigger", "unicorn", 
         "violence", "weather", "xtreme", "yesterday", "zone"];
 
-
-
-
-
     /* ============================================
        単体画像処理
     ============================================ */
@@ -298,8 +275,6 @@ function updateHalf() {
         wingsLayer.style.display = "block";
         capeLayer.style.display = "block";
     }
-
-
 
 
     /* ============================================
@@ -359,8 +334,6 @@ function updateHalf() {
         weapon1Src = "images/skull-weapon2.png";
         weapon2Src = "images/metal-weapon5.png";
     }
-
-
 
 
 /* ============================
@@ -430,10 +403,6 @@ else if (right === "xtreme") {
     weapon2Src = "images/xtreme-weapon.png";
 }
 
-
-
-
-
     else if (left === "metal") {
     if (right === "dummy") {
         weapon1Src = "images/metal-weapon1.png"; // コピー先①（メタル1）
@@ -451,7 +420,6 @@ else if (right === "xtreme") {
         weapon2Src = "images/metal-weapon1.png";
         }
     }
-
 
 
     else if (!disableWeapons) {
@@ -479,7 +447,6 @@ else if (right === "xtreme") {
     }
 
 
-
     // 単体画像でも武器は出す（ただしNGペアは非表示）
     if (isSingle && disableWeapons) {
         weapon1Src = null;
@@ -494,7 +461,7 @@ else if (right === "xtreme") {
     const leftHasWeapon  = (weapon1Src && weapon1Src !== null);
 
 
-// ★ xtreme が絡む場合はダミーコピーを実行しない
+// xtreme が絡む場合はダミーのコピーを実行しない
 if (leftIsDummy && right !== "xtreme") {
     if (rightHasWeapon) {
         weapon1Src = `images/${right}-weapon1.png`;
@@ -513,8 +480,6 @@ else if (rightIsDummy && left !== "xtreme") {
         weapon2Src = null;
     }
 }
-
-
 
 
     if (weapon1Src) {
@@ -536,11 +501,6 @@ else if (rightIsDummy && left !== "xtreme") {
         weapon2Layer.style.display = "none";
         weapon2Layer.dataset.hasWeapon = "false";
     }
-
-
-
-
-
 
 
 
@@ -677,14 +637,9 @@ else if (rightIsDummy && left !== "xtreme") {
 }
 
 
-
-
-
-
 /* ============================================
    武器表示切り替えボタン
 ============================================ */
-
 const toggleWeaponsBtn = document.getElementById("toggleWeaponsBtn");
 
 toggleWeaponsBtn.addEventListener("click", () => {
@@ -716,6 +671,38 @@ function updateWeaponsButtonVisibility() {
 }
 
 
+/* ============================================
+   ✅Xボタン
+============================================ */
+document.getElementById("shareBtn").addEventListener("click", () => {
+
+  const left  = document.getElementById("leftSelect").value;
+  const right = document.getElementById("rightSelect").value;
+
+  // 正式URL
+  const baseUrl = "https://actctzagi.github.io/w-simulator-unofficial/";
+  const shareUrl = `${baseUrl}?left=${encodeURIComponent(left)}&right=${encodeURIComponent(right)}`;
+
+  // 左上のフォーム名を反映
+  const comboName = document.getElementById("formNameDynamic").textContent;
+
+  const text =
+`仮面ライダーW
+今回のメモリは……
+
+【${comboName}】
+
+これで決まりだ！
+
+#AtoZ_運命のシミュレーター(非公式)
+${shareUrl}`;
+
+  const xUrl =
+    `https://twitter.com/intent/tweet` +
+    `?text=${encodeURIComponent(text)}`;
+
+  window.open(xUrl, "_blank");
+});
 
 
 /* ============================================
@@ -736,8 +723,6 @@ function animateViewer() {
 }
 
 
-
-
 /* ============================================
    フォーム名更新
 ============================================ */
@@ -750,8 +735,6 @@ function updateFormName() {
 
     document.getElementById("formNameDynamic").textContent = leftLabel + rightLabel;
 }
-
-
 
 
 /* ============================================
@@ -783,11 +766,9 @@ document.getElementById("swapButton").addEventListener("click", () => {
 });
 
 
-
-
-
-
-// 左右パネルに hover イベント
+/* =============================
+   左右パネルに hover イベント
+============================= */
 ["leftPanel", "rightPanel"].forEach(panelId => {
     const panel = document.getElementById(panelId);
 
@@ -811,10 +792,9 @@ document.getElementById("swapButton").addEventListener("click", () => {
 });
 
 
-
-
-
-// セレクトボックス&モーダル
+/* =============================
+   セレクトボックス&モーダル
+============================= */
 
 let activeSide = "left"; // どちらを編集しているか
 
@@ -880,7 +860,6 @@ function openModal() {
         wrapper.addEventListener("mouseleave", () => wrapper.classList.remove("hovered"));
 
 
-        // 🟦変身演出向けに変更
         wrapper.addEventListener("click", async () => {
 
          　　playHenshinEffect().then(() => {
@@ -920,15 +899,15 @@ function openModal() {
                 updateFormName();
             }
 
-
             updateMemoryDescriptions(); 
 
 });
 
 
 
-
-        // 🟦変身演出
+/* =============================
+   変身演出
+============================= */
 function playHenshinEffect(duration = 900) {
     return new Promise(resolve => {
     const henshin = document.getElementById("henshinEffect");
@@ -980,9 +959,8 @@ function updateSelectors() {
 }
 
 
-
 /* ============================
-   🟦モーダルを閉じる処理 変身演出のためにImmidiateを追加
+   モーダルを閉じる処理
 ============================ */
 function closeModal() {
   const modal = document.getElementById("memoryModal");
@@ -1001,8 +979,6 @@ function closeModalImmediate() {
   modal.classList.remove("show", "closing");
   modal.style.display = "none";
 }
-
-
 
 
 function updateSelectorButton(side, value) {
@@ -1031,9 +1007,9 @@ rightSelect.addEventListener("change", () => {
 
 
 
-
-
-// 変身エフェクト
+/* =============================
+   変身エフェクト
+============================= */
 function playHenshinEffect(duration = 900) {
   return new Promise(resolve => {
     const henshin = document.getElementById("henshinEffect");
@@ -1052,31 +1028,37 @@ function playHenshinEffect(duration = 900) {
 
 
 
-
-
+/* =============================
+   🟥DOMContentLoaded
+============================= */
 document.addEventListener("DOMContentLoaded", () => {
 
-    // ① メモリ選択ボタン生成
     createButtons();
 
-    // ② 初期値セット
-    document.getElementById("leftSelect").value  = "cyclone";
-    document.getElementById("rightSelect").value = "joker";
+    const params = new URLSearchParams(window.location.search);
+    const left  = params.get("left");
+    const right = params.get("right");
 
-    // ③ 左右ボタンのハイライト
-    updateButtonHighlight("left",  "cyclone");
-    updateButtonHighlight("right", "joker");
+    // ✅ URL指定があればそれを使用
+    if (left && right) {
+        document.getElementById("leftSelect").value  = left;
+        document.getElementById("rightSelect").value = right;
 
-    // ④ ボタン画像＋文字更新（あなたの環境に合わせてどちらか1つ）
-    // updateSelectorButtons();  // 古い版ならこっち
-    updateSelectors();           // 新しい版ならこっち
+        updateButtonHighlight("left",  left);
+        updateButtonHighlight("right", right);
+    } 
+    // ✅ 無ければ従来の初期値
+    else {
+        document.getElementById("leftSelect").value  = "cyclone";
+        document.getElementById("rightSelect").value = "joker";
 
-    // ⑤ viewer 画像更新
+        updateButtonHighlight("left",  "cyclone");
+        updateButtonHighlight("right", "joker");
+    }
+
+    updateSelectors();       
     updateHalf();
-
-    // ⑥ フォーム名更新
     updateFormName();
-
     updateMemoryDescriptions();  
 
 });
