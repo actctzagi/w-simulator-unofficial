@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>仮面ライダーW：AtoZ／運命のシミュレーター</title>
+<link rel="stylesheet" href="style.css">
+<link rel="icon" type="image/png" href="images/favicon.png">
+</head>
+
+
+
+
+
+<body>
+
+
+<!-- ▼ 非表示：JSで値設定に使用 -->
+<div class="selectors" style="display:none;">
+    <select id="leftSelect"></select>
+    <select id="rightSelect"></select>
+</div>
+
+
+<!-- ▼ ヘッダー  -->
+<header class="site-header">
+  <div class="header-bg"></div>
+  <img src="images/header2.png" class="header-title" alt="">
+</header>
+
+
+
+<br>
+<br>
+<br>
+
+
+
+<!-- ▼ viewerとフォーム名  -->
+<div class="layout">
+    <div id="viewer-area" class="viewer-area">
+    
+        <div class="formNameWrapper">
+            <div class="formNameStatic">仮面ライダーW</div>
+            <div id="formNameDynamic" class="formNameDynamic">サイクロンジョーカー</div>
+        </div>
+
+
+
+        <div id="singleLayer" class="layer"><img id="singleImg"></div> 
+        <div id="eyesLayer" class="layer"><img id="eyesImg"></div>
+
+        <div id="leftHalf" class="layer"><img id="leftImg"></div>
+        <div id="rightHalf" class="layer"><img id="rightImg"></div>
+
+        <div id="wingsLayer" class="layer"><img id="wingsImg"></div>
+        <div id="capeLayer" class="layer"><img id="capeImg"></div>
+        <div id="mufflerLayer" class="layer"><img id="mufflerImg"></div>
+
+        <div id="weapon1Layer" class="layer"><img id="weapon1Img"></div>
+        <div id="weapon2Layer" class="layer"><img id="weapon2Img"></div>
+
+        <div id="watermarkLayer" class="layer"><img id="watermarkImg" src="images/watermark.png"></div>
+
+
+    </div>
+    <!-- 非表示：左右パネル -->
+    <div id="leftPanel" class="side-panel" style="display:none;"></div>
+    <div id="rightPanel" class="side-panel" style="display:none;"></div>
+</div>
+
+
+
+<!-- ▼ 武器表示ボタン  -->
+<div id="toggleWeaponsWrapper" style="text-align: center; margin: 10px 0;">
+    <button id="toggleWeaponsBtn">
+        <img src="images/weaponbtnbackground1.png" alt="武器ボタン">
+        <span class="btn-text">武器を非表示にする</span>
+    </button>
+</div>
+
+
+
+
+<!-- ▼ 左右選択ボタンと左右入れ替えボタン  -->
+<div class="form-selector-bar">
+
+    <button id="leftSelector" class="selector-btn frame-left">
+      <img class="selector-btn-img" src="images/btn-cyclone.png" alt="サイクロン">
+      <span class="selector-btn-label">サイクロン</span>
+      <div class="memory-description" id="leftMemoryDescription">疾風の記憶を持つガイアメモリ。疾風を引き起こし、風を自由自在に操る能力を与える。</div>
+    </button>
+
+
+    <button id="swapButton" class="swap-button">
+      <img src="images/swap.png" class="swap-icon" alt="swap">
+    </button>
+
+
+    <button id="rightSelector" class="selector-btn frame-right">
+      <img class="selector-btn-img" src="images/btn-joker.png" alt="ジョーカー">
+      <span class="selector-btn-label">ジョーカー</span>
+      <div class="memory-description" id="rightMemoryDescription">切札の記憶を持つガイアメモリ。運動能力を高め、格闘戦の技術を強化する。</div>
+    </button>
+
+</div>
+
+
+
+<!-- ▼ モーダル  -->
+<div id="memoryModal" class="modal">
+  <div class="modal-content">
+      <span id="closeModal" class="close">×</span>
+      <div id="modalGrid" class="modal-grid"></div>
+  </div>
+</div>
+
+
+
+
+<br>
+<br>
+<br>
+
+
+
+
+
+<!-- ▼ 文章  -->
+<div class="info-panel">
+  <p>
+
+▶︎『仮面ライダーW』の非公式シミュレーターです。<br>
+<br>
+▶︎ ガイアメモリをタップすると26種類から選べます。<br>
+▶︎ 中央のボタンで左右のメモリを入れ替えられます。<br>
+▶︎ 同じメモリ同士を組み合わせることもできます。<br>
+▶︎ フォームチェンジの総数は26×26=全676種類。<br>
+<br>
+▶︎ 「ファング」「スカル（左半身に挿した場合）」「????」「?????」「???????」などは左右両半身に変化をもたらします。<br>
+▶︎ なかにはスペシャルな組み合わせも……？<br>
+<br>
+
+※ 画像が表示されない場合は、10秒ほど待つと表示されます。<br>
+※ ガイアメモリの能力設定は『<a href="https://www.shogakukan.co.jp/books/09105133" target="_blank">仮面ライダーW超全集</a>』p132-133 および「<a href="https://www.kamen-rider-official.com/zukan/items/mode/categories?utf8=%E2%9C%93&item%5Bkamen_rider_id%5D=11" target="_blank">仮面ライダー図鑑</a>」の記述に準拠しています｡<br>
+
+
+  </p>
+</div>
+
+
+
+<!-- ▼ フッター  -->
+<footer class="site-footer">
+
+  <div class="footer-credits">
+    <div class="label">シミュレーター作成者：</div>
+
+    <div class="value">
+      ザギザギ（<a href="https://x.com/actct_zagi" target="_blank">@actct_zagi</a>）
+    </div>
+
+    <div class="label">イラスト素材作成者：</div>
+
+    <div class="value">
+      ザギザギ（<a href="https://x.com/actct_zagi" target="_blank">@actct_zagi</a>）
+    </div>
+
+
+    <div class="label">メモリ背景作成者様：</div>
+
+    <div class="value">
+      はるりん（<a href="https://twitter.com/Harlin0420/status/1570038259417518080?s=20" target="_blank">@Harlin0420</a>）様
+    </div>
+  </div>
+
+</footer>
+
+
+
+
+<img id="henshinEffect" src="images/henshin.png">
+
+<script src="dom-to-image.min.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>

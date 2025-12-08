@@ -1,0 +1,1062 @@
+/* ============================
+   全体のページスタイル
+============================ */
+
+body {
+    background: radial-gradient(circle at top, #182034, #090d16);
+    color: black;
+    font-family: "Hiragino Sans", "Noto Sans JP", sans-serif;
+    margin: 0;
+    padding: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    /* 背景画像 */
+    background-image: url('images/pagebackground.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+
+.top-line {
+    height: 1px;            /* 線の太さ */
+    background-color: black; /* 線の色 */
+}
+
+
+
+
+/* ============================
+   ヘッダー
+============================ */
+.site-header {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #000;
+}
+
+@media screen and (min-width: 600px) {
+  .site-header {
+    max-height: 300px;
+  }
+}
+
+/* 背景 */
+.header-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url("images/header1.png");
+  background-size: cover;
+  background-position: center 14%; 
+  z-index: 1;
+}
+
+/* タイトル */
+.header-title {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  z-index: 2;
+  pointer-events: none;
+  display: block;
+}
+
+
+
+
+
+
+
+
+
+
+/* ============================
+   ウォーターマーク
+============================ */
+#watermarkLayer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; 
+    z-index: 99; 
+}
+
+#watermarkLayer img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; 
+    opacity: 1; 
+}
+
+
+/* ============================
+   レイアウト配置
+============================ */
+
+.viewer-area {
+    position: relative;
+
+    width: 417px;
+    height: 556px;
+    max-width: 100%;     /* 画面幅が狭い場合は縮小 */
+    aspect-ratio: 417 / 556;  /* 元の比率を維持 */
+
+    margin: 0 auto; /* 横中央に固定 */
+    margin-bottom: 15px
+    transform: scale(0.8);       /* 80%に縮小 */
+    transform-origin: top center; /* 縮小の基準点（上中央） */
+
+    /* viewer-areaの背景画像 */
+    background-image: url('images/viewerbackground.png');
+    background-size: cover;        /* 全体を覆う */
+    background-position: center;   /* 中央に配置 */
+    background-repeat: no-repeat;  /* 繰り返さない */
+}
+
+.viewer-area .layer,
+.viewer-area .layer img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;  /* トリミング禁止 */
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.viewer-zoom-enter {
+  transform: scale(4);  /* 画面全体くらいのデカさ */
+  opacity: 0;
+}
+
+.viewer-zoom-enter-active {
+  transform: scale(1);
+  opacity: 1;
+  transition: transform 0.45s cubic-bezier(.25,1.4,.45,1),
+              opacity   0.45s ease-out;
+}
+
+
+.layout {
+    position: relative;
+    width: 100%;
+    max-width: 1300px;
+    height: auto;
+    margin: 0 auto; /* 全体を中央揃え */
+}
+
+
+/* ============================
+   Viewer
+============================ */
+
+.layer {
+    position: absolute;
+    width: 417px;
+    height: 556px;
+    top: 0;
+    left: 0;
+}
+
+.layer img {
+    width: 417px;
+    height: 556px;
+    object-fit: contain;
+    pointer-events: none;
+}
+
+
+#weapon1Layer img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 12;
+}
+
+#weapon2Layer img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 11;
+}
+
+#eyesLayer img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10; 
+}
+
+
+#leftHalf img {
+    position: absolute;
+    left: 0;
+    clip-path: inset(0 50% 0 0); 
+    z-index: 5;
+}
+
+#rightHalf img {
+    position: absolute;
+    left: 0;
+    clip-path: inset(0 0 0 50%); 
+    z-index: 5;
+}
+
+#capeLayer img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 3;
+}
+
+#wingsLayer img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2; 
+}
+
+#mufflerLayer img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+
+
+
+
+/* ============================
+   左上のフォーム名表示
+============================ */
+
+.formNameWrapper {
+    position: absolute; 
+    top: 10px;        
+    left: 0px;            
+    text-align: left;   
+    font-family: 'Noto Sans JP', sans-serif;
+    font-style: oblique;
+    font-weight: 900;
+    z-index: 99;
+}
+
+/* 1行目 */
+.formNameStatic {
+    font-size: 8.5px;
+    line-height: 1.2;
+    color: black;
+    font-weight: 900;
+}
+
+/* 2行目 */
+.formNameDynamic {
+    font-size: 11px;
+    line-height: 1.2;
+    color: white;
+    background: black;
+    padding: 2px 4px; 
+}
+
+
+
+
+/* ============================
+   武器表示切り替えボタン
+============================ */
+#toggleWeaponsBtn {
+    position: relative;      /* 内部で文字を絶対配置するため */
+    border: none;
+    padding: 0;
+    background: none;
+    cursor: pointer;
+    display: inline-block;   /* サイズを画像に合わせる */
+}
+
+#toggleWeaponsBtn img {
+    display: block;          /* ボタン内で横幅に合わせて中央 */
+    width: 170px;            /* 画像サイズを小さめに */
+    height: auto;           /* アスペクト比を維持 */
+    pointer-events: none;   /* 画像にクリック干渉しない */
+}
+
+#toggleWeaponsBtn .btn-text {
+    position: absolute;        /* 画像の上に文字を重ねる */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* 完全に中央に重ねる */
+    color: #FFFFFF;         
+    font-size: 11px;
+    font-weight: bold;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-style: oblique;
+    text-align: center;
+    white-space: nowrap;     /* 改行されないようにする */
+    pointer-events: none;    /* ボタン自体がクリック可能 */
+    letter-spacing: 1px; 
+}
+
+#toggleWeaponsBtn:hover {
+    transform: scale(1.1);
+}
+
+#toggleWeaponsBtn:active {
+    transform: scale(0.95);
+}
+
+
+
+
+/* ============================
+    左右選択ボタンと入れ替えボタン 共通の動き
+============================ */
+.selector-btn, #swapButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.1s ease;
+    cursor: pointer;
+    position: relative;
+    z-index: 1; /* 上に出す */
+}
+
+/* ホバー時に拡大 */
+#swapButton:hover {
+    transform: scale(1.1);
+}
+
+.selector-btn:hover .selector-btn-img  {
+  animation: pulse-button 1.5s infinite ease-in-out;
+}
+
+
+/* 押下時 */
+.swapButton:active {
+    transform: scale(0.95);
+}
+.selector-btn:active .selector-btn-img {
+    transform: scale(0.95);
+}
+
+
+/* 内部画像・ラベルは transform しない */
+.selector-btn-img, .swap-icon, .selector-btn-label {
+    transition: none;
+}
+
+
+
+
+
+
+
+/* ============================
+    左右選択ボタン
+============================ */
+.form-selector-bar {
+    display: flex;
+    justify-content: center; /* 全体の中央揃え */
+    align-items: center;
+    gap: 20px; /* 左右ボタンと入れ替えボタンの間隔 */
+    margin-bottom: 10px; 
+}
+
+.selector-btn {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;  /* これで画像＋文字の中央揃え */
+  width: 200px;
+  height: 150px; /* 画像に合わせて余裕のある高さに */
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px; 
+}
+
+.selector-btn-img {
+  display: block;
+  width:  100%;
+  height: auto;
+  object-fit: contain;
+  filter: brightness(0.9); 
+  pointer-events: none; 
+  transition: transform 0.2s ease;
+  animation: none;
+}
+
+.memory-description {
+    position: absolute; 
+    left: 50%; 
+    width: 100%;    
+    transform: translateX(-48%);
+
+    top: 90%;  /* 下にずらす */
+    font-size: clamp(10px, 2vw, 12px);
+
+    line-height: 1.8;
+    text-align: left;
+    font-style: oblique; 
+    font-weight: 700; 
+
+    color: #7E7976;
+    font-family: "Noto Sans JP", sans-serif;
+    text-shadow: 2px 2px 5px white; 
+    text-decoration: underline;
+}
+
+
+
+@keyframes pulse-button {
+  0%   { transform: scale(1.0); }
+  50%  { transform: scale(1.1); }
+  100% { transform: scale(1.0); }
+}
+
+.selector-btn-label {
+  position: absolute;  /* 画像の中央に重ねる */
+  top: 50%;
+  left: 52%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-shadow: 30px 0px 30px black, 30px 0px 30px black;
+  font-size: 18px;
+  font-weight: 700;
+  font-style: oblique;
+  text-align: center;
+  pointer-events: none; /* 文字がクリックを邪魔しないように */
+  white-space: nowrap;        /* 一行に固定 */
+  text-overflow: ellipsis;    /* はみ出たら「…」で省略 */
+  max-width: 80%;             /* ボタン内で文字がはみ出さない幅 */
+}
+
+/* 左ボタン用の枠 */
+.frame-left {
+    background-image: url("images/frame-left.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* 右ボタン用の枠 */
+.frame-right {
+    background-image: url("images/frame-right.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+
+
+
+/* ============================
+    入れ替えボタン
+============================ */
+/* swap ボタン本体 */
+.swap-button {
+    width: 40px;            
+    height: 40px;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+
+/* swap ボタンの画像 */
+.swap-icon {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+
+/* クリックで押し込まれる感じ */
+.swap-button:active .swap-icon {
+    transform: translateY(1px) scale(0.95);
+    filter: brightness(0.8);
+}
+
+
+
+
+
+
+
+
+
+/* ============================
+   モーダル
+============================ */
+.modal {
+    position: fixed;
+    inset: 0; /* ←画面全体に広がる */
+
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    backdrop-filter: blur(8px);
+    background: rgba(255,255,255,0.2);
+    z-index: 2000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.modal.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-content {
+  width: 90vw;
+  max-width: 400px;
+  max-height: 80vh;
+  background: rgba(0,0,0,0.7);
+  padding: 20px;
+  border-radius: 7px;
+  border: 1px solid white;
+  transform: scale(0.5);
+  opacity: 0;
+  transition: transform 0.4s,
+              opacity 0.4s cubic-bezier(.4,0,.6,1);
+}
+.modal.show .modal-content {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 24px;
+    color: white;
+}
+
+
+.modal-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(9, 1fr);   /* 1列に9行 */
+    grid-auto-flow: column;               /* 列方向に要素を流す */
+    gap: 6px;
+    margin-top: 10px;
+}
+
+#memoryModal.closing {
+  opacity: 0;
+  filter: blur(8px);
+  pointer-events: none;
+  transition: opacity 0.3s ease, filter 0.3s ease;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(8px); /* 背景全体をぼかす */
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 2000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.modal-overlay.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+
+
+/* ============================
+   モーダル内のボタン
+============================ */
+.modal-grid .button-wrapper {
+    width: 100px;      /* ← モーダル表示用の小さいボタン */
+    height: 50px;
+}
+
+.modal-grid .button-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.8); /* 通常より少し明るくしたければ調整可 */
+}
+
+/* 通常のボタン */
+.button-wrapper img {
+  transition: filter 0.1s ease;
+}
+
+
+.modal-grid .button-label {
+    font-size: 10px;        /* 文字を小さく */
+    max-width: 70px;       /* はみ出し防止 */
+    padding: 0 2px;        /* 端欠け対策 */
+}
+
+/* 選択中ボタン */
+.button-wrapper.selected {
+    filter: brightness(0.5);      /* 暗くなる */
+    border-radius: 7px;
+}
+
+/* ホバー時 */
+.button-wrapper.hovered {
+  filter: brightness(0.5);    /* 暗くなる */
+  transition: filter 0.1s ease; 
+}
+
+
+
+
+
+
+
+
+
+/* ============================
+   ボタンラッパー
+============================ */
+.button-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 80px;
+    height: 50px;
+    cursor: pointer;
+    overflow: hidden;
+    background-color: transparent; 
+    border-radius: 8px; /* ← これで黒い部分を消す */
+    transition: filter 0.2s;
+}
+
+.button-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;       /* 縦横いっぱいに表示してトリミング */
+    object-position: center; /* 真ん中を基準に上下をカット */
+    z-index: 1;  /* imgがクリックを受け取るように */
+    display: block;       /* ← inline img の隙間を消す */
+    background-color: transparent; /* ← これで黒い部分を消す */
+    transition: none;        /* 選択時ズームを消す */
+    filter: brightness(50%);  /* ← デフォで薄暗く */
+}
+
+
+
+.button-label {
+    position: absolute;
+    top: 52%;
+    left: 52%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-family: "Noto Sans JP", sans-serif;
+    font-weight: 700;
+    font-style: oblique;
+    font-size: 10px;
+
+
+    white-space: nowrap;
+    max-width: 70px;       /* ← これで文字が端にぶつからない */
+    padding: 0 4px;        /* ← これで欠けなくなる */
+    line-height: 1.2;      /* ← 余裕を作る */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+    pointer-events: none;
+    opacity: 1;
+    transition: 0.2s;
+    z-index: 10;
+}
+
+
+
+.button-wrapper.selected img,
+.button-wrapper.hovered img {
+    filter: brightness(50%);
+}
+
+
+.button-wrapper.selected .button-label,
+.button-wrapper.hovered .button-label {
+    opacity: 1;
+}
+
+
+
+
+/* ============================
+   左右のパネル（今は使ってない）
+============================ */
+
+/* 左パネル */
+#leftPanel {
+    position: absolute;
+    top: 0;
+    right: calc(50% + 480px + 40px);  /* 50%は中央基準、208px=viewer幅半分、40px=距離 */
+}
+
+/* 右パネル */
+#rightPanel {
+    position: absolute;
+    top: 0;
+    left: calc(50% + 208.5px + 40px);   /* 同上 */
+}
+
+.side-panel {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);  /* ← 3列 */
+    row-gap: 10px;     /* 縦の間隔 */
+    column-gap: 20px;  /* 横の間隔 */
+    width: 30px;   /* 540px画像を縮小表示するための適度な幅 */
+    height: auto;
+}
+
+.button {
+    outline: none; /* ← これで青枠を消す */
+}
+
+.button:focus {
+    box-shadow: 0 0 0 3px rgba(102, 175, 233, 0.8); /* 枠のように見せる */
+}
+
+
+/* pngボタン画像 */
+.form-thumbnail {
+    width: 80px;   /* 元の幅をそのまま */
+    height: 40px;  /* 表示したい高さ */
+    object-fit: cover;           /* 画像をコンテナいっぱいに表示 */
+    object-position: center;     /* 中央を基準にトリミング */
+    cursor: pointer;
+    border-radius: 8px; /* ← これで黒い部分を消す */
+    transition: 0.15s;
+}
+
+.form-thumbnail:hover {
+    transform: scale(1.07);
+    border-color: #4aa3ff;
+}
+
+.form-thumbnail.selected {
+    border-color: #4aa3ff;
+    box-shadow: 0 0 10px #4aa3ff;
+}
+
+.option-button {
+    border: 3px solid transparent; /* ← 常に3px確保する */
+    border-radius: 8px;  /* ← form-thumbnail の角丸を継承 */
+    box-sizing: border-box;         /* ← 忘れずに入れる */
+    transition: 0.15s;
+}
+
+.option-button:hover {
+    border-color: #4aa3ff;
+}
+
+.option-button.selected {
+    border-color: #4da3ff;          /* ← 色だけ変える */
+    box-shadow: 0 0 10px #4aa3ff;
+}
+
+
+
+
+
+
+
+
+
+/* ============================
+    変身エフェクト
+============================ */
+#henshinEffect {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);  
+    opacity: 0;
+    pointer-events: none;
+    z-index: 9999;
+    width: 120%;
+    max-width: 600px;
+    transition: transform 0.6s cubic-bezier(.34,1.56,.64,1), opacity 0.3s ease;
+}
+
+#henshinEffect.show {
+    transform: translate(-50%, -50%) scale(1.25); 
+    opacity: 1;
+}
+
+
+
+
+
+
+/* ============================
+    文章形式
+============================ */
+.form-name {
+    font-family: "Noto Sans JP", sans-serif; 
+    font-weight: 1000; 
+    font-style: oblique; 
+    text-align: center;
+    font-size: 24px;
+    color: black; 
+    margin-bottom: 10px;
+}
+
+.center-text {
+    font-family: "Noto Sans JP", sans-serif; 
+    font-weight: 1000; 
+    color: black;
+    text-align: left;
+    max-width: 1000px;
+}
+
+.intro-text {
+    animation: blinkText 1.7s ease-in-out infinite;
+    font-family: "Noto Sans JP", sans-serif; 
+    font-weight: 700; 
+    color: black;
+    font-size: 15px;
+    text-align: left;
+    max-width: 1000px;
+    font-style: oblique;
+}
+
+@keyframes blinkText {
+  0% { opacity: 1; }
+  50% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+
+
+
+.info-panel {
+    width: 80vw;
+    max-width: 375px;
+    margin: 0 auto;
+    margin-top: 20px;
+    background: url("images/info-panel.png") center/cover no-repeat;
+    padding: 20px 25px;
+
+    display: flex;
+    justify-content: flex-start; 
+    align-items: center;
+}
+
+.info-panel p {
+    font-family: "Noto Sans JP", sans-serif;
+    font-weight: 1000;
+    font-style: oblique;
+    font-size: 11px;
+    text-align: left;
+    color: white;
+    line-height: 3.0;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 1);
+}
+
+
+.info-panel a {
+    color: #ffffff;  
+    text-decoration: underline;
+    font-weight: 700;
+}
+
+.info-panel a:hover {
+    color: #ffffff;  
+    text-decoration: none;
+}
+
+.info-panel .divider {
+    display: block;
+    height: 1px;
+    background: white;
+    opacity: 0.5;
+    margin: 6px 0;
+}
+
+
+
+
+
+/* ============================
+    フッター
+============================ */
+
+.site-footer {
+  position: relative;
+  width: 100vw;
+  height: 70px;
+  margin: 0;                
+  margin-top: 50px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  bottom: 0;
+  left: 0;
+
+  background-image: url("images/header1.png");
+  background-size: cover;
+  background-position: center 80%; 
+  background-repeat: no-repeat;
+  overflow: hidden;
+}
+
+.site-footer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5); /* 黒の半透明フィルター */
+  z-index: 1;
+}
+
+.footer-credits {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: auto 1fr;  
+  gap: 4px 0px;                     /* 行間、列間 */
+  width: fit-content;               /* 全体幅を字に合わせる */
+  margin: 0 auto;                   /* フッターの中央に配置 */
+}
+
+.footer-credits .label {
+  text-align: right;
+  font-family: "Corporate-Logo-Medium-ver3", sans-serif;
+  font-weight: normal;
+  font-size: 11px;
+  color: #FFFFFF;
+  line-height: 25px;
+}
+
+.footer-credits .value {
+  text-align: left;
+  font-family: "Corporate-Logo-Medium-ver3", sans-serif;
+  font-weight: normal;
+  font-size: 11px;
+  color: #FFFFFF;
+  line-height: 25px;
+}
+
+@font-face {
+  font-family: "Corporate-Logo-Medium-ver3"; 
+  src: url("fonts/Corporate-Logo-Medium-ver3.otf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.site-footer a:link {
+  color: #FFFFFF;   /* 押す前 */
+}
+
+.site-footer a:visited {
+  color: #FFFFFF;   /* 押した後 */
+}
+
+.site-footer a:hover {
+  color: #adff2f;   /* ホバー時 */
+}
+
+.site-footer a:active {
+  color: #adff2f;   /* 押した瞬間 */
+}
+
+
+
+
+
+/* ============================
+   スマホ用: 画面幅600px以下の時
+============================ */
+/* 横スクロール制限 */
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+/* スマホ用レイアウト調整 */
+@media (max-width: 600px) {
+
+.page-title img {
+  max-width: 100vw; /* スマホでは画面幅に合わせる */
+  }
+
+/* 左右ボタンを viewer-area の中に収める */
+.nav-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  z-index: 10;
+}
+
+#prev-btn { left: 8px; }
+#next-btn { right: 8px; } 
+
+.viewer-area {
+    width: 100%;
+    height: 100%;
+}
+
+
+.form-selector-bar {
+    display: flex;
+    justify-content: space-between; /* 左右端に配置 */
+    align-items: center;
+    width: 90vw; /* 画面幅に収める */
+    max-width: 400px;
+    margin: 0 auto 10px auto;
+    gap: 10px;
+}
+
+.selector-btn {
+    width: 60%; /* 横幅を縮小 */
+    min-width: 60px; /* 最小サイズ確保 */
+    height: auto;
+}
+.selector-btn-img {
+    width: 100%;
+    height: auto;
+}
+
+
+  .nav-button {
+    width: 32px;
+    height: 32px;
+  }
+
+  /* 説明文が viewer に重ならない */
+  .description {
+    margin-top: 16px;
+    padding: 0 12px;
+    position: relative;
+    z-index: 1;
+  }
+
+}
