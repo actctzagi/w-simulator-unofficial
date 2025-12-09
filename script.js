@@ -83,7 +83,6 @@ function createButtons() {
   const rightSelect = document.getElementById("rightSelect");
 
   forms.forEach(f => {
-    // select に option 追加
     const leftOpt = document.createElement("option");
     leftOpt.value = f.value;
     leftOpt.text = f.label;
@@ -94,7 +93,6 @@ function createButtons() {
     rightOpt.text = f.label;
     rightSelect.appendChild(rightOpt);
 
-    // 左ボタンラッパー
     const leftWrapper = document.createElement("div");
     leftWrapper.className = "button-wrapper";
 
@@ -111,19 +109,13 @@ function createButtons() {
     leftWrapper.appendChild(leftLabel);
 
     leftWrapper.addEventListener("click", () => {
-        // 既存の選択を解除
         leftPanel.querySelectorAll(".button-wrapper").forEach(w => w.classList.remove("selected"));
-        // 選択中を設定
         leftWrapper.classList.add("selected");
-
         leftSelect.value = f.value;
         updateHalf();
     });
-
     leftPanel.appendChild(leftWrapper);
 
-
-    // 右ボタンラッパー
     const rightWrapper = document.createElement("div");
     rightWrapper.className = "button-wrapper";
 
@@ -140,26 +132,16 @@ function createButtons() {
     rightWrapper.appendChild(rightLabel);
 
     rightWrapper.addEventListener("click", () => {
-        // 既存の選択を解除
         rightPanel.querySelectorAll(".button-wrapper").forEach(w => w.classList.remove("selected"));
-        // 選択中を設定
         rightWrapper.classList.add("selected");
-
         rightSelect.value = f.value;
         updateHalf();
     });
-
     rightPanel.appendChild(rightWrapper);
   });
 
-  // 初期状態設定
-  leftPanel.querySelectorAll(".button-wrapper").forEach(w => {
-      if (w.querySelector("img").dataset.value === "cyclone") w.classList.add("selected");
-  });
-  rightPanel.querySelectorAll(".button-wrapper").forEach(w => {
-      if (w.querySelector("img").dataset.value === "joker") w.classList.add("selected");
-  });
 
+  // 初期状態設定
   leftSelect.value = "cyclone";
   rightSelect.value = "joker";
   updateHalf();
@@ -187,7 +169,6 @@ let weaponsVisible = true;
 function updateHalf() {
     const left = document.getElementById("leftSelect").value;
     const right = document.getElementById("rightSelect").value;
-
     const leftLayer = document.getElementById("leftHalf");
     const rightLayer = document.getElementById("rightHalf");
     const eyesLayer = document.getElementById("eyesLayer");
@@ -336,72 +317,72 @@ function updateHalf() {
     }
 
 
-/* ============================
-   エクストリーム武器分岐
-============================ */
+    /* ============================
+       エクストリーム武器分岐
+    ============================ */
 
-// エクストリーム × ファング（左右共通）
-else if (
-    (left === "xtreme" && right === "fang") ||
-    (left === "fang" && right === "xtreme")
-) {
-    weapon1Src = null;
-    weapon2Src = "images/xtreme-weaponF.png";
-}
+    // エクストリーム × ファング（左右共通）
+    else if (
+        (left === "xtreme" && right === "fang") ||
+        (left === "fang" && right === "xtreme")
+    ) {
+        weapon1Src = null;
+        weapon2Src = "images/xtreme-weaponF.png";
+    }
 
-// エクストリーム × スカル
-else if (left === "xtreme" && right === "skull") {
-    weapon1Src = "images/skull-weapon2.png";
-    weapon2Src = "images/xtreme-weaponXS.png";
-}
+    // エクストリーム × スカル
+    else if (left === "xtreme" && right === "skull") {
+        weapon1Src = "images/skull-weapon2.png";
+        weapon2Src = "images/xtreme-weaponXS.png";
+    }
 
-// スカル × エクストリーム
-else if (left === "skull" && right === "xtreme") {
-    weapon1Src = "images/skull-weapon1.png";
-    weapon2Src = "images/xtreme-weaponSX.png";
-}
+    // スカル × エクストリーム
+    else if (left === "skull" && right === "xtreme") {
+        weapon1Src = "images/skull-weapon1.png";
+        weapon2Src = "images/xtreme-weaponSX.png";
+    }
 
-// エクストリーム × エターナル
-else if (left === "xtreme" && right === "eternal") {
-    weapon1Src = "images/eternal-weapon2.png";
-    weapon2Src = "images/xtreme-weaponE.png";
-}
-else if (left === "eternal" && right === "xtreme") {
-    weapon1Src = "images/eternal-weapon1.png";
-    weapon2Src = "images/xtreme-weaponE.png";
-}
+    // エクストリーム × エターナル
+    else if (left === "xtreme" && right === "eternal") {
+        weapon1Src = "images/eternal-weapon2.png";
+        weapon2Src = "images/xtreme-weaponE.png";
+    }
+    else if (left === "eternal" && right === "xtreme") {
+        weapon1Src = "images/eternal-weapon1.png";
+        weapon2Src = "images/xtreme-weaponE.png";
+    }
 
-// エクストリーム × バイオレンス
-else if (left === "xtreme" && right === "violence") {
-    weapon1Src = "images/violence-weapon6.png";
-    weapon2Src = "images/xtreme-weapon.png";
-}
-else if (left === "violence" && right === "xtreme") {
-    weapon1Src = "images/violence-weapon5.png";
-    weapon2Src = "images/xtreme-weapon.png";
-}
+    // エクストリーム × バイオレンス
+    else if (left === "xtreme" && right === "violence") {
+        weapon1Src = "images/violence-weapon6.png";
+        weapon2Src = "images/xtreme-weapon.png";
+    }
+    else if (left === "violence" && right === "xtreme") {
+        weapon1Src = "images/violence-weapon5.png";
+        weapon2Src = "images/xtreme-weapon.png";
+    }
 
-// エクストリーム × エクストリーム
-else if (left === "xtreme" && right === "xtreme") {
-    weapon1Src = null; 
-    weapon2Src = null; 
-}
+    // エクストリーム × エクストリーム
+    else if (left === "xtreme" && right === "xtreme") {
+        weapon1Src = null; 
+        weapon2Src = null; 
+    }
 
-// それ以外：左がエクストリーム
-else if (left === "xtreme") {
-    weapon1Src = weaponUsers.includes(right)
-        ? `images/${right}-weapon2.png`
-        : null;
-    weapon2Src = "images/xtreme-weapon.png";
-}
+    // それ以外：左がエクストリーム
+    else if (left === "xtreme") {
+        weapon1Src = weaponUsers.includes(right)
+           ? `images/${right}-weapon2.png`
+            : null;
+        weapon2Src = "images/xtreme-weapon.png";
+    }
 
-// それ以外：右がエクストリーム
-else if (right === "xtreme") {
-    weapon1Src = weaponUsers.includes(left)
-        ? `images/${left}-weapon1.png`
-        : null;
-    weapon2Src = "images/xtreme-weapon.png";
-}
+    // それ以外：右がエクストリーム
+    else if (right === "xtreme") {
+        weapon1Src = weaponUsers.includes(left)
+            ? `images/${left}-weapon1.png`
+            : null;
+        weapon2Src = "images/xtreme-weapon.png";
+    }
 
     else if (left === "metal") {
     if (right === "dummy") {
@@ -426,7 +407,7 @@ else if (right === "xtreme") {
         const L_hasWeapon = weaponUsers.includes(left);
         const R_hasWeapon = weaponUsers.includes(right);
 
-        // 左右同じ武器フォームなら両手に表示
+        // 左右同じ武器の場合
         const sameWeaponForms = [
         "accel", "eternal", "gene", 
         "heat", "iceage", "key", "luna", "metal", "nasca", 
@@ -446,14 +427,13 @@ else if (right === "xtreme") {
         }
     }
 
-
-    // 単体画像でも武器は出す（ただしNGペアは非表示）
+    // 単体画像でも武器を表示
     if (isSingle && disableWeapons) {
         weapon1Src = null;
         weapon2Src = null;
     }
 
-
+    // ダミー分岐
     const leftIsDummy  = (left === "dummy");
     const rightIsDummy = (right === "dummy");
 
@@ -461,25 +441,25 @@ else if (right === "xtreme") {
     const leftHasWeapon  = (weapon1Src && weapon1Src !== null);
 
 
-// xtreme が絡む場合はダミーのコピーを実行しない
-if (leftIsDummy && right !== "xtreme") {
-    if (rightHasWeapon) {
-        weapon1Src = `images/${right}-weapon1.png`;
-        weapon2Src = `images/${right}-weapon2.png`;
-    } else {
-        weapon1Src = null;
-        weapon2Src = null;
+    // エクストリーム × ダミー
+    if (leftIsDummy && right !== "xtreme") {
+        if (rightHasWeapon) {
+            weapon1Src = `images/${right}-weapon1.png`;
+            weapon2Src = `images/${right}-weapon2.png`;
+        } else {
+            weapon1Src = null;
+            weapon2Src = null;
+        }
     }
-}
-else if (rightIsDummy && left !== "xtreme") {
-    if (leftHasWeapon) {
-        weapon1Src = `images/${left}-weapon1.png`;
-        weapon2Src = `images/${left}-weapon2.png`;
-    } else {
-        weapon1Src = null;
-        weapon2Src = null;
+    else if (rightIsDummy && left !== "xtreme") {
+        if (leftHasWeapon) {
+            weapon1Src = `images/${left}-weapon1.png`;
+            weapon2Src = `images/${left}-weapon2.png`;
+        } else {
+            weapon1Src = null;
+            weapon2Src = null;
+        }
     }
-}
 
 
     if (weapon1Src) {
@@ -568,20 +548,19 @@ else if (rightIsDummy && left !== "xtreme") {
         capeSrc = "images/eternal-cape.png";
     }
 
-    // サイクロンマフラー分岐（ケープが無い場合のみ）
+    // サイクロンマフラー分岐
     if(!capeSrc){
         if(left === "cyclone" && right === "cyclone") mufflerSrc="images/cyclone-muffler3.png";
         else if(left === "cyclone") mufflerSrc="images/cyclone-muffler1.png";
         else if(right === "cyclone") mufflerSrc="images/cyclone-muffler2.png";
     }
 
-    // ナスカマフラー分岐（ケープが無い場合のみ）
+    // ナスカマフラー分岐
     if(!capeSrc){
         if(left === "nasca" && right === "nasca") mufflerSrc="images/nasca-muffler3.png";
         else if(left === "nasca") mufflerSrc="images/nasca-muffler1.png";
         else if(right === "nasca") mufflerSrc="images/nasca-muffler2.png";
     }
-
 
     // ウイングス分岐
     if((left === "bird" && right === "nasca") ||(left === "nasca" && right === "bird")){
@@ -593,11 +572,6 @@ else if (rightIsDummy && left !== "xtreme") {
     }else {
         wingsSrc = null;
     }
-
-
-    /* ============================================
-       ここから既存の出力処理（変更なし）
-    ============================================ */
 
     // 左右半身描画
     leftImg.src = leftSrc;
@@ -634,6 +608,15 @@ else if (rightIsDummy && left !== "xtreme") {
     updateMemoryDescriptions(); 
     updateWeaponsButton();
 
+
+    const row = document.querySelector(".button-row");
+    const weaponBtn = document.getElementById("toggleWeaponsBtn");
+
+    if (weaponBtn.style.display === "none") {
+        row.classList.add("center-share-only");
+    } else {
+        row.classList.remove("center-share-only");
+    }
 }
 
 
@@ -643,8 +626,8 @@ else if (rightIsDummy && left !== "xtreme") {
 const toggleWeaponsBtn = document.getElementById("toggleWeaponsBtn");
 
 toggleWeaponsBtn.addEventListener("click", () => {
-    weaponsVisible = !weaponsVisible; // 表示状態反転
-    updateWeaponsDisplay();           // 武器レイヤー表示を更新
+    weaponsVisible = !weaponsVisible; 
+    updateWeaponsDisplay();           
 });
 
 function updateWeaponsDisplay() {
@@ -655,7 +638,6 @@ function updateWeaponsDisplay() {
         weapon2Layer.style.display = weaponsVisible ? "block" : "none";
     }
 
-    // ボタン文字を切り替え
     toggleWeaponsBtn.querySelector(".btn-text").textContent = 
         weaponsVisible ? "武器を非表示にする" : "武器を表示する";
 
@@ -666,24 +648,33 @@ function updateWeaponsDisplay() {
 }
 
 function updateWeaponsButtonVisibility() {
-    const anyWeapon = (weapon1Layer.dataset.hasWeapon === "true") || (weapon2Layer.dataset.hasWeapon === "true");
-    toggleWeaponsBtn.style.display = anyWeapon ? "block" : "none";
+    const wrapper = document.getElementById("toggleWeaponsWrapper");
+    
+    const anyWeapon =
+        weapon1Layer.dataset.hasWeapon === "true" ||
+        weapon2Layer.dataset.hasWeapon === "true";
+
+    wrapper.style.display = anyWeapon ? "block" : "none";
+
+    const row = document.querySelector(".button-row");
+    if (!anyWeapon) {
+        row.classList.add("center-share-only");
+    } else {
+        row.classList.remove("center-share-only");
+    }
 }
 
-
 /* ============================================
-   ✅Xボタン
+   Xボタン
 ============================================ */
 document.getElementById("shareBtn").addEventListener("click", () => {
 
   const left  = document.getElementById("leftSelect").value;
   const right = document.getElementById("rightSelect").value;
 
-  // 正式URL
   const baseUrl = "https://actctzagi.github.io/w-simulator-unofficial/";
   const shareUrl = `${baseUrl}?left=${encodeURIComponent(left)}&right=${encodeURIComponent(right)}`;
 
-  // 左上のフォーム名を反映
   const comboName = document.getElementById("formNameDynamic").textContent;
 
   const text =
@@ -694,7 +685,7 @@ document.getElementById("shareBtn").addEventListener("click", () => {
 
 これで決まりだ！
 
-#AtoZ_運命のシミュレーター(非公式)
+#AtoZ運命のシミュレーター【非公式】
 ${shareUrl}`;
 
   const xUrl =
@@ -744,48 +735,34 @@ document.getElementById("swapButton").addEventListener("click", () => {
     const leftSelect = document.getElementById("leftSelect");
     const rightSelect = document.getElementById("rightSelect");
 
-    // 値を入れ替え
     const temp = leftSelect.value;
     leftSelect.value = rightSelect.value;
     rightSelect.value = temp;
 
-    // wrapper の selected クラスを更新
     updateButtonHighlight("left", leftSelect.value);
     updateButtonHighlight("right", rightSelect.value);
 
-    // viewer 画像更新
     updateHalf();
-
-    // セレクター画像とラベル更新 
     updateSelectors();
-
-    // フォーム名更新 
     updateFormName();
-
     updateMemoryDescriptions(); 
 });
 
 
 /* =============================
-   左右パネルに hover イベント
+   左右パネルに hover
 ============================= */
 ["leftPanel", "rightPanel"].forEach(panelId => {
     const panel = document.getElementById(panelId);
-
     panel.addEventListener("mouseenter", () => {
         panel.querySelectorAll(".button-wrapper").forEach(w => w.classList.add("hovered"));
     });
-
     panel.addEventListener("mouseleave", () => {
         panel.querySelectorAll(".button-wrapper").forEach(w => w.classList.remove("hovered"));
     });
-
-    // タッチ開始
     panel.addEventListener("touchstart", () => {
         panel.querySelectorAll(".button-wrapper").forEach(w => w.classList.add("hovered"));
     });
-
-    // タッチ終了
     panel.addEventListener("touchend", () => {
         panel.querySelectorAll(".button-wrapper").forEach(w => w.classList.remove("hovered"));
     });
@@ -795,8 +772,7 @@ document.getElementById("swapButton").addEventListener("click", () => {
 /* =============================
    セレクトボックス&モーダル
 ============================= */
-
-let activeSide = "left"; // どちらを編集しているか
+let activeSide = "left";
 
 const leftSelector = document.getElementById("leftSelector");
 const rightSelector = document.getElementById("rightSelector");
@@ -823,25 +799,22 @@ function openModal() {
     const rightSelect = document.getElementById("rightSelect");
 
     const modal = document.getElementById("memoryModal");
-    modal.classList.add("show");  // show クラスを付与
+    modal.classList.add("show");  
 
     const grid = document.getElementById("modalGrid");
 
-    grid.innerHTML = ""; // 初期化
+    grid.innerHTML = ""; 
 
     forms.forEach(f => {
 
-        // ボタンラッパーを作る
         const wrapper = document.createElement("div");
         wrapper.className = "button-wrapper";
 
-        // 画像
         const btn = document.createElement("img");
         btn.src = `images/btn-${f.value}.png`;
-        btn.className = "form-thumbnail"; // CSSで薄暗・トリミング済み
+        btn.className = "form-thumbnail"; 
         btn.dataset.value = f.value;
 
-        // ラベル
         const label = document.createElement("span");
         label.className = "button-label";
         label.textContent = f.label;
@@ -849,13 +822,11 @@ function openModal() {
         wrapper.appendChild(btn);
         wrapper.appendChild(label);
 
-        // 選択中ボタンに selected を付与
         if ((activeSide === "left" && f.value === leftValue) ||
             (activeSide === "right" && f.value === rightValue)) {
             wrapper.classList.add("selected");
         }
 
-        // ホバーで hovered
         wrapper.addEventListener("mouseenter", () => wrapper.classList.add("hovered"));
         wrapper.addEventListener("mouseleave", () => wrapper.classList.remove("hovered"));
 
@@ -863,10 +834,9 @@ function openModal() {
         wrapper.addEventListener("click", async () => {
 
          　　playHenshinEffect().then(() => {
-    　　　　　closeModal(); // 変身エフェクトと同時に消える
+    　　　　　closeModal(); 
  　　　　　　 });
 
-            // --- 選択セット ---
             if (activeSide === "left") {
                 leftSelect.value = f.value;
                 updateButtonHighlight("left", f.value);
@@ -875,58 +845,19 @@ function openModal() {
                 updateButtonHighlight("right", f.value);
             }
 
-            // --- モーダル内の選択表示更新 ---
             grid.querySelectorAll(".button-wrapper.selected").forEach(el => el.classList.remove("selected"));
             wrapper.classList.add("selected");
 
-
-            // --- 変身演出 ---
-            // 1000 は表示時間（ms）
             await playHenshinEffect(1000);   
-
-
-            // --- モーダルを即閉じる ---
             closeModalImmediate(); 
-
-            // --- viewer 更新 ---
             updateHalf();
-
-            // --- セレクター表示更新 ---
             updateSelectors();
-
-            // --- フォーム名更新 ---
             if (typeof updateFormName === "function") {
                 updateFormName();
             }
-
             updateMemoryDescriptions(); 
-
 });
 
-
-
-/* =============================
-   変身演出
-============================= */
-function playHenshinEffect(duration = 900) {
-    return new Promise(resolve => {
-    const henshin = document.getElementById("henshinEffect");
-    if (!henshin) return resolve();
-
-    // 表示
-    henshin.classList.add("show");
-
-    // duration 経過後に消去
-    setTimeout(() => {
-    henshin.classList.remove("show");
-
-    // CSSトランジションが終わるのを待つ
-    const transitionTime = 300; // opacity/transformに合わせる
-    setTimeout(resolve, transitionTime);
-
-    }, duration);
-  });
-}
         grid.appendChild(wrapper);
     });
 
@@ -970,7 +901,7 @@ function closeModal() {
     modal.classList.remove("show", "closing");
     modal.style.display = "none";
 
-  }, 300); // CSSのtransitionと同じ秒数
+  }, 300);
 }
 
 function closeModalImmediate() {
@@ -991,20 +922,15 @@ function updateSelectorButton(side, value) {
     label.textContent = forms.find(f => f.value === value)?.label || "";
 }
 
-// ボタン押下でモーダルを開く
 leftSelector.addEventListener("click", () => { activeSide = "left"; openModal(); });
 rightSelector.addEventListener("click", () => { activeSide = "right"; openModal(); });
 
-
-// 選択時
 leftSelect.addEventListener("change", () => {
     updateSelectorButton("left", leftSelect.value);
 });
 rightSelect.addEventListener("change", () => {
     updateSelectorButton("right", rightSelect.value);
 });
-
-
 
 
 /* =============================
@@ -1026,10 +952,8 @@ function playHenshinEffect(duration = 900) {
 }
 
 
-
-
 /* =============================
-   🟥DOMContentLoaded
+   DOMContentLoaded
 ============================= */
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -1039,7 +963,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const left  = params.get("left");
     const right = params.get("right");
 
-    // ✅ URL指定があればそれを使用
+    // URL指定があれば使用
     if (left && right) {
         document.getElementById("leftSelect").value  = left;
         document.getElementById("rightSelect").value = right;
@@ -1047,7 +971,7 @@ document.addEventListener("DOMContentLoaded", () => {
         updateButtonHighlight("left",  left);
         updateButtonHighlight("right", right);
     } 
-    // ✅ 無ければ従来の初期値
+    // 無ければ従来の初期値
     else {
         document.getElementById("leftSelect").value  = "cyclone";
         document.getElementById("rightSelect").value = "joker";
