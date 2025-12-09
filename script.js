@@ -139,12 +139,6 @@ function createButtons() {
     });
     rightPanel.appendChild(rightWrapper);
   });
-
-
-  // 初期状態設定
-  leftSelect.value = "cyclone";
-  rightSelect.value = "joker";
-  updateHalf();
 }
 
 function updateButtonHighlight(side, selectedValue) {
