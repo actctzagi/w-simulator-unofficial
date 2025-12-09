@@ -667,7 +667,7 @@ document.getElementById("shareBtn").addEventListener("click", () => {
   const right = document.getElementById("rightSelect").value;
 
   const baseUrl = "https://actctzagi.github.io/w-simulator-unofficial/";
-  const shareUrl = `${baseUrl}?left=${encodeURIComponent(left)}&right=${encodeURIComponent(right)}`;
+  const shareUrl = `${baseUrl}?left=${encodeURIComponent(left)}&right=${encodeURIComponent(right)}&v=2`;
 
   const comboName = document.getElementById("formNameDynamic").textContent;
 
