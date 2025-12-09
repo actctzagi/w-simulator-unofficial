@@ -956,33 +956,33 @@ function playHenshinEffect(duration = 900) {
    DOMContentLoaded
 ============================= */
 document.addEventListener("DOMContentLoaded", () => {
-
     createButtons();
 
-    const params = new URLSearchParams(window.location.search);
-    const left  = params.get("left");
-    const right = params.get("right");
+    // createButtons が DOM を作り終わるまで 1 tick 遅らせる
+    setTimeout(() => {
 
-    // URL指定があれば使用
-    if (left && right) {
-        document.getElementById("leftSelect").value  = left;
-        document.getElementById("rightSelect").value = right;
+        const params = new URLSearchParams(window.location.search);
+        const left  = params.get("left");
+        const right = params.get("right");
 
-        updateButtonHighlight("left",  left);
-        updateButtonHighlight("right", right);
-    } 
-    // 無ければ従来の初期値
-    else {
-        document.getElementById("leftSelect").value  = "cyclone";
-        document.getElementById("rightSelect").value = "joker";
+        if (left && right) {
+            document.getElementById("leftSelect").value  = left;
+            document.getElementById("rightSelect").value = right;
 
-        updateButtonHighlight("left",  "cyclone");
-        updateButtonHighlight("right", "joker");
-    }
+            updateButtonHighlight("left", left);
+            updateButtonHighlight("right", right);
+        } else {
+            document.getElementById("leftSelect").value  = "cyclone";
+            document.getElementById("rightSelect").value = "joker";
 
-    updateSelectors();       
-    updateHalf();
-    updateFormName();
-    updateMemoryDescriptions();  
+            updateButtonHighlight("left",  "cyclone");
+            updateButtonHighlight("right", "joker");
+        }
 
+        updateSelectors();
+        updateHalf();
+        updateFormName();
+        updateMemoryDescriptions();
+
+    }, 0);
 });
