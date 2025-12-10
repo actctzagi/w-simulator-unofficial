@@ -244,8 +244,6 @@ body {
 }
 
 
-
-
 /* ============================
     武器ボタンとXボタン 
 ============================ */
@@ -658,75 +656,6 @@ body {
 .button-wrapper.selected .button-label,
 .button-wrapper.hovered .button-label {
     opacity: 1;
-}
-
-
-/* ============================
-   左右のパネル（非表示だが不可欠）
-============================ */
-#leftPanel {
-    position: absolute;
-    top: 0;
-    right: calc(50% + 480px + 40px);
-}
-
-#rightPanel {
-    position: absolute;
-    top: 0;
-    left: calc(50% + 208.5px + 40px); 
-}
-
-.side-panel {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); 
-    row-gap: 10px;   
-    column-gap: 20px; 
-    width: 30px; 
-    height: auto;
-}
-
-.button {
-    outline: none;
-}
-
-.button:focus {
-    box-shadow: 0 0 0 3px rgba(102, 175, 233, 0.8);
-}
-
-.form-thumbnail {
-    width: 80px;  
-    height: 40px; 
-    object-fit: cover;         
-    object-position: center; 
-    cursor: pointer;
-    border-radius: 8px; 
-    transition: 0.15s;
-}
-
-.form-thumbnail:hover {
-    transform: scale(1.07);
-    border-color: #4aa3ff;
-}
-
-.form-thumbnail.selected {
-    border-color: #4aa3ff;
-    box-shadow: 0 0 10px #4aa3ff;
-}
-
-.option-button {
-    border: 3px solid transparent; 
-    border-radius: 8px; 
-    box-sizing: border-box;  
-    transition: 0.15s;
-}
-
-.option-button:hover {
-    border-color: #4aa3ff;
-}
-
-.option-button.selected {
-    border-color: #4da3ff; 
-    box-shadow: 0 0 10px #4aa3ff;
 }
 
 

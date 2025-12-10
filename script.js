@@ -74,11 +74,9 @@ function updateMemoryDescriptions() {
 }
 
 /* =============================
-   左右のパネルにボタンを生成（非表示だが不可欠）
+   左右パネル（非表示だが不可欠）
 ============================= */
 function createButtons() {
-  const leftPanel = document.getElementById("leftPanel");
-  const rightPanel = document.getElementById("rightPanel");
   const leftSelect = document.getElementById("leftSelect");
   const rightSelect = document.getElementById("rightSelect");
 
@@ -92,72 +90,14 @@ function createButtons() {
     rightOpt.value = f.value;
     rightOpt.text = f.label;
     rightSelect.appendChild(rightOpt);
-
-    const leftWrapper = document.createElement("div");
-    leftWrapper.className = "button-wrapper";
-
-    const leftBtn = document.createElement("img");
-    leftBtn.src = `images/btn-${f.value}.png`;
-    leftBtn.className = "form-thumbnail";
-    leftBtn.dataset.value = f.value;
-
-    const leftLabel = document.createElement("span");
-    leftLabel.className = "button-label";
-    leftLabel.textContent = f.label;
-
-    leftWrapper.appendChild(leftBtn);
-    leftWrapper.appendChild(leftLabel);
-
-    leftWrapper.addEventListener("click", () => {
-        leftPanel.querySelectorAll(".button-wrapper").forEach(w => w.classList.remove("selected"));
-        leftWrapper.classList.add("selected");
-        leftSelect.value = f.value;
-        updateHalf();
-    });
-    leftPanel.appendChild(leftWrapper);
-
-    const rightWrapper = document.createElement("div");
-    rightWrapper.className = "button-wrapper";
-
-    const rightBtn = document.createElement("img");
-    rightBtn.src = `images/btn-${f.value}.png`;
-    rightBtn.className = "form-thumbnail";
-    rightBtn.dataset.value = f.value;
-
-    const rightLabel = document.createElement("span");
-    rightLabel.className = "button-label";
-    rightLabel.textContent = f.label;
-
-    rightWrapper.appendChild(rightBtn);
-    rightWrapper.appendChild(rightLabel);
-
-    rightWrapper.addEventListener("click", () => {
-        rightPanel.querySelectorAll(".button-wrapper").forEach(w => w.classList.remove("selected"));
-        rightWrapper.classList.add("selected");
-        rightSelect.value = f.value;
-        updateHalf();
-    });
-    rightPanel.appendChild(rightWrapper);
-  });
-}
-
-function updateButtonHighlight(side, selectedValue) {
-    const panel = side === "left" ? document.getElementById("leftPanel")
-                                  : document.getElementById("rightPanel");
-
-    panel.querySelectorAll(".button-wrapper").forEach(wrapper => {
-        const btn = wrapper.querySelector("img");
-        if (!btn) return;
-        wrapper.classList.toggle("selected", btn.dataset.value === selectedValue);
     });
 }
-
 
 let weaponsVisible = true; 
 
 
 /* =============================
-   🟥updateHalf：viewer内の画像を変化
+   updateHalf：viewer内の画像を変化
 ============================= */
 
 function updateHalf() {
@@ -680,7 +620,7 @@ document.getElementById("shareBtn").addEventListener("click", () => {
 これで決まりだ！
 
 #AtoZ運命のシミュレーター
-でその全貌を見る▼【非公式ファンサイト】
+でこのフォームを見る▼【非公式】
 ${shareUrl}`;
 
   const xUrl =
@@ -734,9 +674,6 @@ document.getElementById("swapButton").addEventListener("click", () => {
     leftSelect.value = rightSelect.value;
     rightSelect.value = temp;
 
-    updateButtonHighlight("left", leftSelect.value);
-    updateButtonHighlight("right", rightSelect.value);
-
     updateHalf();
     updateSelectors();
     updateFormName();
@@ -744,28 +681,9 @@ document.getElementById("swapButton").addEventListener("click", () => {
 });
 
 
-/* =============================
-   左右パネルに hover
-============================= */
-["leftPanel", "rightPanel"].forEach(panelId => {
-    const panel = document.getElementById(panelId);
-    panel.addEventListener("mouseenter", () => {
-        panel.querySelectorAll(".button-wrapper").forEach(w => w.classList.add("hovered"));
-    });
-    panel.addEventListener("mouseleave", () => {
-        panel.querySelectorAll(".button-wrapper").forEach(w => w.classList.remove("hovered"));
-    });
-    panel.addEventListener("touchstart", () => {
-        panel.querySelectorAll(".button-wrapper").forEach(w => w.classList.add("hovered"));
-    });
-    panel.addEventListener("touchend", () => {
-        panel.querySelectorAll(".button-wrapper").forEach(w => w.classList.remove("hovered"));
-    });
-});
-
 
 /* =============================
-   セレクトボックス&モーダル
+   モーダルを開ける
 ============================= */
 let activeSide = "left";
 
@@ -773,76 +691,50 @@ const leftSelector = document.getElementById("leftSelector");
 const rightSelector = document.getElementById("rightSelector");
 const swapButton = document.getElementById("swapButton");
 
-document.getElementById("leftSelector").addEventListener("click", () => {
-    activeSide = "left";
-    openModal();
-});
-
-document.getElementById("rightSelector").addEventListener("click", () => {
-    activeSide = "right";
-    openModal();
-});
-
+leftSelector.addEventListener("click", () => { activeSide = "left"; openModal(); });
+rightSelector.addEventListener("click", () => { activeSide = "right"; openModal(); });
 
 document.getElementById("closeModal").addEventListener("click", closeModal);
 
 function openModal() {
-
     const leftValue = document.getElementById("leftSelect").value;
     const rightValue = document.getElementById("rightSelect").value;
     const leftSelect = document.getElementById("leftSelect");
     const rightSelect = document.getElementById("rightSelect");
-
     const modal = document.getElementById("memoryModal");
     modal.classList.add("show");  
-
     const grid = document.getElementById("modalGrid");
-
     grid.innerHTML = ""; 
-
     forms.forEach(f => {
-
         const wrapper = document.createElement("div");
         wrapper.className = "button-wrapper";
-
         const btn = document.createElement("img");
         btn.src = `images/btn-${f.value}.png`;
         btn.className = "form-thumbnail"; 
         btn.dataset.value = f.value;
-
         const label = document.createElement("span");
         label.className = "button-label";
         label.textContent = f.label;
-
         wrapper.appendChild(btn);
         wrapper.appendChild(label);
-
         if ((activeSide === "left" && f.value === leftValue) ||
             (activeSide === "right" && f.value === rightValue)) {
             wrapper.classList.add("selected");
         }
-
         wrapper.addEventListener("mouseenter", () => wrapper.classList.add("hovered"));
         wrapper.addEventListener("mouseleave", () => wrapper.classList.remove("hovered"));
-
-
         wrapper.addEventListener("click", async () => {
-
          　　playHenshinEffect().then(() => {
     　　　　　closeModal(); 
  　　　　　　 });
-
             if (activeSide === "left") {
                 leftSelect.value = f.value;
-                updateButtonHighlight("left", f.value);
             } else {
                 rightSelect.value = f.value;
-                updateButtonHighlight("right", f.value);
             }
-
-            grid.querySelectorAll(".button-wrapper.selected").forEach(el => el.classList.remove("selected"));
+            grid.querySelectorAll(".button-wrapper.selected").forEach
+            (el => el.classList.remove("selected"));
             wrapper.classList.add("selected");
-
             await playHenshinEffect(1000);   
             closeModalImmediate(); 
             updateHalf();
@@ -851,32 +743,26 @@ function openModal() {
                 updateFormName();
             }
             updateMemoryDescriptions(); 
-});
-
+        });
         grid.appendChild(wrapper);
     });
-
     modal.style.display = "block";
 }
 
 function updateSelectors() {
     const left = document.getElementById("leftSelect").value;
     const right = document.getElementById("rightSelect").value;
-
     const leftBtn = document.querySelector("#leftSelector .selector-btn-img");
     const leftLabel = document.querySelector("#leftSelector .selector-btn-label");
     const rightBtn = document.querySelector("#rightSelector .selector-btn-img");
     const rightLabel = document.querySelector("#rightSelector .selector-btn-label");
-
     const leftForm = forms.find(f => f.value === left);
     const rightForm = forms.find(f => f.value === right);
-
     if (leftForm) {
         leftBtn.src = `images/btn-${leftForm.value}.png`;
         leftBtn.alt = leftForm.label;
         leftLabel.textContent = leftForm.label;
     }
-
     if (rightForm) {
         rightBtn.src = `images/btn-${rightForm.value}.png`;
         rightBtn.alt = rightForm.label;
@@ -884,48 +770,25 @@ function updateSelectors() {
     }
 }
 
-
 /* ============================
-   モーダルを閉じる処理
+   モーダルを閉じる
 ============================ */
 function closeModal() {
   const modal = document.getElementById("memoryModal");
   modal.classList.add("closing");
-
   setTimeout(() => {
     modal.classList.remove("show", "closing");
     modal.style.display = "none";
-
   }, 300);
 }
 
 function closeModalImmediate() {
   const modal = document.getElementById("memoryModal");
   if (!modal) return;
-  modal.classList.remove("show", "closing");
-  modal.style.display = "none";
+    modal.classList.remove("show", "closing");
+    modal.style.display = "none";
 }
 
-
-function updateSelectorButton(side, value) {
-    const btn = side === "left" ? leftSelector : rightSelector;
-    const img = btn.querySelector(".selector-btn-img");
-    const label = btn.querySelector(".selector-btn-label");
-
-    img.src = `images/btn-${value}.png`;
-    img.alt = forms.find(f => f.value === value)?.label || "";
-    label.textContent = forms.find(f => f.value === value)?.label || "";
-}
-
-leftSelector.addEventListener("click", () => { activeSide = "left"; openModal(); });
-rightSelector.addEventListener("click", () => { activeSide = "right"; openModal(); });
-
-leftSelect.addEventListener("change", () => {
-    updateSelectorButton("left", leftSelect.value);
-});
-rightSelect.addEventListener("change", () => {
-    updateSelectorButton("right", rightSelect.value);
-});
 
 
 /* =============================
@@ -963,15 +826,9 @@ document.addEventListener("DOMContentLoaded", () => {
         if (left && right) {
             document.getElementById("leftSelect").value  = left;
             document.getElementById("rightSelect").value = right;
-
-            updateButtonHighlight("left", left);
-            updateButtonHighlight("right", right);
         } else {
             document.getElementById("leftSelect").value  = "cyclone";
             document.getElementById("rightSelect").value = "joker";
-
-            updateButtonHighlight("left",  "cyclone");
-            updateButtonHighlight("right", "joker");
         }
 
         updateSelectors();
