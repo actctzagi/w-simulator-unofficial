@@ -679,7 +679,8 @@ document.getElementById("shareBtn").addEventListener("click", () => {
 
 これで決まりだ！
 
-#AtoZ運命のシミュレーター【非公式】
+#AtoZ運命のシミュレーター
+でその全貌を見る▼【非公式ファンサイト】
 ${shareUrl}`;
 
   const xUrl =

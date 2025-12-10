@@ -797,10 +797,6 @@ body {
     margin-top: 20px;
     background: url("images/info-panel.png") center/cover no-repeat;
     padding: 20px 25px;
-
-    display: flex;
-    justify-content: flex-start; 
-    align-items: center;
 }
 
 .info-panel p {
@@ -814,6 +810,16 @@ body {
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 1);
 }
 
+.after-divider {
+    font-family: "Noto Sans JP", sans-serif;
+    font-weight: 1000;
+    font-style: oblique;
+    font-size: 9.5px;
+    text-align: left;
+    color: white;
+    line-height: 2.0;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 1);
+}
 
 .info-panel a {
     color: #ffffff;  
@@ -842,6 +848,8 @@ body {
 }
 
 
+
+
 /* ============================
     フッター
 ============================ */
@@ -852,7 +860,7 @@ body {
   margin: 0;                
   margin-top: 50px;
   padding-top: 50px;
-  padding-bottom: 50px;
+  padding-bottom: 85px;
   bottom: 0;
   left: 0;
 
@@ -867,7 +875,7 @@ body {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.7);
   z-index: 1;
 }
 
@@ -888,6 +896,7 @@ body {
   font-size: 11px;
   color: #FFFFFF;
   line-height: 25px;
+  margin-left: 20px;
 }
 
 .footer-credits .value {
@@ -918,6 +927,17 @@ body {
 .site-footer a:active {
   color: #adff2f; 
 }
+
+
+.footer-copy {
+  text-align: center;
+  z-index: 2;
+  color: #FFFFFF;
+  font-family: "Corporate-Logo-Medium-ver3", sans-serif;
+  font-weight: normal;
+  font-size: 11px;
+}
+
 
 
 /* ============================
