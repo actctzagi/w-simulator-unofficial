@@ -162,7 +162,7 @@ function updateHalf() {
 
     const key = left + "-" + right;
     const weaponUsers = [
-        "accel", "eternal", "gene", 
+        "accel", "cyclone", "eternal", "gene", 
         "heat", "iceage", "key", "luna", "metal", "nasca", 
         "ocean", "puppeteer", "queen", "rocket", "skull", "trigger", "unicorn", 
         "violence", "weather", "xtreme", "yesterday", "zone"];
@@ -251,11 +251,67 @@ function updateHalf() {
     }
 
 
+
+    /* ============================
+       サイクロン武器分岐
+    ============================ */
+    // サイクロン × ジョーカー
+    else if (left === "cyclone" && right === "joker") {
+        weapon1Src = null;
+        weapon2Src = "images/cyclone-weaponCJ.png";
+    }
+    else if (left === "joker" && right === "cyclone") {
+        weapon1Src = null;
+        weapon2Src = "images/cyclone-weaponJC.png";
+    }
+
+    // サイクロン × スカル
+    else if (left === "cyclone" && right === "skull") {
+        weapon1Src = "images/skull-weapon2.png";
+        weapon2Src = "images/cyclone-weaponCJ.png";
+    }
+    else if (left === "skull" && right === "cyclone") {
+        weapon1Src = "images/skull-weapon1.png";
+        weapon2Src = "images/cyclone-weaponJC.png";
+    }
+
+    // サイクロン × ナスカ
+    else if (left === "cyclone" && right === "nasca") {
+        weapon1Src = "images/nasca-weapon2.png";
+        weapon2Src = "images/cyclone-weaponCN.png";
+    }
+    else if (left === "nasca" && right === "cyclone") {
+        weapon1Src = "images/nasca-weapon1.png";
+        weapon2Src = "images/cyclone-weaponNC.png";
+    }
+
+    // サイクロン × エクストリーム
+    else if (
+        (left === "xtreme" && right === "cyclone") ||
+        (left === "cyclone" && right === "xtreme")
+    ) {
+        weapon1Src = "images/xtreme-weapon.png";
+        weapon2Src = "images/cyclone-weapon.png";
+    }
+
+    // 右がサイクロン
+    else if (right === "cyclone") {
+        const L_hasWeapon = weaponUsers.includes(left);
+        weapon1Src = L_hasWeapon ? `images/${left}-weapon1.png` : null;
+        weapon2Src = "images/cyclone-weapon.png";
+    }
+    // 左がサイクロン
+    else if (left === "cyclone") {
+        const R_hasWeapon = weaponUsers.includes(right);
+        weapon1Src = R_hasWeapon ? `images/${right}-weapon2.png` : null;
+        weapon2Src = "images/cyclone-weapon.png";
+    }
+
+
     /* ============================
        エクストリーム武器分岐
     ============================ */
-
-    // エクストリーム × ファング（左右共通）
+    // エクストリーム × ファング
     else if (
         (left === "xtreme" && right === "fang") ||
         (left === "fang" && right === "xtreme")
@@ -302,7 +358,7 @@ function updateHalf() {
         weapon2Src = null; 
     }
 
-    // それ以外：左がエクストリーム
+    // 左がエクストリーム
     else if (left === "xtreme") {
         weapon1Src = weaponUsers.includes(right)
            ? `images/${right}-weapon2.png`
@@ -310,7 +366,7 @@ function updateHalf() {
         weapon2Src = "images/xtreme-weapon.png";
     }
 
-    // それ以外：右がエクストリーム
+    // 右がエクストリーム
     else if (right === "xtreme") {
         weapon1Src = weaponUsers.includes(left)
             ? `images/${left}-weapon1.png`
@@ -320,8 +376,8 @@ function updateHalf() {
 
     else if (left === "metal") {
     if (right === "dummy") {
-        weapon1Src = "images/metal-weapon1.png"; // コピー先①（メタル1）
-        weapon2Src = "images/metal-weapon2.png"; // コピー先②（メタル2）
+        weapon1Src = "images/metal-weapon1.png"; 
+        weapon2Src = "images/metal-weapon2.png"; 
     }else if (right === "fang") {
         weapon1Src = null;
         weapon2Src = "images/fang-weapon2.png";
@@ -343,7 +399,7 @@ function updateHalf() {
 
         // 左右同じ武器の場合
         const sameWeaponForms = [
-        "accel", "eternal", "gene", 
+        "accel", "cyclone", "eternal", "gene", 
         "heat", "iceage", "key", "luna", "metal", "nasca", 
         "ocean", "puppeteer", "queen", "rocket", "skull", "trigger", "unicorn", 
         "violence", "weather", "xtreme", "yesterday", "zone"];
@@ -374,7 +430,6 @@ function updateHalf() {
     const rightHasWeapon = (weapon2Src && weapon2Src !== null);
     const leftHasWeapon  = (weapon1Src && weapon1Src !== null);
 
-
     // エクストリーム × ダミー
     if (leftIsDummy && right !== "xtreme") {
         if (rightHasWeapon) {
@@ -394,6 +449,17 @@ function updateHalf() {
             weapon2Src = null;
         }
     }
+
+   // サイクロン × ダミー または サイクロン × サイクロン
+    if (
+        (left === "cyclone" && right === "cyclone") ||
+        (left === "dummy" && right === "cyclone") ||
+        (left === "cyclone" && right === "dummy")
+    ) {
+        weapon1Src = null;
+        weapon2Src = "images/cyclone-weapon.png";
+    }
+
 
 
     if (weapon1Src) {
