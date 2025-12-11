@@ -265,26 +265,6 @@ function updateHalf() {
         weapon2Src = "images/cyclone-weaponJC.png";
     }
 
-    // サイクロン × スカル
-    else if (left === "cyclone" && right === "skull") {
-        weapon1Src = "images/skull-weapon2.png";
-        weapon2Src = "images/cyclone-weaponCJ.png";
-    }
-    else if (left === "skull" && right === "cyclone") {
-        weapon1Src = "images/skull-weapon1.png";
-        weapon2Src = "images/cyclone-weaponJC.png";
-    }
-
-    // サイクロン × ナスカ
-    else if (left === "cyclone" && right === "nasca") {
-        weapon1Src = "images/nasca-weapon2.png";
-        weapon2Src = "images/cyclone-weaponCN.png";
-    }
-    else if (left === "nasca" && right === "cyclone") {
-        weapon1Src = "images/nasca-weapon1.png";
-        weapon2Src = "images/cyclone-weaponNC.png";
-    }
-
     // サイクロン × エクストリーム
     else if (
         (left === "xtreme" && right === "cyclone") ||
