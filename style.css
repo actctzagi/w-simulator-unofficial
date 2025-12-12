@@ -219,9 +219,6 @@ body {
     top: 10px;        
     left: 0px;            
     text-align: left;   
-    font-family: 'Noto Sans JP', sans-serif;
-    font-style: oblique;
-    font-weight: 900;
     z-index: 99;
 }
 
@@ -229,6 +226,9 @@ body {
     font-size: 8.5px;
     line-height: 1.2;
     color: black;
+    padding: 2px; 
+    font-family: 'Noto Sans JP', sans-serif;
+    font-style: oblique;
     font-weight: 900;
 }
 
@@ -238,6 +238,21 @@ body {
     color: white;
     background: black;
     padding: 2px 4px; 
+    font-family: 'Noto Sans JP', sans-serif;
+    font-style: oblique;
+    font-weight: 900;
+}
+
+.formNameDynamicEn {
+    font-size: 10px;
+    line-height: 1.2;
+    color: #7E7976;
+    padding: 1px; 
+    opacity: 0.7;
+    font-family: "American Typewriter", serif;
+    font-style: oblique;
+    font-weight: 500;
+
 }
 
 
@@ -521,7 +536,6 @@ body {
     font-size: 24px;
     color: white;
 }
-
 
 .modal-grid {
     display: grid;

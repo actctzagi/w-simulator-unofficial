@@ -30,6 +30,35 @@ const forms = [
   { value: "zone", label: "ゾーン" }
 ];
 
+const formNameEN = {
+    accel: "ACCEL",
+    bird: "BIRD",
+    cyclone: "CYCLONE",
+    dummy: "DUMMY",
+    eternal: "ETERNAL",
+    fang: "FANG",
+    gene: "GENE",
+    heat: "HEAT",
+    iceage: "ICEAGE",
+    joker: "JOKER",
+    key: "KEY",
+    luna: "LUNA",
+    metal: "METAL",
+    nasca: "NASCA",
+    ocean: "OCEAN",
+    puppeteer: "PUPPETEER",
+    queen: "QUEEN",
+    rocket: "ROCKET",
+    skull: "SKULL",
+    trigger: "TRIGGER",
+    unicorn: "UNICORN",
+    violence: "VIOLENCE",
+    weather: "WEATHER",
+    xtreme: "XTREME",
+    yesterday: "YESTERDAY",
+    zone: "ZONE"
+}; 
+
 /* =============================
    メモリ解説文
 ============================= */
@@ -691,11 +720,14 @@ function animateViewer() {
 function updateFormName() {
     const left = document.getElementById("leftSelect").value;
     const right = document.getElementById("rightSelect").value;
-
     const leftLabel = forms.find(f => f.value === left)?.label || "";
     const rightLabel = forms.find(f => f.value === right)?.label || "";
-
     document.getElementById("formNameDynamic").textContent = leftLabel + rightLabel;
+
+    const enLeft = formNameEN[left] || "";
+    const enRight = formNameEN[right] || "";
+    const enName = `${enLeft} ${enRight}`;
+    document.getElementById("formNameDynamicEn").textContent = enName;
 }
 
 /* ============================================
