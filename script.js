@@ -74,7 +74,7 @@ function updateMemoryDescriptions() {
 }
 
 /* =============================
-   左右パネル（非表示だが不可欠）
+   左右パネル（非表示・不可欠）
 ============================= */
 function createButtons() {
   const leftSelect = document.getElementById("leftSelect");
@@ -94,7 +94,6 @@ function createButtons() {
 }
 
 let weaponsVisible = true; 
-
 
 /* =============================
    updateHalf：viewer内の画像を変化
@@ -440,8 +439,6 @@ function updateHalf() {
         weapon2Src = "images/cyclone-weapon.png";
     }
 
-
-
     if (weapon1Src) {
         weapon1Img.src = weapon1Src;
         weapon1Layer.appendChild(weapon1Img);
@@ -461,8 +458,6 @@ function updateHalf() {
         weapon2Layer.style.display = "none";
         weapon2Layer.dataset.hasWeapon = "false";
     }
-
-
 
     /* ============================================
        左右半身・目・マフラー・ウイング・ケープ描画
@@ -489,7 +484,6 @@ function updateHalf() {
             capeLayer.appendChild(capeImg);
         }
     }
-
 
     // ファング分岐
     if(left === "fang" && right === "fang"){
@@ -588,7 +582,6 @@ function updateHalf() {
     updateMemoryDescriptions(); 
     updateWeaponsButton();
 
-
     const row = document.querySelector(".button-row");
     const weaponBtn = document.getElementById("toggleWeaponsBtn");
 
@@ -598,7 +591,6 @@ function updateHalf() {
         row.classList.remove("center-share-only");
     }
 }
-
 
 /* ============================================
    武器表示切り替えボタン
@@ -676,7 +668,6 @@ ${shareUrl}`;
   window.open(xUrl, "_blank");
 });
 
-
 /* ============================================
    変身アニメーション
 ============================================ */
@@ -694,7 +685,6 @@ function animateViewer() {
   }, 500);
 }
 
-
 /* ============================================
    フォーム名更新
 ============================================ */
@@ -707,7 +697,6 @@ function updateFormName() {
 
     document.getElementById("formNameDynamic").textContent = leftLabel + rightLabel;
 }
-
 
 /* ============================================
    左右入れ替えボタン
@@ -725,8 +714,6 @@ document.getElementById("swapButton").addEventListener("click", () => {
     updateFormName();
     updateMemoryDescriptions(); 
 });
-
-
 
 /* =============================
    モーダルを開ける
@@ -835,8 +822,6 @@ function closeModalImmediate() {
     modal.style.display = "none";
 }
 
-
-
 /* =============================
    変身エフェクト
 ============================= */
@@ -855,20 +840,15 @@ function playHenshinEffect(duration = 900) {
   });
 }
 
-
 /* =============================
    DOMContentLoaded
 ============================= */
 document.addEventListener("DOMContentLoaded", () => {
     createButtons();
-
-    // createButtons が DOM を作り終わるまで 1 tick 遅らせる
     setTimeout(() => {
-
         const params = new URLSearchParams(window.location.search);
         const left  = params.get("left");
         const right = params.get("right");
-
         if (left && right) {
             document.getElementById("leftSelect").value  = left;
             document.getElementById("rightSelect").value = right;
@@ -876,11 +856,9 @@ document.addEventListener("DOMContentLoaded", () => {
             document.getElementById("leftSelect").value  = "cyclone";
             document.getElementById("rightSelect").value = "joker";
         }
-
         updateSelectors();
         updateHalf();
         updateFormName();
         updateMemoryDescriptions();
-
     }, 0);
 });
