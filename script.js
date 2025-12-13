@@ -2,6 +2,7 @@
    メモリ名
 ============================= */
 const forms = [
+  { value: "prism", label: "プリズム" },
   { value: "accel", label: "アクセル" },
   { value: "bird", label: "バード" },
   { value: "cyclone", label: "サイクロン" },
@@ -30,39 +31,36 @@ const forms = [
   { value: "zone", label: "ゾーン" }
 ];
 
-const formNameEN = {
-    accel: "ACCEL",
-    bird: "BIRD",
-    cyclone: "CYCLONE",
-    dummy: "DUMMY",
-    eternal: "ETERNAL",
-    fang: "FANG",
-    gene: "GENE",
-    heat: "HEAT",
-    iceage: "ICEAGE",
-    joker: "JOKER",
-    key: "KEY",
-    luna: "LUNA",
-    metal: "METAL",
-    nasca: "NASCA",
-    ocean: "OCEAN",
-    puppeteer: "PUPPETEER",
-    queen: "QUEEN",
-    rocket: "ROCKET",
-    skull: "SKULL",
-    trigger: "TRIGGER",
-    unicorn: "UNICORN",
-    violence: "VIOLENCE",
-    weather: "WEATHER",
-    xtreme: "XTREME",
-    yesterday: "YESTERDAY",
-    zone: "ZONE"
-}; 
+
+const excludedFromMainModal = [
+  "prism"
+];
+const mainModalForms = forms.filter(
+  f => !excludedFromMainModal.includes(f.value)
+); 
+
+
+const extraModalSlots = [
+  { value: "prism", label: "プリズム", enabled: true },
+  { value: null, label: "???", enabled: false },
+  { value: null, label: "???", enabled: false },
+
+  { value: null, label: "???", enabled: false },
+  { value: null, label: "???", enabled: false },
+  { value: null, label: "???", enabled: false },
+
+  { value: null, label: "???", enabled: false },
+  { value: null, label: "???", enabled: false },
+  { value: null, label: "???", enabled: false },
+];
+
+
 
 /* =============================
    メモリ解説文
 ============================= */
 const memoryDescriptions = {
+    prism: "｢プリズムの記憶｣を持つガイアメモリ。複数のメモリのリンクを行い、一つのエネルギーへと収束変換する。",
     accel: "｢加速の記憶｣を持つガイアメモリ。加速能力を与え、高速移動を可能にする｡",
     bird: "｢始祖鳥の記憶｣を持つガイアメモリ。使用者に飛翔能力を与える｡",
     cyclone: "｢疾風の記憶｣を持つガイアメモリ。疾風を引き起こし、風を自由自在に操る能力を与える｡",
@@ -190,10 +188,12 @@ function updateHalf() {
 
     const key = left + "-" + right;
     const weaponUsers = [
+        "prism", 
         "accel", "cyclone", "eternal", "gene", 
         "heat", "iceage", "key", "luna", "metal", "nasca", 
         "ocean", "puppeteer", "queen", "rocket", "skull", "trigger", "unicorn", 
-        "violence", "weather", "xtreme", "yesterday", "zone"];
+        "violence", "weather", "xtreme", "yesterday", "zone"
+        ];
 
     /* ============================================
        単体画像処理
@@ -319,6 +319,18 @@ function updateHalf() {
     /* ============================
        エクストリーム武器分岐
     ============================ */
+    // エクストリーム × プリズム
+    else if (left === "xtreme" && right === "prism") {
+        weapon1Src = "images/prism-weaponXP.png";
+        weapon2Src = "images/xtreme-weapon.png";
+    }
+
+    // プリズム × エクストリーム
+    else if (left === "prism" && right === "xtreme") {
+        weapon1Src = "images/prism-weaponPX.png";
+        weapon2Src = "images/xtreme-weapon.png";
+    }
+
     // エクストリーム × ファング
     else if (
         (left === "xtreme" && right === "fang") ||
@@ -407,10 +419,12 @@ function updateHalf() {
 
         // 左右同じ武器の場合
         const sameWeaponForms = [
+        "prism", 
         "accel", "cyclone", "eternal", "gene", 
         "heat", "iceage", "key", "luna", "metal", "nasca", 
         "ocean", "puppeteer", "queen", "rocket", "skull", "trigger", "unicorn", 
-        "violence", "weather", "xtreme", "yesterday", "zone"];
+        "violence", "weather", "xtreme", "yesterday", "zone"
+        ];
 
         if (left === right && sameWeaponForms.includes(left)) {
             weapon1Src = `images/${left}-weapon1.png`;
@@ -723,11 +737,6 @@ function updateFormName() {
     const leftLabel = forms.find(f => f.value === left)?.label || "";
     const rightLabel = forms.find(f => f.value === right)?.label || "";
     document.getElementById("formNameDynamic").textContent = leftLabel + rightLabel;
-
-    const enLeft = formNameEN[left] || "";
-    const enRight = formNameEN[right] || "";
-    const enName = `${enLeft} ${enRight}`;
-    document.getElementById("formNameDynamicEn").textContent = enName;
 }
 
 /* ============================================
@@ -761,58 +770,154 @@ rightSelector.addEventListener("click", () => { activeSide = "right"; openModal(
 
 document.getElementById("closeModal").addEventListener("click", closeModal);
 
+
+
 function openModal() {
-    const leftValue = document.getElementById("leftSelect").value;
-    const rightValue = document.getElementById("rightSelect").value;
-    const leftSelect = document.getElementById("leftSelect");
+    const leftSelect  = document.getElementById("leftSelect");
     const rightSelect = document.getElementById("rightSelect");
+    const leftValue   = leftSelect.value;
+    const rightValue  = rightSelect.value;
+
     const modal = document.getElementById("memoryModal");
-    modal.classList.add("show");  
-    const grid = document.getElementById("modalGrid");
-    grid.innerHTML = ""; 
-    forms.forEach(f => {
+    modal.classList.add("show");
+    modal.style.display = "block";
+
+    const root = document.getElementById("modalGrid");
+    root.innerHTML = "";
+
+
+
+    /* ============================
+       上段：タイトル
+    ============================ */
+    const titleMain = document.createElement("div");
+    titleMain.className = "modal-section-title";
+    titleMain.textContent = "【 AtoZ 】";
+    root.appendChild(titleMain);
+
+
+
+    /* ============================
+       上段：既存枠
+    ============================ */
+    const mainGrid = document.createElement("div");
+    mainGrid.className = "modal-main-grid";
+
+    mainModalForms.forEach(f => {
         const wrapper = document.createElement("div");
         wrapper.className = "button-wrapper";
+
         const btn = document.createElement("img");
         btn.src = `images/btn-${f.value}.png`;
-        btn.className = "form-thumbnail"; 
-        btn.dataset.value = f.value;
+        btn.className = "form-thumbnail";
+
         const label = document.createElement("span");
         label.className = "button-label";
         label.textContent = f.label;
-        wrapper.appendChild(btn);
-        wrapper.appendChild(label);
-        if ((activeSide === "left" && f.value === leftValue) ||
-            (activeSide === "right" && f.value === rightValue)) {
+
+        if (
+            (activeSide === "left" && f.value === leftValue) ||
+            (activeSide === "right" && f.value === rightValue)
+        ) {
             wrapper.classList.add("selected");
         }
-        wrapper.addEventListener("mouseenter", () => wrapper.classList.add("hovered"));
-        wrapper.addEventListener("mouseleave", () => wrapper.classList.remove("hovered"));
+
         wrapper.addEventListener("click", async () => {
-         　　playHenshinEffect().then(() => {
-    　　　　　closeModal(); 
- 　　　　　　 });
             if (activeSide === "left") {
                 leftSelect.value = f.value;
             } else {
                 rightSelect.value = f.value;
             }
-            grid.querySelectorAll(".button-wrapper.selected").forEach
-            (el => el.classList.remove("selected"));
-            wrapper.classList.add("selected");
-            await playHenshinEffect(1000);   
-            closeModalImmediate(); 
+
+            await playHenshinEffect(1000);
+            closeModalImmediate();
             updateHalf();
             updateSelectors();
-            if (typeof updateFormName === "function") {
-                updateFormName();
-            }
-            updateMemoryDescriptions(); 
+            updateFormName?.();
+            updateMemoryDescriptions();
         });
-        grid.appendChild(wrapper);
+
+        wrapper.appendChild(btn);
+        wrapper.appendChild(label);
+        mainGrid.appendChild(wrapper);
     });
-    modal.style.display = "block";
+    root.appendChild(mainGrid);
+
+
+    /* ============================
+       区切り線
+    ============================ */
+    const divider = document.createElement("div");
+    divider.className = "modal-divider";
+    root.appendChild(divider);
+
+
+    /* ============================
+       下段：タイトル
+    ============================ */
+    const titleExtra = document.createElement("div");
+    titleExtra.className = "modal-section-title";
+    titleExtra.textContent = "【 EXTRA 】";
+    root.appendChild(titleExtra);
+
+
+    /* ============================
+       下段：追加枠
+    ============================ */
+    const extraGrid = document.createElement("div");
+    extraGrid.className = "modal-extra-grid";
+
+    extraModalSlots.forEach(slot => {
+        const wrapper = document.createElement("div");
+        wrapper.className = "button-wrapper";
+
+        const btn = document.createElement("img");
+        btn.className = "form-thumbnail";
+
+        const label = document.createElement("span");
+        label.className = "button-label";
+
+        if (slot.enabled && slot.value) {
+            btn.src = `images/btn-${slot.value}.png`;
+            label.textContent = slot.label;
+
+            if (
+                (activeSide === "left" && slot.value === leftValue) ||
+                (activeSide === "right" && slot.value === rightValue)
+            ) {
+                wrapper.classList.add("selected");
+            }
+
+            wrapper.addEventListener("click", async () => {
+                if (activeSide === "left") {
+                    leftSelect.value = slot.value;
+                } else {
+                    rightSelect.value = slot.value;
+                }
+
+                await playHenshinEffect(1000);
+                closeModalImmediate();
+                updateHalf();
+                updateSelectors();
+                updateFormName?.();
+                updateMemoryDescriptions();
+            });
+        } else {
+            btn.src = "images/btn-blank.png";
+            label.textContent = "???";
+            wrapper.classList.add("locked");
+        }
+
+        wrapper.appendChild(btn);
+        wrapper.appendChild(label);
+        extraGrid.appendChild(wrapper);
+    });
+    root.appendChild(extraGrid);
 }
+
+
+
+
 
 function updateSelectors() {
     const left = document.getElementById("leftSelect").value;
