@@ -2,6 +2,9 @@
    メモリ名
 ============================= */
 const forms = [
+  { value: "bomb", label: "ボム" },
+  { value: "engine", label: "エンジン" },
+  { value: "trial", label: "トライアル" },
   { value: "prism", label: "プリズム" },
   { value: "accel", label: "アクセル" },
   { value: "bird", label: "バード" },
@@ -33,7 +36,7 @@ const forms = [
 
 
 const excludedFromMainModal = [
-  "prism"
+  "prism", "trial", "engine", "bomb"
 ];
 const mainModalForms = forms.filter(
   f => !excludedFromMainModal.includes(f.value)
@@ -44,11 +47,9 @@ const extraModalSlots = [
   { value: "prism", label: "プリズム", enabled: true },
   { value: null, label: "???", enabled: false },
   { value: null, label: "???", enabled: false },
-
+  { value: "trial", label: "トライアル", enabled: true },
   { value: null, label: "???", enabled: false },
   { value: null, label: "???", enabled: false },
-  { value: null, label: "???", enabled: false },
-
   { value: null, label: "???", enabled: false },
   { value: null, label: "???", enabled: false },
   { value: null, label: "???", enabled: false },
@@ -60,7 +61,10 @@ const extraModalSlots = [
    メモリ解説文
 ============================= */
 const memoryDescriptions = {
-    prism: "｢プリズムの記憶｣を持つガイアメモリ。複数のメモリのリンクを行い、一つのエネルギーへと収束変換する。",
+    bomb: "｢爆弾の記憶｣を持つガイアメモリ。分裂・爆発する強力な光弾を放つ。",
+    engine: "｢ジェット｣｢スチーム｣｢エレクトリック｣、3種のエンジンパワーを引き出せる多機能型メモリ。",
+    trial: "｢挑戦の記憶｣を持つガイアメモリ。既存のメモリのプログラムに超加速のパッチを当てることで、音速に到達する加速力を与える。",
+    prism: "｢プリズムの記憶｣を持つガイアメモリ。複数のメモリをリンクさせ、一つのエネルギーへと収束変換する。",
     accel: "｢加速の記憶｣を持つガイアメモリ。加速能力を与え、高速移動を可能にする｡",
     bird: "｢始祖鳥の記憶｣を持つガイアメモリ。使用者に飛翔能力を与える｡",
     cyclone: "｢疾風の記憶｣を持つガイアメモリ。疾風を引き起こし、風を自由自在に操る能力を与える｡",
@@ -168,6 +172,11 @@ function updateHalf() {
 
     // 単体画像パターン
     const singleImages = {
+        "accel-trial": "AccelTrial.png",
+        "trial-accel": "TrialAccel.png",
+        "fang-trial": "FangTrial.png",
+        "trial-fang": "TrialFang.png",
+
         "skull-joker": "SkullJoker.png",
         "nasca-joker": "NascaJoker.png",
         "nasca-skull": "NascaSkull.png",
@@ -188,7 +197,7 @@ function updateHalf() {
 
     const key = left + "-" + right;
     const weaponUsers = [
-        "prism", 
+        "prism", "trial", "engine", "bomb", 
         "accel", "cyclone", "eternal", "gene", 
         "heat", "iceage", "key", "luna", "metal", "nasca", 
         "ocean", "puppeteer", "queen", "rocket", "skull", "trigger", "unicorn", 
@@ -228,32 +237,21 @@ function updateHalf() {
     let disableWeapons = disableWeaponPairs.some(p => (left === p[0] && right === p[1]));
 
 
+    /* ============================
+       ファング武器分岐
+    ============================ */
     if(left === "fang" && right === "metal") {
         weapon1Src = "images/fang-weapon1.png";
         weapon2Src = null;
     }
-
     else if(left === "fang" && right === "trigger") {
         weapon1Src = null; 
         weapon2Src = "images/fang-weapon3.png";
     }
-
     else if(left === "trigger" && right === "fang") {
         weapon1Src = "images/fang-weapon4.png";
         weapon2Src = null; 
     }
-
-
-    else if(left === "metal" && right === "eternal") {
-        weapon1Src = "images/metal-weapon3.png";
-        weapon2Src = "images/eternal-weapon2.png";
-    } 
-    else if(left === "eternal" && right === "metal") {
-        weapon1Src = "images/eternal-weapon1.png";
-        weapon2Src = "images/metal-weapon4.png";
-    }
-
-
     else if(left === "luna" && right === "fang") {
         weapon1Src = "images/luna-weapon3.png";
         weapon2Src = null;
@@ -262,8 +260,6 @@ function updateHalf() {
         weapon1Src = null;
         weapon2Src = "images/luna-weapon4.png";
     } 
-
-
     else if(left === "violence" && right === "fang") {
         weapon1Src = "images/violence-weapon3.png";
         weapon2Src = null;
@@ -273,11 +269,49 @@ function updateHalf() {
         weapon2Src = "images/violence-weapon4.png";
     } 
 
+    /* ============================
+       メタル武器分岐
+    ============================ */
+    else if(left === "metal" && right === "eternal") {
+        weapon1Src = "images/metal-weapon3.png";
+        weapon2Src = "images/eternal-weapon2.png";
+    } 
+    else if(left === "eternal" && right === "metal") {
+        weapon1Src = "images/eternal-weapon1.png";
+        weapon2Src = "images/metal-weapon4.png";
+    }
     else if(left === "metal" && right === "skull") {
         weapon1Src = "images/skull-weapon2.png";
         weapon2Src = "images/metal-weapon5.png";
     }
 
+
+    /* ============================
+       エンジン武器分岐
+    ============================ */
+    // アクセル × エンジン
+    else if (left === "accel" && right === "engine") {
+        weapon1Src = "images/engine-weaponAE.png";
+        weapon2Src = null;
+    }
+    // エンジン × アクセル
+    else if (left === "engine" && right === "accel") {
+        weapon1Src = "images/engine-weaponEA.png";
+        weapon2Src = null;
+    }
+    // エンジン × スカル
+    else if (left === "engine" && right === "skull") {
+        weapon1Src = "images/engine-weaponES.png";
+        weapon2Src = "images/skull-weapon2.png";
+    }
+    // エンジン × エクストリーム
+    else if (
+        (left === "xtreme" && right === "engine") ||
+        (left === "engine" && right === "xtreme")
+    ) {
+        weapon1Src = "images/xtreme-weapon.png";
+        weapon2Src = null;
+    }
 
 
     /* ============================
@@ -292,7 +326,6 @@ function updateHalf() {
         weapon1Src = null;
         weapon2Src = "images/cyclone-weaponJC.png";
     }
-
     // サイクロン × エクストリーム
     else if (
         (left === "xtreme" && right === "cyclone") ||
@@ -301,7 +334,6 @@ function updateHalf() {
         weapon1Src = "images/xtreme-weapon.png";
         weapon2Src = "images/cyclone-weapon.png";
     }
-
     // 右がサイクロン
     else if (right === "cyclone") {
         const L_hasWeapon = weaponUsers.includes(left);
@@ -419,7 +451,7 @@ function updateHalf() {
 
         // 左右同じ武器の場合
         const sameWeaponForms = [
-        "prism", 
+        "prism", "trial", "engine", "bomb", 
         "accel", "cyclone", "eternal", "gene", 
         "heat", "iceage", "key", "luna", "metal", "nasca", 
         "ocean", "puppeteer", "queen", "rocket", "skull", "trigger", "unicorn", 
@@ -445,7 +477,7 @@ function updateHalf() {
         weapon2Src = null;
     }
 
-    // ダミー分岐
+    // ダミー武器分岐
     const leftIsDummy  = (left === "dummy");
     const rightIsDummy = (right === "dummy");
 
@@ -472,7 +504,7 @@ function updateHalf() {
         }
     }
 
-   // サイクロン × ダミー または サイクロン × サイクロン
+   // サイクロン × ダミー 武器分岐
     if (
         (left === "cyclone" && right === "cyclone") ||
         (left === "dummy" && right === "cyclone") ||
@@ -554,12 +586,21 @@ function updateHalf() {
         rightSrc = "images/skull-skull.png";
     }
 
-    // アクセル・エターナル分岐
+    // アクセル・トライアル・エターナル分岐
     if((left === "accel" && right === "eternal") || (left === "eternal" && right === "accel")){
         eyesSrc = "images/eternal-accel-eyes.png";
         capeSrc = "images/eternal-cape.png";
+
+    } else if((left === "trial" && right === "eternal") || (left === "eternal" && right === "trial")){
+        eyesSrc = "images/eternal-trial-eyes.png";
+        capeSrc = "images/eternal-cape.png";
+
     } else if(left === "accel" || right === "accel"){
         eyesSrc = "images/accel-eyes.png";
+
+    } else if(left === "trial" || right === "trial"){
+        eyesSrc = "images/trial-eyes.png";
+
     } else if(left === "eternal" || right === "eternal"){
         eyesSrc = "images/eternal-eyes.png";
         capeSrc = "images/eternal-cape.png";
@@ -792,7 +833,7 @@ function openModal() {
     ============================ */
     const titleMain = document.createElement("div");
     titleMain.className = "modal-section-title";
-    titleMain.textContent = "【 AtoZ 】";
+    titleMain.textContent = "【 AtoZ MEMORIES 】";
     root.appendChild(titleMain);
 
 
@@ -857,7 +898,7 @@ function openModal() {
     ============================ */
     const titleExtra = document.createElement("div");
     titleExtra.className = "modal-section-title";
-    titleExtra.textContent = "【 EXTRA 】";
+    titleExtra.textContent = "【 EXTRA MEMORIES 】";
     root.appendChild(titleExtra);
 
 
