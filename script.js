@@ -176,6 +176,7 @@ function updateHalf() {
         "trial-accel": "TrialAccel.png",
         "fang-trial": "FangTrial.png",
         "trial-fang": "TrialFang.png",
+        "trial-skull": "TrialSkull.png",
 
         "skull-joker": "SkullJoker.png",
         "nasca-joker": "NascaJoker.png",
