@@ -2,6 +2,8 @@
    メモリ名
 ============================= */
 const forms = [
+  { value: "utopia", label: "ユートピア" },
+  { value: "terror", label: "テラー" },
   { value: "bomb", label: "ボム" },
   { value: "engine", label: "エンジン" },
   { value: "trial", label: "トライアル" },
@@ -36,7 +38,7 @@ const forms = [
 
 
 const excludedFromMainModal = [
-  "prism", "trial", "engine", "bomb"
+  "prism", "trial", "engine", "bomb", "terror", "utopia"
 ];
 const mainModalForms = forms.filter(
   f => !excludedFromMainModal.includes(f.value)
@@ -50,7 +52,7 @@ const extraModalSlots = [
   { value: "trial", label: "トライアル", enabled: true },
   { value: null, label: "???", enabled: false },
   { value: null, label: "???", enabled: false },
-  { value: null, label: "???", enabled: false },
+  { value: "engine", label: "エンジン", enabled: true },
   { value: null, label: "???", enabled: false },
   { value: null, label: "???", enabled: false },
 ];
@@ -61,6 +63,8 @@ const extraModalSlots = [
    メモリ解説文
 ============================= */
 const memoryDescriptions = {
+    utopia: "｢理想郷の記憶｣を持つガイアメモリ。重力操作能力に加えて、触れた人間の感情を吸い取って自らのエネルギーに転換する能力を持つ。",
+    terror: "｢恐怖の記憶｣を持つガイアメモリ。恐怖領域｢テラーフィールド｣を展開し、敵に激しい恐怖心を与えることができる。",
     bomb: "｢爆弾の記憶｣を持つガイアメモリ。分裂・爆発する強力な光弾を放つ。",
     engine: "｢ジェット｣｢スチーム｣｢エレクトリック｣、3種のエンジンパワーを引き出せる多機能型メモリ。",
     trial: "｢挑戦の記憶｣を持つガイアメモリ。既存のメモリのプログラムに超加速のパッチを当てることで、音速に到達する加速力を与える。",
@@ -198,7 +202,7 @@ function updateHalf() {
 
     const key = left + "-" + right;
     const weaponUsers = [
-        "prism", "trial", "engine", "bomb", 
+        "prism", "trial", "engine", "bomb", "terror", "utopia",
         "accel", "cyclone", "eternal", "gene", 
         "heat", "iceage", "key", "luna", "metal", "nasca", 
         "ocean", "puppeteer", "queen", "rocket", "skull", "trigger", "unicorn", 
@@ -335,6 +339,14 @@ function updateHalf() {
         weapon1Src = "images/xtreme-weapon.png";
         weapon2Src = "images/cyclone-weapon.png";
     }
+    // テラー × サイクロン
+    else if (
+        (left === "terror" && right === "cyclone") ||
+        (left === "cyclone" && right === "terror")
+    ) {
+        weapon1Src = "images/terror-weapon.png";
+        weapon2Src = "images/cyclone-weapon.png";
+    }
     // 右がサイクロン
     else if (right === "cyclone") {
         const L_hasWeapon = weaponUsers.includes(left);
@@ -347,6 +359,40 @@ function updateHalf() {
         weapon1Src = R_hasWeapon ? `images/${right}-weapon2.png` : null;
         weapon2Src = "images/cyclone-weapon.png";
     }
+
+
+    /* ============================
+       テラー武器分岐
+    ============================ */
+    // テラー × ファング
+    else if (
+        (left === "terror" && right === "fang") ||
+        (left === "fang" && right === "terror")
+    ) {
+        weapon1Src = null;
+        weapon2Src = "images/terror-weaponF.png";
+    }
+    // テラー × エクストリーム
+    else if (
+        (left === "xtreme" && right === "terror") ||
+        (left === "terror" && right === "xtreme")
+    ) {
+        weapon1Src = "images/xtreme-weapon.png";
+        weapon2Src = "images/terror-weapon.png";
+    }
+    // 右がテラー
+    else if (right === "terror") {
+        const L_hasWeapon = weaponUsers.includes(left);
+        weapon1Src = L_hasWeapon ? `images/${left}-weapon1.png` : null;
+        weapon2Src = "images/terror-weapon.png";
+    }
+    // 左がテラー
+    else if (left === "terror") {
+        const R_hasWeapon = weaponUsers.includes(right);
+        weapon1Src = R_hasWeapon ? `images/${right}-weapon2.png` : null;
+        weapon2Src = "images/terror-weapon.png";
+    }
+
 
 
     /* ============================
@@ -452,7 +498,7 @@ function updateHalf() {
 
         // 左右同じ武器の場合
         const sameWeaponForms = [
-        "prism", "trial", "engine", "bomb", 
+        "prism", "trial", "engine", "bomb", "utopia", 
         "accel", "cyclone", "eternal", "gene", 
         "heat", "iceage", "key", "luna", "metal", "nasca", 
         "ocean", "puppeteer", "queen", "rocket", "skull", "trigger", "unicorn", 
@@ -478,7 +524,10 @@ function updateHalf() {
         weapon2Src = null;
     }
 
-    // ダミー武器分岐
+
+    /* ============================
+       ダミー武器分岐
+    ============================ */
     const leftIsDummy  = (left === "dummy");
     const rightIsDummy = (right === "dummy");
 
@@ -505,7 +554,7 @@ function updateHalf() {
         }
     }
 
-   // サイクロン × ダミー 武器分岐
+   // サイクロン × ダミー 
     if (
         (left === "cyclone" && right === "cyclone") ||
         (left === "dummy" && right === "cyclone") ||
@@ -514,6 +563,17 @@ function updateHalf() {
         weapon1Src = null;
         weapon2Src = "images/cyclone-weapon.png";
     }
+
+   // テラー × ダミー 
+    if (
+        (left === "terror" && right === "terror") ||
+        (left === "dummy" && right === "terror") ||
+        (left === "terror" && right === "dummy")
+    ) {
+        weapon1Src = null;
+        weapon2Src = "images/terror-weapon.png";
+    }
+
 
     if (weapon1Src) {
         weapon1Img.src = weapon1Src;
@@ -580,46 +640,155 @@ function updateHalf() {
     }
 
     // スカル分岐
-    if(right === "skull"){
+    if (
+        (left === "terror"  && right === "skull") ||
+        (left === "utopia"  && right === "skull") 
+    ) {
+        eyesSrc = "images/normal-eyes.png";
+        mufflerSrc = null;
+        leftSrc = `images/skull-${left}.png`;
+        rightSrc = "images/skull-skull.png";
+    }
+    else if (
+        (left === "skull"   && right === "terror") ||
+        (left === "skull"   && right === "utopia")
+    ) {
+        eyesSrc = "images/normal-eyes.png";
+        mufflerSrc = null;
+    }
+    else if(right === "skull"){
         eyesSrc = "images/skull-eyes.png";
         mufflerSrc = "images/skull-muffler.png";
         leftSrc = `images/skull-${left}.png`;
         rightSrc = "images/skull-skull.png";
     }
 
-    // アクセル・トライアル・エターナル分岐
-    if((left === "accel" && right === "eternal") || (left === "eternal" && right === "accel")){
-        eyesSrc = "images/eternal-accel-eyes.png";
-        capeSrc = "images/eternal-cape.png";
 
-    } else if((left === "trial" && right === "eternal") || (left === "eternal" && right === "trial")){
-        eyesSrc = "images/eternal-trial-eyes.png";
-        capeSrc = "images/eternal-cape.png";
+    // ============================
+    // eyes 分岐
+    // ============================
 
-    } else if(left === "accel" || right === "accel"){
-        eyesSrc = "images/accel-eyes.png";
-
-    } else if(left === "trial" || right === "trial"){
-        eyesSrc = "images/trial-eyes.png";
-
-    } else if(left === "eternal" || right === "eternal"){
-        eyesSrc = "images/eternal-eyes.png";
-        capeSrc = "images/eternal-cape.png";
+    if (
+        (left === "fang" && right === "terror") ||
+        (left === "terror" && right === "fang") ||
+        (left === "fang" && right === "utopia") ||
+        (left === "utopia" && right === "fang")
+    ) {
+        if (left === "fang") {
+            eyesSrc = "images/fang-eyes1-caped.png";
+        }
+        else {
+            eyesSrc = "images/fang-eyes2-caped.png";
+        }
     }
 
-    // サイクロンマフラー分岐
+    else if (
+        (left === "eternal" && right === "terror") ||
+        (left === "terror" && right === "eternal") ||
+        (left === "eternal" && right === "utopia") ||
+        (left === "utopia" && right === "eternal")
+    ) {
+        eyesSrc = "images/eternal-eyes.png";
+    }
+
+    else if (
+        (left === "accel" && right === "terror") ||
+        (left === "terror" && right === "accel") ||
+        (left === "accel" && right === "utopia") ||
+        (left === "utopia" && right === "accel")
+    ) {
+        eyesSrc = "images/accel-eyes-caped.png";
+    }
+
+    else if (
+        (left === "trial" && right === "terror") ||
+        (left === "terror" && right === "trial") ||
+        (left === "trial" && right === "utopia") ||
+        (left === "utopia" && right === "trial")
+    ) {
+        eyesSrc = "images/trial-eyes-caped.png";
+    }
+
+    else if (
+        left === "terror" || right === "terror" ||
+        left === "utopia" || right === "utopia"
+    ) {
+        eyesSrc = "images/normal-eyes-caped.png";
+    }
+
+
+    else if (
+        (left === "accel" && right === "eternal") ||
+        (left === "eternal" && right === "accel")
+    ) {
+        eyesSrc = "images/eternal-accel-eyes.png";
+    }
+    else if (
+        (left === "trial" && right === "eternal") ||
+        (left === "eternal" && right === "trial")
+    ) {
+        eyesSrc = "images/eternal-trial-eyes.png";
+    }
+    else if (left === "accel" || right === "accel") {
+        eyesSrc = "images/accel-eyes.png";
+    }
+    else if (left === "trial" || right === "trial") {
+        eyesSrc = "images/trial-eyes.png";
+    }
+    else if (left === "eternal" || right === "eternal") {
+        eyesSrc = "images/eternal-eyes.png";
+    }
+
+
+    // ============================
+    // cape 分岐
+    // ============================
+    if (
+        (left === "eternal" && right === "terror") ||
+        (left === "terror" && right === "eternal")
+    ) {
+        capeSrc = "images/terror-cape.png";
+    }
+    else if (
+        (left === "eternal" && right === "utopia") ||
+        (left === "utopia" && right === "eternal")
+    ) {
+        capeSrc = "images/utopia-cape.png";
+    }
+    else if (
+        (left === "terror" && right === "utopia") ||
+        (left === "utopia" && right === "terror")
+    ) {
+        capeSrc = "images/terror-utopia-cape.png";
+    }
+    else if (left === "eternal" || right === "eternal") {
+        capeSrc = "images/eternal-cape.png";
+    }
+    else if (left === "terror" || right === "terror") {
+        capeSrc = "images/terror-cape.png";
+    }
+    else if (left === "utopia" || right === "utopia") {
+        capeSrc = "images/utopia-cape.png";
+    }
+    else {
+        capeSrc = null;
+    }
+
+
+    // ============================
+    // muffler 分岐
+    // ============================
     if(!capeSrc){
         if(left === "cyclone" && right === "cyclone") mufflerSrc="images/cyclone-muffler3.png";
         else if(left === "cyclone") mufflerSrc="images/cyclone-muffler1.png";
         else if(right === "cyclone") mufflerSrc="images/cyclone-muffler2.png";
     }
-
-    // ナスカマフラー分岐
     if(!capeSrc){
         if(left === "nasca" && right === "nasca") mufflerSrc="images/nasca-muffler3.png";
         else if(left === "nasca") mufflerSrc="images/nasca-muffler1.png";
         else if(right === "nasca") mufflerSrc="images/nasca-muffler2.png";
     }
+
 
     // ウイングス分岐
     if((left === "bird" && right === "nasca") ||(left === "nasca" && right === "bird")){
