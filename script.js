@@ -2,8 +2,11 @@
    メモリ名
 ============================= */
 const forms = [
-  { value: "utopia", label: "ユートピア" },
   { value: "terror", label: "テラー" },
+  { value: "taboo", label: "タブー" },
+  { value: "claydoll", label: "クレイドール" },
+  { value: "smilodon", label: "スミロドン" },
+  { value: "utopia", label: "ユートピア" },
   { value: "bomb", label: "ボム" },
   { value: "engine", label: "エンジン" },
   { value: "trial", label: "トライアル" },
@@ -38,7 +41,7 @@ const forms = [
 
 
 const excludedFromMainModal = [
-  "prism", "trial", "engine", "bomb", "terror", "utopia"
+  "prism", "trial", "engine", "bomb", "terror", "taboo", "claydoll", "smilodon", "utopia"
 ];
 const mainModalForms = forms.filter(
   f => !excludedFromMainModal.includes(f.value)
@@ -47,11 +50,13 @@ const mainModalForms = forms.filter(
 
 const extraModalSlots = [
   { value: "prism", label: "プリズム", enabled: true },
+  { value: "bomb", label: "ボム", enabled: true },
   { value: null, label: "???", enabled: false },
-  { value: null, label: "???", enabled: false },
+
   { value: "trial", label: "トライアル", enabled: true },
   { value: null, label: "???", enabled: false },
   { value: null, label: "???", enabled: false },
+
   { value: "engine", label: "エンジン", enabled: true },
   { value: null, label: "???", enabled: false },
   { value: null, label: "???", enabled: false },
@@ -64,7 +69,10 @@ const extraModalSlots = [
 ============================= */
 const memoryDescriptions = {
     utopia: "｢理想郷の記憶｣を持つガイアメモリ。重力操作能力に加えて、触れた人間の感情を吸い取って自らのエネルギーに転換する能力を持つ。",
-    terror: "｢恐怖の記憶｣を持つガイアメモリ。恐怖領域｢テラーフィールド｣を展開し、敵に激しい恐怖心を与えることができる。",
+    terror: "｢恐怖の記憶｣を持つガイアメモリ。恐怖領域｢テラーフィールド｣を展開し、敵に激しい恐怖心を与える。",
+    taboo: "｢禁忌の記憶｣を持つガイアメモリ。強烈な破壊光球を発射する能力を与える。",
+    claydoll: "｢土偶の記憶｣を持つガイアメモリ。重力エネルギー弾を発射する能力と再生能力を与える。",
+    smilodon: "｢スミロドンの記憶｣を持つガイアメモリ。鋭い爪と超高速移動能力を与える。",
     bomb: "｢爆弾の記憶｣を持つガイアメモリ。分裂・爆発する強力な光弾を放つ。",
     engine: "｢ジェット｣｢スチーム｣｢エレクトリック｣、3種のエンジンパワーを引き出せる多機能型メモリ。",
     trial: "｢挑戦の記憶｣を持つガイアメモリ。既存のメモリのプログラムに超加速のパッチを当てることで、音速に到達する加速力を与える。",
@@ -73,7 +81,7 @@ const memoryDescriptions = {
     bird: "｢始祖鳥の記憶｣を持つガイアメモリ。使用者に飛翔能力を与える｡",
     cyclone: "｢疾風の記憶｣を持つガイアメモリ。疾風を引き起こし、風を自由自在に操る能力を与える｡",
     dummy: "｢偽物(複製)の記憶｣を持つガイアメモリ。他人や物体に擬態する能力を与える｡",
-    eternal: "｢永遠の記憶｣を持つガイアメモリ。T2以前のガイアメモリの能力を無力化させる｡",
+    eternal: "｢永遠の記憶｣を持つガイアメモリ。T2以前のガイアメモリの能力を無力化する｡",
     fang: "｢牙の記憶｣を持つガイアメモリ。闘争本能を増幅させ、全身に鋭利な刃を発生させる｡",
     gene: "｢遺伝子の記憶｣を持つガイアメモリ。遺伝子を操作する能力を与える｡",
     heat: "｢熱き記憶｣を持つガイアメモリ。感情を昂らせ、高熱や炎を自在に操る能力を与える｡",
@@ -176,6 +184,12 @@ function updateHalf() {
 
     // 単体画像パターン
     const singleImages = {
+        "claydoll-xtreme": "ClaydollXtreme.png",
+        "xtreme-claydoll": "XtremeClaydoll.png",
+
+        "taboo-weather": "TabooWeather.png",
+        "weather-taboo": "WeatherTaboo.png",
+
         "accel-trial": "AccelTrial.png",
         "trial-accel": "TrialAccel.png",
         "fang-trial": "FangTrial.png",
@@ -202,7 +216,7 @@ function updateHalf() {
 
     const key = left + "-" + right;
     const weaponUsers = [
-        "prism", "trial", "engine", "bomb", "terror", "utopia",
+        "prism", "trial", "engine", "bomb", "terror", "taboo", "claydoll", "smilodon", "utopia",
         "accel", "cyclone", "eternal", "gene", 
         "heat", "iceage", "key", "luna", "metal", "nasca", 
         "ocean", "puppeteer", "queen", "rocket", "skull", "trigger", "unicorn", 
@@ -285,6 +299,25 @@ function updateHalf() {
         weapon1Src = "images/eternal-weapon1.png";
         weapon2Src = "images/metal-weapon4.png";
     }
+
+    else if(left === "metal" && right === "terror") {
+        weapon1Src = "images/metal-weapon3.png";
+        weapon2Src = "images/terror-weapon.png";
+    } 
+    else if(left === "terror" && right === "metal") {
+        weapon1Src = "images/metal-weapon4.png";
+        weapon2Src = "images/terror-weapon.png";
+    }
+
+    else if(left === "metal" && right === "utopia") {
+        weapon1Src = "images/metal-weapon3.png";
+        weapon2Src = "images/utopia-weapon2.png";
+    } 
+    else if(left === "utopia" && right === "metal") {
+        weapon1Src = "images/utopia-weapon1.png";
+        weapon2Src = "images/metal-weapon4.png";
+    }
+
     else if(left === "metal" && right === "skull") {
         weapon1Src = "images/skull-weapon2.png";
         weapon2Src = "images/metal-weapon5.png";
@@ -339,13 +372,22 @@ function updateHalf() {
         weapon1Src = "images/xtreme-weapon.png";
         weapon2Src = "images/cyclone-weapon.png";
     }
-    // テラー × サイクロン
+    // サイクロン × テラー
     else if (
         (left === "terror" && right === "cyclone") ||
         (left === "cyclone" && right === "terror")
     ) {
-        weapon1Src = "images/terror-weapon.png";
-        weapon2Src = "images/cyclone-weapon.png";
+        weapon1Src = "images/cyclone-weapon.png";
+        weapon2Src = "images/terror-weapon.png";
+    }
+    // サイクロン × スミロドン
+    else if (left === "cyclone" && right === "smilodon") {
+        weapon1Src = "images/cyclone-weapon.png";
+        weapon2Src = "images/smilodon-weapon2.png";
+    }
+    else if (left === "smilodon" && right === "cyclone") {
+        weapon1Src = "images/cyclone-weapon.png";
+        weapon2Src = "images/smilodon-weapon1.png";
     }
     // 右がサイクロン
     else if (right === "cyclone") {
@@ -377,7 +419,7 @@ function updateHalf() {
         (left === "xtreme" && right === "terror") ||
         (left === "terror" && right === "xtreme")
     ) {
-        weapon1Src = "images/xtreme-weapon.png";
+        weapon1Src = "images/xtreme-weaponE.png";
         weapon2Src = "images/terror-weapon.png";
     }
     // 右がテラー
@@ -394,6 +436,40 @@ function updateHalf() {
     }
 
 
+    /* ============================
+       タブー武器分岐
+    ============================ */
+    // タブー × ウェザー
+    else if (left === "taboo" && right === "weather") {
+        weapon1Src = null;
+        weapon2Src = "images/taboo-weaponTW.png";
+    }
+    else if (left === "weather" && right === "taboo") {
+        weapon1Src = null;
+        weapon2Src = "images/taboo-weaponWT.png";
+    }
+
+    /* ============================
+       クレイドール武器分岐
+    ============================ */
+    // クレイドール × ジーン
+    else if (left === "claydoll" && right === "gene") {
+        weapon1Src = null;
+        weapon2Src = "images/claydoll-weaponCG.png";
+    }
+    else if (left === "gene" && right === "claydoll") {
+        weapon1Src = null;
+        weapon2Src = "images/claydoll-weaponGC.png";
+    }
+    // クレイドール × エクストリーム
+    else if (
+        (left === "xtreme" && right === "claydoll") ||
+        (left === "claydoll" && right === "xtreme")
+    ) {
+        weapon1Src = null;
+        weapon2Src = "images/claydoll-weaponX.png";
+    }
+
 
     /* ============================
        エクストリーム武器分岐
@@ -403,8 +479,6 @@ function updateHalf() {
         weapon1Src = "images/prism-weaponXP.png";
         weapon2Src = "images/xtreme-weapon.png";
     }
-
-    // プリズム × エクストリーム
     else if (left === "prism" && right === "xtreme") {
         weapon1Src = "images/prism-weaponPX.png";
         weapon2Src = "images/xtreme-weapon.png";
@@ -424,8 +498,6 @@ function updateHalf() {
         weapon1Src = "images/skull-weapon2.png";
         weapon2Src = "images/xtreme-weaponXS.png";
     }
-
-    // スカル × エクストリーム
     else if (left === "skull" && right === "xtreme") {
         weapon1Src = "images/skull-weapon1.png";
         weapon2Src = "images/xtreme-weaponSX.png";
@@ -450,6 +522,27 @@ function updateHalf() {
         weapon1Src = "images/violence-weapon5.png";
         weapon2Src = "images/xtreme-weapon.png";
     }
+
+    // エクストリーム × スミロドン
+    else if (left === "xtreme" && right === "smilodon") {
+        weapon1Src = "images/smilodon-weapon2.png";
+        weapon2Src = "images/xtreme-weaponXSm.png";
+    }
+    else if (left === "smilodon" && right === "xtreme") {
+        weapon1Src = "images/smilodon-weapon1.png";
+        weapon2Src = "images/xtreme-weaponSmX.png";
+    }
+
+    // エクストリーム × ユートピア
+    else if (left === "xtreme" && right === "utopia") {
+        weapon1Src = "images/utopia-weapon2.png";
+        weapon2Src = "images/xtreme-weaponE.png";
+    }
+    else if (left === "utopia" && right === "xtreme") {
+        weapon1Src = "images/utopia-weapon1.png";
+        weapon2Src = "images/xtreme-weaponE.png";
+    }
+
 
     // エクストリーム × エクストリーム
     else if (left === "xtreme" && right === "xtreme") {
@@ -498,7 +591,7 @@ function updateHalf() {
 
         // 左右同じ武器の場合
         const sameWeaponForms = [
-        "prism", "trial", "engine", "bomb", "utopia", 
+        "prism", "trial", "engine", "bomb", "taboo", "claydoll", "smilodon", "utopia", 
         "accel", "cyclone", "eternal", "gene", 
         "heat", "iceage", "key", "luna", "metal", "nasca", 
         "ocean", "puppeteer", "queen", "rocket", "skull", "trigger", "unicorn", 
@@ -667,7 +760,6 @@ function updateHalf() {
     // ============================
     // eyes 分岐
     // ============================
-
     if (
         (left === "fang" && right === "terror") ||
         (left === "terror" && right === "fang") ||
@@ -716,7 +808,6 @@ function updateHalf() {
         eyesSrc = "images/normal-eyes-caped.png";
     }
 
-
     else if (
         (left === "accel" && right === "eternal") ||
         (left === "eternal" && right === "accel")
@@ -753,7 +844,7 @@ function updateHalf() {
         (left === "eternal" && right === "utopia") ||
         (left === "utopia" && right === "eternal")
     ) {
-        capeSrc = "images/utopia-cape.png";
+        capeSrc = "images/terror-utopia-cape.png";
     }
     else if (
         (left === "terror" && right === "utopia") ||
