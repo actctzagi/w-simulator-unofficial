@@ -4,6 +4,7 @@
 const forms = [
   { value: "terror", label: "テラー" },
   { value: "taboo", label: "タブー" },
+  { value: "nasca3", label: "ナスカ" },
   { value: "claydoll", label: "クレイドール" },
   { value: "smilodon", label: "スミロドン" },
   { value: "utopia", label: "ユートピア" },
@@ -41,7 +42,7 @@ const forms = [
 
 
 const excludedFromMainModal = [
-  "prism", "trial", "engine", "bomb", "terror", "taboo", "claydoll", "smilodon", "utopia"
+  "prism", "trial", "engine", "bomb", "terror", "taboo", "nasca3", "claydoll", "smilodon", "utopia"
 ];
 const mainModalForms = forms.filter(
   f => !excludedFromMainModal.includes(f.value)
@@ -50,15 +51,17 @@ const mainModalForms = forms.filter(
 
 const extraModalSlots = [
   { value: "prism", label: "プリズム", enabled: true },
+  { value: "trial", label: "トライアル", enabled: true },
+  { value: "engine", label: "エンジン", enabled: true },
+
   { value: "bomb", label: "ボム", enabled: true },
   { value: null, label: "???", enabled: false },
-
-  { value: "trial", label: "トライアル", enabled: true },
-  { value: null, label: "???", enabled: false },
   { value: null, label: "???", enabled: false },
 
-  { value: "engine", label: "エンジン", enabled: true },
   { value: null, label: "???", enabled: false },
+  { value: null, label: "???", enabled: false },
+  { value: "smilodon", label: "スミロドン", enabled: true },
+
   { value: null, label: "???", enabled: false },
 ];
 
@@ -68,9 +71,10 @@ const extraModalSlots = [
    メモリ解説文
 ============================= */
 const memoryDescriptions = {
-    utopia: "｢理想郷の記憶｣を持つガイアメモリ。重力操作能力に加えて、触れた人間の感情を吸い取って自らのエネルギーに転換する能力を持つ。",
+    utopia: "｢理想郷の記憶｣を持つガイアメモリ。重力操作能力に加えて、触れた人間の感情を吸い取って自らのエネルギーに転換する能力を与える。",
     terror: "｢恐怖の記憶｣を持つガイアメモリ。恐怖領域｢テラーフィールド｣を展開し、敵に激しい恐怖心を与える。",
     taboo: "｢禁忌の記憶｣を持つガイアメモリ。強烈な破壊光球を発射する能力を与える。",
+    nasca3: "｢ナスカ文明の記憶｣を持つガイアメモリ。使用者をナスカ文明の剣士に変化させ､飛翔能力と超高速移動能力を与える。レベル3に到達することで更なる進化を果たす｡",
     claydoll: "｢土偶の記憶｣を持つガイアメモリ。重力エネルギー弾を発射する能力と再生能力を与える。",
     smilodon: "｢スミロドンの記憶｣を持つガイアメモリ。鋭い爪と超高速移動能力を与える。",
     bomb: "｢爆弾の記憶｣を持つガイアメモリ。分裂・爆発する強力な光弾を放つ。",
@@ -95,7 +99,7 @@ const memoryDescriptions = {
     puppeteer: "｢人形使いの記憶｣を持つガイアメモリ。対象物を人形のように意のままに操る能力を与える｡",
     queen: "｢女王の記憶｣を持つガイアメモリ。鉄壁のバリアーを発生させ、敵の攻撃を防ぐ｡",
     rocket: "｢ロケットの記憶｣を持つガイアメモリ。攻撃対象に向かってミサイルを発射する能力を与える｡",
-    skull: "｢骸骨の記憶｣を持つガイアメモリ。身体能力を極限まで高め、その状態に耐えうる肉体に作り変える｡",
+    skull: "｢骸骨の記憶｣を持つガイアメモリ。身体能力を極限まで高め、その状態に耐えうる肉体へと作り変える｡",
     trigger: "｢銃撃手の記憶｣を持つガイアメモリ。銃撃能力を与え、射撃力を強化する｡",
     unicorn: "｢一角獣の記憶｣を持つガイアメモリ。パンチなどの打突攻撃の破壊力を高める｡",
     violence: "｢暴力の記憶｣を持つガイアメモリ。全身の筋力を強化し、特に腕力を最も強化させる｡",
@@ -184,39 +188,50 @@ function updateHalf() {
 
     // 単体画像パターン
     const singleImages = {
-        "claydoll-xtreme": "ClaydollXtreme.png",
-        "xtreme-claydoll": "XtremeClaydoll.png",
-
-        "taboo-weather": "TabooWeather.png",
-        "weather-taboo": "WeatherTaboo.png",
-
         "accel-trial": "AccelTrial.png",
         "trial-accel": "TrialAccel.png",
         "fang-trial": "FangTrial.png",
         "trial-fang": "TrialFang.png",
         "trial-skull": "TrialSkull.png",
 
-        "skull-joker": "SkullJoker.png",
+        "claydoll-xtreme": "ClaydollXtreme.png",
+        "xtreme-claydoll": "XtremeClaydoll.png",
+
+        "nasca3-nasca": "Nasca3Nasca.png",
+        "nasca-nasca3": "NascaNasca3.png",
+        "nasca3-taboo": "Nasca3Taboo.png",
+        "taboo-nasca3": "TabooNasca3.png",
+        "nasca3-weather": "Nasca3Weather.png",
+        "weather-nasca3": "WeatherNasca3.png",
+
         "nasca-joker": "NascaJoker.png",
-        "nasca-skull": "NascaSkull.png",
         "nasca-cyclone": "NascaCyclone.png",
         "cyclone-nasca": "CycloneNasca.png",
         "nasca-yesterday": "NascaYesterday.png",
         "yesterday-nasca": "YesterdayNasca.png",
+        "nasca-taboo": "NascaTaboo.png",
+        "taboo-nasca": "TabooNasca.png",
+
+        "nasca3-skull": "Nasca3Skull.png",
+        "nasca-skull": "NascaSkull.png",
+
         "fang-eternal": "FangEternal.png",
         "eternal-fang": "EternalFang.png",
         "fang-accel": "FangAccel.png",
         "accel-fang": "AccelFang.png",
+
         "eternal-skull": "EternalSkull.png",
         "fang-skull": "FangSkull.png",
         "accel-skull": "AccelSkull.png",
         "cyclone-skull": "CycloneSkull.png",
+        "skull-joker": "SkullJoker.png",
+
         "xtreme-xtreme": "XtremeXtreme.png"
     };
 
     const key = left + "-" + right;
     const weaponUsers = [
-        "prism", "trial", "engine", "bomb", "terror", "taboo", "claydoll", "smilodon", "utopia",
+        "prism", "trial", "engine", "bomb", "terror", "taboo", "nasca3", "claydoll", "smilodon", "utopia",
         "accel", "cyclone", "eternal", "gene", 
         "heat", "iceage", "key", "luna", "metal", "nasca", 
         "ocean", "puppeteer", "queen", "rocket", "skull", "trigger", "unicorn", 
@@ -462,14 +477,14 @@ function updateHalf() {
         weapon2Src = "images/claydoll-weaponGC.png";
     }
     // クレイドール × エクストリーム
-    else if (
-        (left === "xtreme" && right === "claydoll") ||
-        (left === "claydoll" && right === "xtreme")
-    ) {
+    else if (left === "claydoll" && right === "xtreme") {
         weapon1Src = null;
-        weapon2Src = "images/claydoll-weaponX.png";
+        weapon2Src = "images/claydoll-weaponCX.png";
     }
-
+    else if (left === "xtreme" && right === "claydoll") {
+        weapon1Src = null;
+        weapon2Src = "images/claydoll-weaponXC.png";
+    }
 
     /* ============================
        エクストリーム武器分岐
@@ -543,7 +558,6 @@ function updateHalf() {
         weapon2Src = "images/xtreme-weaponE.png";
     }
 
-
     // エクストリーム × エクストリーム
     else if (left === "xtreme" && right === "xtreme") {
         weapon1Src = null; 
@@ -591,7 +605,7 @@ function updateHalf() {
 
         // 左右同じ武器の場合
         const sameWeaponForms = [
-        "prism", "trial", "engine", "bomb", "taboo", "claydoll", "smilodon", "utopia", 
+        "prism", "trial", "engine", "bomb", "taboo", "nasca3", "claydoll", "smilodon", "utopia", 
         "accel", "cyclone", "eternal", "gene", 
         "heat", "iceage", "key", "luna", "metal", "nasca", 
         "ocean", "puppeteer", "queen", "rocket", "skull", "trigger", "unicorn", 
@@ -875,6 +889,13 @@ function updateHalf() {
         else if(right === "cyclone") mufflerSrc="images/cyclone-muffler2.png";
     }
     if(!capeSrc){
+        if(left === "nasca3" && right === "nasca3") mufflerSrc="images/cyclone-muffler3.png";
+        else if(left === "nasca3" && right === "cyclone") mufflerSrc="images/cyclone-muffler3.png";
+        else if(left === "cyclone" && right === "nasca3") mufflerSrc="images/cyclone-muffler3.png";
+        else if(left === "nasca3") mufflerSrc="images/cyclone-muffler1.png";
+        else if(right === "nasca3") mufflerSrc="images/cyclone-muffler2.png";
+    }
+    if(!capeSrc){
         if(left === "nasca" && right === "nasca") mufflerSrc="images/nasca-muffler3.png";
         else if(left === "nasca") mufflerSrc="images/nasca-muffler1.png";
         else if(right === "nasca") mufflerSrc="images/nasca-muffler2.png";
@@ -884,10 +905,14 @@ function updateHalf() {
     // ウイングス分岐
     if((left === "bird" && right === "nasca") ||(left === "nasca" && right === "bird")){
         wingsSrc = "images/bird-nasca-wings.png";
+    }else if((left === "bird" && right === "nasca3") ||(left === "nasca3" && right === "bird")){
+        wingsSrc = "images/bird-nasca3-wings.png";
     }else if(left === "bird" || right === "bird"){
         wingsSrc = "images/bird-wings.png";
     }else if(left === "nasca" || right === "nasca"){
         wingsSrc = "images/nasca-wings.png";
+    }else if(left === "nasca3" || right === "nasca3"){
+        wingsSrc = "images/nasca3-wings.png";
     }else {
         wingsSrc = null;
     }
@@ -1217,10 +1242,6 @@ function openModal() {
     root.appendChild(extraGrid);
 }
 
-
-
-
-
 function updateSelectors() {
     const left = document.getElementById("leftSelect").value;
     const right = document.getElementById("rightSelect").value;
@@ -1233,12 +1254,22 @@ function updateSelectors() {
     if (leftForm) {
         leftBtn.src = `images/btn-${leftForm.value}.png`;
         leftBtn.alt = leftForm.label;
-        leftLabel.textContent = leftForm.label;
+
+        leftLabel.textContent =
+        leftForm.value === "nasca3"
+            ? "ナスカ (Lv3)"
+            : leftForm.label;
     }
     if (rightForm) {
         rightBtn.src = `images/btn-${rightForm.value}.png`;
         rightBtn.alt = rightForm.label;
-        rightLabel.textContent = rightForm.label;
+
+
+        rightLabel.textContent =
+        rightForm.value === "nasca3"
+            ? "ナスカ (Lv3)"
+            : rightForm.label;
+
     }
 }
 

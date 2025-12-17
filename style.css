@@ -589,12 +589,12 @@ body {
 .modal-extra-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, auto);
     gap: 12px;
-    grid-auto-flow: column;
 }
 
-
+.modal-extra-grid .button-wrapper:nth-child(10) {
+    grid-column: 1;
+}
 
 #memoryModal.closing {
     opacity: 0;
