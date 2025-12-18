@@ -55,14 +55,14 @@ const extraModalSlots = [
   { value: "engine", label: "エンジン", enabled: true },
 
   { value: "bomb", label: "ボム", enabled: true },
-  { value: null, label: "???", enabled: false },
-  { value: null, label: "???", enabled: false },
+  { value: null, label: "???", enabled: false }, 
+  { value: "taboo", label: "タブー", enabled: true },
 
-  { value: null, label: "???", enabled: false },
-  { value: null, label: "???", enabled: false },
+  { value: null, label: "???", enabled: false }, 
+  { value: null, label: "???", enabled: false }, 
   { value: "smilodon", label: "スミロドン", enabled: true },
 
-  { value: null, label: "???", enabled: false },
+  { value: null, label: "???", enabled: false }
 ];
 
 
@@ -197,23 +197,24 @@ function updateHalf() {
         "claydoll-xtreme": "ClaydollXtreme.png",
         "xtreme-claydoll": "XtremeClaydoll.png",
 
+        "nasca3-skull": "Nasca3Skull.png",
         "nasca3-nasca": "Nasca3Nasca.png",
         "nasca-nasca3": "NascaNasca3.png",
         "nasca3-taboo": "Nasca3Taboo.png",
         "taboo-nasca3": "TabooNasca3.png",
         "nasca3-weather": "Nasca3Weather.png",
         "weather-nasca3": "WeatherNasca3.png",
+        "taboo-weather": "TabooWeather.png",
+        "weather-taboo": "WeatherTaboo.png",
 
+        "nasca-skull": "NascaSkull.png",
+        "nasca-taboo": "NascaTaboo.png",
+        "taboo-nasca": "TabooNasca.png",
         "nasca-joker": "NascaJoker.png",
         "nasca-cyclone": "NascaCyclone.png",
         "cyclone-nasca": "CycloneNasca.png",
         "nasca-yesterday": "NascaYesterday.png",
         "yesterday-nasca": "YesterdayNasca.png",
-        "nasca-taboo": "NascaTaboo.png",
-        "taboo-nasca": "TabooNasca.png",
-
-        "nasca3-skull": "Nasca3Skull.png",
-        "nasca-skull": "NascaSkull.png",
 
         "fang-eternal": "FangEternal.png",
         "eternal-fang": "EternalFang.png",
@@ -448,20 +449,6 @@ function updateHalf() {
         const R_hasWeapon = weaponUsers.includes(right);
         weapon1Src = R_hasWeapon ? `images/${right}-weapon2.png` : null;
         weapon2Src = "images/terror-weapon.png";
-    }
-
-
-    /* ============================
-       タブー武器分岐
-    ============================ */
-    // タブー × ウェザー
-    else if (left === "taboo" && right === "weather") {
-        weapon1Src = null;
-        weapon2Src = "images/taboo-weaponTW.png";
-    }
-    else if (left === "weather" && right === "taboo") {
-        weapon1Src = null;
-        weapon2Src = "images/taboo-weaponWT.png";
     }
 
     /* ============================
