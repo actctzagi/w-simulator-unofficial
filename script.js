@@ -58,11 +58,11 @@ const extraModalSlots = [
   { value: null, label: "???", enabled: false }, 
   { value: "taboo", label: "タブー", enabled: true },
 
-  { value: null, label: "???", enabled: false }, 
+  { value: "nasca3", label: "ナスカ (Lv3)", enabled: true },
   { value: null, label: "???", enabled: false }, 
   { value: "smilodon", label: "スミロドン", enabled: true },
 
-  { value: null, label: "???", enabled: false }
+  { value: null, label: "???", enabled: false }, 
 ];
 
 
