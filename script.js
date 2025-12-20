@@ -59,7 +59,7 @@ const extraModalSlots = [
   { value: "taboo", label: "タブー", enabled: true },
 
   { value: "nasca3", label: "ナスカ (Lv3)", enabled: true },
-  { value: null, label: "???", enabled: false }, 
+  { value: "claydoll", label: "クレイドール", enabled: true },
   { value: "smilodon", label: "スミロドン", enabled: true },
 
   { value: null, label: "???", enabled: false }, 
@@ -465,12 +465,12 @@ function updateHalf() {
     }
     // クレイドール × エクストリーム
     else if (left === "claydoll" && right === "xtreme") {
-        weapon1Src = null;
-        weapon2Src = "images/claydoll-weaponCX.png";
+        weapon1Src = "images/claydoll-weaponCX.png";
+        weapon2Src = "images/claydoll-weaponX.png";
     }
     else if (left === "xtreme" && right === "claydoll") {
-        weapon1Src = null;
-        weapon2Src = "images/claydoll-weaponXC.png";
+        weapon1Src = "images/claydoll-weaponXC.png";
+        weapon2Src = "images/claydoll-weaponX.png";
     }
 
     /* ============================
