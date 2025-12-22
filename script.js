@@ -62,7 +62,7 @@ const extraModalSlots = [
   { value: "claydoll", label: "クレイドール", enabled: true },
   { value: "smilodon", label: "スミロドン", enabled: true },
 
-  { value: "utopia", label: "ユートピア", enabled: true }
+  { value: null, label: "???", enabled: false }
 ];
 
 
