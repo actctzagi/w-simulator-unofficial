@@ -55,14 +55,14 @@ const extraModalSlots = [
   { value: "engine", label: "エンジン", enabled: true },
 
   { value: "bomb", label: "ボム", enabled: true },
-  { value: null, label: "???", enabled: false }, 
+  { value: "terror", label: "テラー", enabled: true },
   { value: "taboo", label: "タブー", enabled: true },
 
   { value: "nasca3", label: "ナスカ (Lv3)", enabled: true },
   { value: "claydoll", label: "クレイドール", enabled: true },
   { value: "smilodon", label: "スミロドン", enabled: true },
 
-  { value: null, label: "???", enabled: false }, 
+  { value: null, label: "???", enabled: false }
 ];
 
 
@@ -393,7 +393,7 @@ function updateHalf() {
         (left === "terror" && right === "cyclone") ||
         (left === "cyclone" && right === "terror")
     ) {
-        weapon1Src = "images/cyclone-weapon.png";
+        weapon1Src = "images/cyclone-weaponT.png";
         weapon2Src = "images/terror-weapon.png";
     }
     // サイクロン × スミロドン
