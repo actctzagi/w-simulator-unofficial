@@ -62,7 +62,7 @@ const extraModalSlots = [
   { value: "claydoll", label: "クレイドール", enabled: true },
   { value: "smilodon", label: "スミロドン", enabled: true },
 
-  { value: null, label: "???", enabled: false }
+  { value: "utopia", label: "ユートピア", enabled: true }
 ];
 
 
@@ -339,7 +339,6 @@ function updateHalf() {
         weapon2Src = "images/metal-weapon5.png";
     }
 
-
     /* ============================
        エンジン武器分岐
     ============================ */
@@ -367,7 +366,6 @@ function updateHalf() {
         weapon2Src = null;
     }
 
-
     /* ============================
        サイクロン武器分岐
     ============================ */
@@ -380,14 +378,57 @@ function updateHalf() {
         weapon1Src = null;
         weapon2Src = "images/cyclone-weaponJC.png";
     }
-    // サイクロン × エクストリーム
-    else if (
-        (left === "xtreme" && right === "cyclone") ||
-        (left === "cyclone" && right === "xtreme")
-    ) {
-        weapon1Src = "images/xtreme-weapon.png";
-        weapon2Src = "images/cyclone-weapon.png";
+
+    // サイクロン × ヒート
+    else if (left === "cyclone" && right === "heat") {
+        weapon1Src = "images/heat-weapon1.png";
+        weapon2Src = "images/cyclone-weaponH.png";
     }
+    else if (left === "heat" && right === "cyclone") {
+        weapon1Src = "images/heat-weapon2.png";
+        weapon2Src = "images/cyclone-weaponH.png";
+    }
+
+    // サイクロン × ボム
+    else if (left === "cyclone" && right === "bomb") {
+        weapon1Src = "images/bomb-weapon1.png";
+        weapon2Src = "images/cyclone-weaponH.png";
+    }
+    else if (left === "bomb" && right === "cyclone") {
+        weapon1Src = "images/bomb-weapon2.png";
+        weapon2Src = "images/cyclone-weaponH.png";
+    }
+
+    // サイクロン × クレイドール
+    else if (left === "cyclone" && right === "claydoll") {
+        weapon1Src = "images/claydoll-weapon1.png";
+        weapon2Src = "images/cyclone-weaponH.png";
+    }
+    else if (left === "claydoll" && right === "cyclone") {
+        weapon1Src = "images/claydoll-weapon2.png";
+        weapon2Src = "images/cyclone-weaponH.png";
+    }
+
+    // サイクロン × アイスエイジ
+    else if (left === "cyclone" && right === "iceage") {
+        weapon1Src = "images/iceage-weapon1.png";
+        weapon2Src = "images/cyclone-weaponI.png";
+    }
+    else if (left === "iceage" && right === "cyclone") {
+        weapon1Src = "images/iceage-weapon2.png";
+        weapon2Src = "images/cyclone-weaponI.png";
+    }
+
+    // サイクロン × オーシャン
+    else if (left === "cyclone" && right === "ocean") {
+        weapon1Src = "images/ocean-weapon1.png";
+        weapon2Src = "images/cyclone-weaponI.png";
+    }
+    else if (left === "ocean" && right === "cyclone") {
+        weapon1Src = "images/ocean-weapon2.png";
+        weapon2Src = "images/cyclone-weaponI.png";
+    }
+
     // サイクロン × テラー
     else if (
         (left === "terror" && right === "cyclone") ||
@@ -396,6 +437,7 @@ function updateHalf() {
         weapon1Src = "images/cyclone-weaponT.png";
         weapon2Src = "images/terror-weapon.png";
     }
+
     // サイクロン × スミロドン
     else if (left === "cyclone" && right === "smilodon") {
         weapon1Src = "images/cyclone-weapon.png";
@@ -405,6 +447,16 @@ function updateHalf() {
         weapon1Src = "images/cyclone-weapon.png";
         weapon2Src = "images/smilodon-weapon1.png";
     }
+
+    // サイクロン × エクストリーム
+    else if (
+        (left === "xtreme" && right === "cyclone") ||
+        (left === "cyclone" && right === "xtreme")
+    ) {
+        weapon1Src = "images/xtreme-weapon.png";
+        weapon2Src = "images/cyclone-weapon.png";
+    }
+
     // 右がサイクロン
     else if (right === "cyclone") {
         const L_hasWeapon = weaponUsers.includes(left);
@@ -417,7 +469,6 @@ function updateHalf() {
         weapon1Src = R_hasWeapon ? `images/${right}-weapon2.png` : null;
         weapon2Src = "images/cyclone-weapon.png";
     }
-
 
     /* ============================
        テラー武器分岐
@@ -474,6 +525,37 @@ function updateHalf() {
     }
 
     /* ============================
+       ユートピア武器分岐
+    ============================ */
+
+    // ユートピア × エクストリーム
+    else if (
+        (left === "utopia" && right === "xtreme") ||
+        (left === "xtreme" && right === "utopia")
+    ) {
+        weapon1Src = "images/xtreme-weaponE.png";
+        weapon2Src =
+        left === "utopia"
+            ? "images/utopia-weapon1.png"
+            : "images/utopia-weapon2.png";
+    }
+
+    // 左/右がユートピア
+    else if (left === "utopia" || right === "utopia") {
+        if (left === "utopia") {
+        weapon1Src = "images/utopia-weapon1.png";
+        weapon2Src = weaponUsers.includes(right)
+           ? `images/${right}-weapon2.png`
+            : null;
+        } else {
+        weapon1Src = "images/utopia-weapon2.png";
+        weapon2Src = weaponUsers.includes(left)
+           ? `images/${left}-weapon1.png`
+            : null;
+        }
+    }
+
+    /* ============================
        エクストリーム武器分岐
     ============================ */
     // エクストリーム × プリズム
@@ -515,6 +597,16 @@ function updateHalf() {
         weapon2Src = "images/xtreme-weaponE.png";
     }
 
+    // エクストリーム × ユートピア
+    else if (left === "xtreme" && right === "utopia") {
+        weapon1Src = "images/utopia-weapon2.png";
+        weapon2Src = "images/xtreme-weaponE.png";
+    }
+    else if (left === "utopia" && right === "xtreme") {
+        weapon1Src = "images/utopia-weapon1.png";
+        weapon2Src = "images/xtreme-weaponE.png";
+    }
+
     // エクストリーム × バイオレンス
     else if (left === "xtreme" && right === "violence") {
         weapon1Src = "images/violence-weapon6.png";
@@ -533,16 +625,6 @@ function updateHalf() {
     else if (left === "smilodon" && right === "xtreme") {
         weapon1Src = "images/smilodon-weapon1.png";
         weapon2Src = "images/xtreme-weaponSmX.png";
-    }
-
-    // エクストリーム × ユートピア
-    else if (left === "xtreme" && right === "utopia") {
-        weapon1Src = "images/utopia-weapon2.png";
-        weapon2Src = "images/xtreme-weaponE.png";
-    }
-    else if (left === "utopia" && right === "xtreme") {
-        weapon1Src = "images/utopia-weapon1.png";
-        weapon2Src = "images/xtreme-weaponE.png";
     }
 
     // エクストリーム × エクストリーム
@@ -668,7 +750,17 @@ function updateHalf() {
         weapon2Src = "images/terror-weapon.png";
     }
 
+    // ユートピア × ダミー
+    else if (
+        (left === "utopia" && right === "utopia") ||
+        (left === "utopia" && right === "dummy") ||
+        (left === "dummy" && right === "utopia")
+    ) {
+        weapon1Src = "images/utopia-weapon1.png";
+        weapon2Src = "images/utopia-weapon3.png";
+    }
 
+    // 左/右がダミー
     if (weapon1Src) {
         weapon1Img.src = weapon1Src;
         weapon1Layer.appendChild(weapon1Img);
