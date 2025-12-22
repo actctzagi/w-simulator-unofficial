@@ -380,51 +380,51 @@ function updateHalf() {
     }
 
     // サイクロン × ヒート
-    else if (left === "cyclone" && right === "heat") {
+    else if (left === "heat" && right === "cyclone") {
         weapon1Src = "images/heat-weapon1.png";
         weapon2Src = "images/cyclone-weaponH.png";
     }
-    else if (left === "heat" && right === "cyclone") {
+    else if (left === "cyclone" && right === "heat") {
         weapon1Src = "images/heat-weapon2.png";
         weapon2Src = "images/cyclone-weaponH.png";
     }
 
     // サイクロン × ボム
-    else if (left === "cyclone" && right === "bomb") {
+    else if (left === "bomb" && right === "cyclone") {
         weapon1Src = "images/bomb-weapon1.png";
         weapon2Src = "images/cyclone-weaponH.png";
     }
-    else if (left === "bomb" && right === "cyclone") {
+    else if (left === "cyclone" && right === "bomb") {
         weapon1Src = "images/bomb-weapon2.png";
         weapon2Src = "images/cyclone-weaponH.png";
     }
 
     // サイクロン × クレイドール
-    else if (left === "cyclone" && right === "claydoll") {
+    else if (left === "claydoll" && right === "cyclone") {
         weapon1Src = "images/claydoll-weapon1.png";
         weapon2Src = "images/cyclone-weaponH.png";
     }
-    else if (left === "claydoll" && right === "cyclone") {
+    else if (left === "cyclone" && right === "claydoll") {
         weapon1Src = "images/claydoll-weapon2.png";
         weapon2Src = "images/cyclone-weaponH.png";
     }
 
     // サイクロン × アイスエイジ
-    else if (left === "cyclone" && right === "iceage") {
+    else if (left === "iceage" && right === "cyclone") {
         weapon1Src = "images/iceage-weapon1.png";
         weapon2Src = "images/cyclone-weaponI.png";
     }
-    else if (left === "iceage" && right === "cyclone") {
+    else if (left === "cyclone" && right === "iceage") {
         weapon1Src = "images/iceage-weapon2.png";
         weapon2Src = "images/cyclone-weaponI.png";
     }
 
     // サイクロン × オーシャン
-    else if (left === "cyclone" && right === "ocean") {
+    else if (left === "ocean" && right === "cyclone") {
         weapon1Src = "images/ocean-weapon1.png";
         weapon2Src = "images/cyclone-weaponI.png";
     }
-    else if (left === "ocean" && right === "cyclone") {
+    else if (left === "cyclone" && right === "ocean") {
         weapon1Src = "images/ocean-weapon2.png";
         weapon2Src = "images/cyclone-weaponI.png";
     }
