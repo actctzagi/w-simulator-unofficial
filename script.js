@@ -62,7 +62,7 @@ const extraModalSlots = [
   { value: "claydoll", label: "クレイドール", enabled: true },
   { value: "smilodon", label: "スミロドン", enabled: true },
 
-  { value: null, label: "???", enabled: false }
+  { value: "utopia", label: "ユートピア", enabled: true }
 ];
 
 
@@ -71,16 +71,16 @@ const extraModalSlots = [
    メモリ解説文
 ============================= */
 const memoryDescriptions = {
-    utopia: "｢理想郷の記憶｣を持つガイアメモリ。重力操作能力に加えて、触れた人間の感情を吸い取って自らのエネルギーに転換する能力を与える。",
-    terror: "｢恐怖の記憶｣を持つガイアメモリ。恐怖領域｢テラーフィールド｣を展開し、敵に激しい恐怖心を与える。",
-    taboo: "｢禁忌の記憶｣を持つガイアメモリ。強烈な破壊光球を発射する能力を与える。",
+    utopia: "｢理想郷の記憶｣を持つガイアメモリ。重力操作能力に加えて、触れた人間の感情を吸い取って自らのエネルギーに転換する能力を与える｡",
+    terror: "｢恐怖の記憶｣を持つガイアメモリ。恐怖領域｢テラーフィールド｣を展開し、敵に激しい恐怖心を与える｡",
+    taboo: "｢禁忌の記憶｣を持つガイアメモリ。強烈な破壊光球を発射する能力を与える｡",
     nasca3: "｢ナスカ文明の記憶｣を持つガイアメモリ。使用者をナスカ文明の剣士に変化させ､飛翔能力と超高速移動能力を与える。レベル3に到達することで更なる進化を果たす｡",
-    claydoll: "｢土偶の記憶｣を持つガイアメモリ。重力エネルギー弾を発射する能力と再生能力を与える。",
-    smilodon: "｢スミロドンの記憶｣を持つガイアメモリ。鋭い爪と超高速移動能力を与える。",
-    bomb: "｢爆弾の記憶｣を持つガイアメモリ。分裂・爆発する強力な光弾を放つ。",
-    engine: "｢ジェット｣｢スチーム｣｢エレクトリック｣、3種のエンジンパワーを引き出せる多機能型メモリ。",
-    trial: "｢挑戦の記憶｣を持つガイアメモリ。既存のメモリのプログラムに超加速のパッチを当てることで、音速に到達する加速力を与える。",
-    prism: "｢プリズムの記憶｣を持つガイアメモリ。複数のメモリをリンクさせ、一つのエネルギーへと収束変換する。",
+    claydoll: "｢土偶の記憶｣を持つガイアメモリ。重力エネルギー弾を発射する能力と再生能力を与える｡",
+    smilodon: "｢スミロドンの記憶｣を持つガイアメモリ。鋭い爪と超高速移動能力を与える｡",
+    bomb: "｢爆弾の記憶｣を持つガイアメモリ。分裂・爆発する強力な光弾を放つ｡",
+    engine: "｢ジェット｣｢スチーム｣｢エレクトリック｣、3種のエンジンパワーを引き出せる多機能型メモリ｡",
+    trial: "｢挑戦の記憶｣を持つガイアメモリ。既存のメモリのプログラムに超加速のパッチを当てることで、音速に到達する加速力を与える｡",
+    prism: "｢プリズムの記憶｣を持つガイアメモリ。複数のメモリをリンクさせ、一つのエネルギーへと収束変換する｡",
     accel: "｢加速の記憶｣を持つガイアメモリ。加速能力を与え、高速移動を可能にする｡",
     bird: "｢始祖鳥の記憶｣を持つガイアメモリ。使用者に飛翔能力を与える｡",
     cyclone: "｢疾風の記憶｣を持つガイアメモリ。疾風を引き起こし、風を自由自在に操る能力を与える｡",
@@ -347,23 +347,25 @@ function updateHalf() {
         weapon1Src = "images/engine-weaponAE.png";
         weapon2Src = null;
     }
-    // エンジン × アクセル
     else if (left === "engine" && right === "accel") {
         weapon1Src = "images/engine-weaponEA.png";
         weapon2Src = null;
     }
+
+    // エンジン × エクストリーム
+    else if (left === "engine" && right === "xtreme") {
+        weapon1Src = "images/engine-weaponEX.png";
+        weapon2Src = "images/xtreme-weapon.png";
+    }
+    else if (left === "xtreme" && right === "engine") {
+        weapon1Src = "images/engine-weaponXE.png";
+        weapon2Src = "images/xtreme-weapon.png";
+    }
+
     // エンジン × スカル
     else if (left === "engine" && right === "skull") {
-        weapon1Src = "images/engine-weaponES.png";
-        weapon2Src = "images/skull-weapon2.png";
-    }
-    // エンジン × エクストリーム
-    else if (
-        (left === "xtreme" && right === "engine") ||
-        (left === "engine" && right === "xtreme")
-    ) {
-        weapon1Src = "images/xtreme-weapon.png";
-        weapon2Src = null;
+        weapon1Src = "images/skull-weapon2.png";
+        weapon2Src = "images/engine-weaponES.png";
     }
 
     /* ============================
