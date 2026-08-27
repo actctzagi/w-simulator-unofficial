@@ -373,6 +373,16 @@ function updateHalf() {
         weapon2Src = "images/cyclone-weaponH.png";
     }
 
+    // サイクロン × エンジン
+    else if (left === "engine" && right === "cyclone") {
+        weapon1Src = "images/engine-weapon1.png";
+        weapon2Src = "images/cyclone-weaponH.png";
+    }
+    else if (left === "cyclone" && right === "engine") {
+        weapon1Src = "images/engine-weapon2.png";
+        weapon2Src = "images/cyclone-weaponH.png";
+    }
+
     // サイクロン × ボム
     else if (left === "bomb" && right === "cyclone") {
         weapon1Src = "images/bomb-weapon1.png";
