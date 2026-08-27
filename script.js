@@ -109,35 +109,21 @@ const memoryDescriptions = {
     zone: "｢地帯の記憶｣を持つガイアメモリ。任意の対象物を自由に他の場所へ転送する｡"
 };
 
+/* =============================
+   選択中のガイアメモリ（状態管理）
+============================= */
+let currentLeft = "cyclone";
+let currentRight = "joker";
+
 function updateMemoryDescriptions() {
-    const left = document.getElementById("leftSelect").value;
-    const right = document.getElementById("rightSelect").value;
+    const left = currentLeft;
+    const right = currentRight;
 
     const leftBox = document.getElementById("leftMemoryDescription");
     const rightBox = document.getElementById("rightMemoryDescription");
 
     if(leftBox)  leftBox.textContent  = memoryDescriptions[left]  || "";
     if(rightBox) rightBox.textContent = memoryDescriptions[right] || "";
-}
-
-/* =============================
-   左右パネル（非表示・不可欠）
-============================= */
-function createButtons() {
-  const leftSelect = document.getElementById("leftSelect");
-  const rightSelect = document.getElementById("rightSelect");
-
-  forms.forEach(f => {
-    const leftOpt = document.createElement("option");
-    leftOpt.value = f.value;
-    leftOpt.text = f.label;
-    leftSelect.appendChild(leftOpt);
-
-    const rightOpt = document.createElement("option");
-    rightOpt.value = f.value;
-    rightOpt.text = f.label;
-    rightSelect.appendChild(rightOpt);
-    });
 }
 
 let weaponsVisible = true; 
@@ -147,8 +133,8 @@ let weaponsVisible = true;
 ============================= */
 
 function updateHalf() {
-    const left = document.getElementById("leftSelect").value;
-    const right = document.getElementById("rightSelect").value;
+    const left = currentLeft;
+    const right = currentRight;
     const leftLayer = document.getElementById("leftHalf");
     const rightLayer = document.getElementById("rightHalf");
     const eyesLayer = document.getElementById("eyesLayer");
@@ -267,10 +253,6 @@ function updateHalf() {
     /* ============================================
        武器処理
     ============================================ */
-    const disableWeaponPairs = [];
-
-    let disableWeapons = disableWeaponPairs.some(p => (left === p[0] && right === p[1]));
-
 
     /* ============================
        ファング武器分岐
@@ -345,11 +327,11 @@ function updateHalf() {
     // アクセル × エンジン
     else if (left === "accel" && right === "engine") {
         weapon1Src = "images/engine-weaponAE.png";
-        weapon2Src = null;
+        weapon2Src = "images/accel-weapon1.png";
     }
     else if (left === "engine" && right === "accel") {
         weapon1Src = "images/engine-weaponEA.png";
-        weapon2Src = null;
+        weapon2Src = "images/accel-weapon2.png";
     }
 
     // エンジン × エクストリーム
@@ -670,23 +652,11 @@ function updateHalf() {
     }
 
 
-    else if (!disableWeapons) {
+    else {
         const L_hasWeapon = weaponUsers.includes(left);
         const R_hasWeapon = weaponUsers.includes(right);
 
-        // 左右同じ武器の場合
-        const sameWeaponForms = [
-        "prism", "trial", "engine", "bomb", "taboo", "nasca3", "claydoll", "smilodon", "utopia", 
-        "accel", "cyclone", "eternal", "gene", 
-        "heat", "iceage", "key", "luna", "metal", "nasca", 
-        "ocean", "puppeteer", "queen", "rocket", "skull", "trigger", "unicorn", 
-        "violence", "weather", "xtreme", "yesterday", "zone"
-        ];
-
-        if (left === right && sameWeaponForms.includes(left)) {
-            weapon1Src = `images/${left}-weapon1.png`;
-            weapon2Src = `images/${right}-weapon2.png`;
-        } else if (L_hasWeapon && R_hasWeapon) {
+        if (L_hasWeapon && R_hasWeapon) {
             weapon1Src = `images/${left}-weapon1.png`;
             weapon2Src = `images/${right}-weapon2.png`;
         } else if (L_hasWeapon) {
@@ -695,13 +665,6 @@ function updateHalf() {
             weapon2Src = `images/${right}-weapon2.png`;
         }
     }
-
-    // 単体画像でも武器を表示
-    if (isSingle && disableWeapons) {
-        weapon1Src = null;
-        weapon2Src = null;
-    }
-
 
     /* ============================
        ダミー武器分岐
@@ -781,32 +744,6 @@ function updateHalf() {
     } else {
         weapon2Layer.style.display = "none";
         weapon2Layer.dataset.hasWeapon = "false";
-    }
-
-    /* ============================================
-       左右半身・目・マフラー・ウイング・ケープ描画
-    ============================================ */
-    if(!isSingle){
-        leftImg.src = leftSrc;
-        rightImg.src = rightSrc;
-        leftLayer.appendChild(leftImg);
-        rightLayer.appendChild(rightImg);
-
-        eyesImg.src = eyesSrc;
-        eyesLayer.appendChild(eyesImg);
-
-        if(mufflerSrc){
-            mufflerImg.src = mufflerSrc;
-            mufflerLayer.appendChild(mufflerImg);
-        }
-        if(wingsSrc){
-            wingsImg.src = wingsSrc;
-            wingsLayer.appendChild(wingsImg);
-        }
-        if(capeSrc){
-            capeImg.src = capeSrc;
-            capeLayer.appendChild(capeImg);
-        }
     }
 
     // ファング分岐
@@ -1092,8 +1029,8 @@ function updateWeaponsButtonVisibility() {
 ============================================ */
 document.getElementById("shareBtn").addEventListener("click", () => {
 
-  const left  = document.getElementById("leftSelect").value;
-  const right = document.getElementById("rightSelect").value;
+  const left  = currentLeft;
+  const right = currentRight;
 
   const baseUrl = "https://actctzagi.github.io/w-simulator-unofficial/";
   const shareUrl = `${baseUrl}?left=${encodeURIComponent(left)}&right=${encodeURIComponent(right)}&v=2`;
@@ -1140,8 +1077,8 @@ function animateViewer() {
    フォーム名更新
 ============================================ */
 function updateFormName() {
-    const left = document.getElementById("leftSelect").value;
-    const right = document.getElementById("rightSelect").value;
+    const left = currentLeft;
+    const right = currentRight;
     const leftLabel = forms.find(f => f.value === left)?.label || "";
     const rightLabel = forms.find(f => f.value === right)?.label || "";
     document.getElementById("formNameDynamic").textContent = leftLabel + rightLabel;
@@ -1151,12 +1088,9 @@ function updateFormName() {
    左右入れ替えボタン
 ============================================ */
 document.getElementById("swapButton").addEventListener("click", () => {
-    const leftSelect = document.getElementById("leftSelect");
-    const rightSelect = document.getElementById("rightSelect");
-
-    const temp = leftSelect.value;
-    leftSelect.value = rightSelect.value;
-    rightSelect.value = temp;
+    const temp = currentLeft;
+    currentLeft = currentRight;
+    currentRight = temp;
 
     updateHalf();
     updateSelectors();
@@ -1181,10 +1115,10 @@ document.getElementById("closeModal").addEventListener("click", closeModal);
 
 
 function openModal() {
-    const leftSelect  = document.getElementById("leftSelect");
-    const rightSelect = document.getElementById("rightSelect");
-    const leftValue   = leftSelect.value;
-    const rightValue  = rightSelect.value;
+    const leftValue   = currentLeft;
+    const rightValue  = currentRight;
+    const primaryValue = activeSide === "left" ? leftValue : rightValue;
+    const otherValue   = activeSide === "left" ? rightValue : leftValue;
 
     const modal = document.getElementById("memoryModal");
     modal.classList.add("show");
@@ -1223,18 +1157,25 @@ function openModal() {
         label.className = "button-label";
         label.textContent = f.label;
 
-        if (
-            (activeSide === "left" && f.value === leftValue) ||
-            (activeSide === "right" && f.value === rightValue)
-        ) {
+        const selectedFrame = document.createElement("img");
+        selectedFrame.className = "selected-frame";
+        selectedFrame.src = "images/frame-selected.png";
+
+        const selectedFrame2 = document.createElement("img");
+        selectedFrame2.className = "selected-frame2";
+        selectedFrame2.src = "images/frame-selected2.png";
+
+        if (f.value === primaryValue) {
             wrapper.classList.add("selected");
+        } else if (f.value === otherValue && otherValue !== primaryValue) {
+            wrapper.classList.add("selected-secondary");
         }
 
         wrapper.addEventListener("click", async () => {
             if (activeSide === "left") {
-                leftSelect.value = f.value;
+                currentLeft = f.value;
             } else {
-                rightSelect.value = f.value;
+                currentRight = f.value;
             }
 
             await playHenshinEffect(1000);
@@ -1247,6 +1188,8 @@ function openModal() {
 
         wrapper.appendChild(btn);
         wrapper.appendChild(label);
+        wrapper.appendChild(selectedFrame);
+        wrapper.appendChild(selectedFrame2);
         mainGrid.appendChild(wrapper);
     });
     root.appendChild(mainGrid);
@@ -1285,22 +1228,29 @@ function openModal() {
         const label = document.createElement("span");
         label.className = "button-label";
 
+        const selectedFrame = document.createElement("img");
+        selectedFrame.className = "selected-frame";
+        selectedFrame.src = "images/frame-selected.png";
+
+        const selectedFrame2 = document.createElement("img");
+        selectedFrame2.className = "selected-frame2";
+        selectedFrame2.src = "images/frame-selected2.png";
+
         if (slot.enabled && slot.value) {
             btn.src = `images/btn-${slot.value}.png`;
             label.textContent = slot.label;
 
-            if (
-                (activeSide === "left" && slot.value === leftValue) ||
-                (activeSide === "right" && slot.value === rightValue)
-            ) {
+            if (slot.value === primaryValue) {
                 wrapper.classList.add("selected");
+            } else if (slot.value === otherValue && otherValue !== primaryValue) {
+                wrapper.classList.add("selected-secondary");
             }
 
             wrapper.addEventListener("click", async () => {
                 if (activeSide === "left") {
-                    leftSelect.value = slot.value;
+                    currentLeft = slot.value;
                 } else {
-                    rightSelect.value = slot.value;
+                    currentRight = slot.value;
                 }
 
                 await playHenshinEffect(1000);
@@ -1318,14 +1268,16 @@ function openModal() {
 
         wrapper.appendChild(btn);
         wrapper.appendChild(label);
+        wrapper.appendChild(selectedFrame);
+        wrapper.appendChild(selectedFrame2);
         extraGrid.appendChild(wrapper);
     });
     root.appendChild(extraGrid);
 }
 
 function updateSelectors() {
-    const left = document.getElementById("leftSelect").value;
-    const right = document.getElementById("rightSelect").value;
+    const left = currentLeft;
+    const right = currentRight;
     const leftBtn = document.querySelector("#leftSelector .selector-btn-img");
     const leftLabel = document.querySelector("#leftSelector .selector-btn-label");
     const rightBtn = document.querySelector("#rightSelector .selector-btn-img");
@@ -1395,17 +1347,16 @@ function playHenshinEffect(duration = 900) {
    DOMContentLoaded
 ============================= */
 document.addEventListener("DOMContentLoaded", () => {
-    createButtons();
     setTimeout(() => {
         const params = new URLSearchParams(window.location.search);
         const left  = params.get("left");
         const right = params.get("right");
         if (left && right) {
-            document.getElementById("leftSelect").value  = left;
-            document.getElementById("rightSelect").value = right;
+            currentLeft  = left;
+            currentRight = right;
         } else {
-            document.getElementById("leftSelect").value  = "cyclone";
-            document.getElementById("rightSelect").value = "joker";
+            currentLeft  = "cyclone";
+            currentRight = "joker";
         }
         updateSelectors();
         updateHalf();
