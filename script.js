@@ -363,6 +363,16 @@ function updateHalf() {
         weapon2Src = "images/cyclone-weaponJC.png";
     }
 
+    // サイクロン × アクセル
+    else if (left === "accel" && right === "cyclone") {
+        weapon1Src = "images/accel-weapon1.png";
+        weapon2Src = "images/cyclone-weaponH.png";
+    }
+    else if (left === "cyclone" && right === "accel") {
+        weapon1Src = "images/accel-weapon2.png";
+        weapon2Src = "images/cyclone-weaponH.png";
+    }
+
     // サイクロン × ヒート
     else if (left === "heat" && right === "cyclone") {
         weapon1Src = "images/heat-weapon1.png";
