@@ -2,8 +2,16 @@
    Fonts
 ============================ */
 @font-face {
-  font-family: "Corporate-Logo-Medium-ver3"; 
-  src: url("fonts/Corporate-Logo-Medium-ver3.otf") format("opentype");
+  font-family: "Corporate-Logo-Medium-ver3";
+  /* 配布版の .otf は cmap(format 14/異体字セレクタ)テーブルが壊れており、
+     ChromiumのOpenTypeサニタイザ(OTS)に丸ごと弾かれる。→ Android系ブラウザで
+     フォントが当たらずsans-serifに落ちる。修復済みの woff2/woff を先に読ませる。
+     local() はフォントをインストール済みのPC(制作環境)向けのフォールバック。 */
+  src: local("Corporate Logo Medium ver3"),
+       local("Corporate-Logo-Medium-ver3"),
+       url("fonts/Corporate-Logo-Medium-ver3.woff2") format("woff2"),
+       url("fonts/Corporate-Logo-Medium-ver3.woff") format("woff"),
+       url("fonts/Corporate-Logo-Medium-ver3.otf") format("opentype");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
