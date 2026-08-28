@@ -162,9 +162,9 @@ function updateHalf() {
     const weapon2Img = document.createElement("img");
 
     // デフォルト画像
-    let leftSrc = `images/${left}.png`;
-    let rightSrc = `images/${right}.png`;
-    let eyesSrc = "images/normal-eyes.png";
+    let leftSrc = `images_webp/${left}.webp`;
+    let rightSrc = `images_webp/${right}.webp`;
+    let eyesSrc = "images_webp/normal-eyes.webp";
     let mufflerSrc = null;
     let wingsSrc = null;
     let capeSrc = null;
@@ -174,46 +174,46 @@ function updateHalf() {
 
     // 単体画像パターン
     const singleImages = {
-        "accel-trial": "AccelTrial.png",
-        "trial-accel": "TrialAccel.png",
-        "fang-trial": "FangTrial.png",
-        "trial-fang": "TrialFang.png",
-        "trial-skull": "TrialSkull.png",
+        "accel-trial": "AccelTrial.webp",
+        "trial-accel": "TrialAccel.webp",
+        "fang-trial": "FangTrial.webp",
+        "trial-fang": "TrialFang.webp",
+        "trial-skull": "TrialSkull.webp",
 
-        "claydoll-xtreme": "ClaydollXtreme.png",
-        "xtreme-claydoll": "XtremeClaydoll.png",
+        "claydoll-xtreme": "ClaydollXtreme.webp",
+        "xtreme-claydoll": "XtremeClaydoll.webp",
 
-        "nasca3-skull": "Nasca3Skull.png",
-        "nasca3-nasca": "Nasca3Nasca.png",
-        "nasca-nasca3": "NascaNasca3.png",
-        "nasca3-taboo": "Nasca3Taboo.png",
-        "taboo-nasca3": "TabooNasca3.png",
-        "nasca3-weather": "Nasca3Weather.png",
-        "weather-nasca3": "WeatherNasca3.png",
-        "taboo-weather": "TabooWeather.png",
-        "weather-taboo": "WeatherTaboo.png",
+        "nasca3-skull": "Nasca3Skull.webp",
+        "nasca3-nasca": "Nasca3Nasca.webp",
+        "nasca-nasca3": "NascaNasca3.webp",
+        "nasca3-taboo": "Nasca3Taboo.webp",
+        "taboo-nasca3": "TabooNasca3.webp",
+        "nasca3-weather": "Nasca3Weather.webp",
+        "weather-nasca3": "WeatherNasca3.webp",
+        "taboo-weather": "TabooWeather.webp",
+        "weather-taboo": "WeatherTaboo.webp",
 
-        "nasca-skull": "NascaSkull.png",
-        "nasca-taboo": "NascaTaboo.png",
-        "taboo-nasca": "TabooNasca.png",
-        "nasca-joker": "NascaJoker.png",
-        "nasca-cyclone": "NascaCyclone.png",
-        "cyclone-nasca": "CycloneNasca.png",
-        "nasca-yesterday": "NascaYesterday.png",
-        "yesterday-nasca": "YesterdayNasca.png",
+        "nasca-skull": "NascaSkull.webp",
+        "nasca-taboo": "NascaTaboo.webp",
+        "taboo-nasca": "TabooNasca.webp",
+        "nasca-joker": "NascaJoker.webp",
+        "nasca-cyclone": "NascaCyclone.webp",
+        "cyclone-nasca": "CycloneNasca.webp",
+        "nasca-yesterday": "NascaYesterday.webp",
+        "yesterday-nasca": "YesterdayNasca.webp",
 
-        "fang-eternal": "FangEternal.png",
-        "eternal-fang": "EternalFang.png",
-        "fang-accel": "FangAccel.png",
-        "accel-fang": "AccelFang.png",
+        "fang-eternal": "FangEternal.webp",
+        "eternal-fang": "EternalFang.webp",
+        "fang-accel": "FangAccel.webp",
+        "accel-fang": "AccelFang.webp",
 
-        "eternal-skull": "EternalSkull.png",
-        "fang-skull": "FangSkull.png",
-        "accel-skull": "AccelSkull.png",
-        "cyclone-skull": "CycloneSkull.png",
-        "skull-joker": "SkullJoker.png",
+        "eternal-skull": "EternalSkull.webp",
+        "fang-skull": "FangSkull.webp",
+        "accel-skull": "AccelSkull.webp",
+        "cyclone-skull": "CycloneSkull.webp",
+        "skull-joker": "SkullJoker.webp",
 
-        "xtreme-xtreme": "XtremeXtreme.png"
+        "xtreme-xtreme": "XtremeXtreme.webp"
     };
 
     const key = left + "-" + right;
@@ -231,7 +231,7 @@ function updateHalf() {
     let isSingle = false;
     if (singleImages[key]) {
         isSingle = true;
-        singleImg.src = "images/" + singleImages[key];
+        singleImg.src = "images_webp/" + singleImages[key];
         singleImg.style.display = "block";
 
         leftLayer.style.display = "none";
@@ -258,67 +258,67 @@ function updateHalf() {
        ファング武器分岐
     ============================ */
     if(left === "fang" && right === "metal") {
-        weapon1Src = "images/fang-weapon1.png";
+        weapon1Src = "images_webp/fang-weapon1.webp";
         weapon2Src = null;
     }
     else if(left === "fang" && right === "trigger") {
         weapon1Src = null; 
-        weapon2Src = "images/fang-weapon3.png";
+        weapon2Src = "images_webp/fang-weapon3.webp";
     }
     else if(left === "trigger" && right === "fang") {
-        weapon1Src = "images/fang-weapon4.png";
+        weapon1Src = "images_webp/fang-weapon4.webp";
         weapon2Src = null; 
     }
     else if(left === "luna" && right === "fang") {
-        weapon1Src = "images/luna-weapon3.png";
+        weapon1Src = "images_webp/luna-weapon3.webp";
         weapon2Src = null;
     }
     else if(left === "fang" && right === "luna") {
         weapon1Src = null;
-        weapon2Src = "images/luna-weapon4.png";
+        weapon2Src = "images_webp/luna-weapon4.webp";
     } 
     else if(left === "violence" && right === "fang") {
-        weapon1Src = "images/violence-weapon3.png";
+        weapon1Src = "images_webp/violence-weapon3.webp";
         weapon2Src = null;
     }
     else if(left === "fang" && right === "violence") {
         weapon1Src = null;
-        weapon2Src = "images/violence-weapon4.png";
+        weapon2Src = "images_webp/violence-weapon4.webp";
     } 
 
     /* ============================
        メタル武器分岐
     ============================ */
     else if(left === "metal" && right === "eternal") {
-        weapon1Src = "images/metal-weapon3.png";
-        weapon2Src = "images/eternal-weapon2.png";
+        weapon1Src = "images_webp/metal-weapon3.webp";
+        weapon2Src = "images_webp/eternal-weapon2.webp";
     } 
     else if(left === "eternal" && right === "metal") {
-        weapon1Src = "images/eternal-weapon1.png";
-        weapon2Src = "images/metal-weapon4.png";
+        weapon1Src = "images_webp/eternal-weapon1.webp";
+        weapon2Src = "images_webp/metal-weapon4.webp";
     }
 
     else if(left === "metal" && right === "terror") {
-        weapon1Src = "images/metal-weapon3.png";
-        weapon2Src = "images/terror-weapon.png";
+        weapon1Src = "images_webp/metal-weapon3.webp";
+        weapon2Src = "images_webp/terror-weapon.webp";
     } 
     else if(left === "terror" && right === "metal") {
-        weapon1Src = "images/metal-weapon4.png";
-        weapon2Src = "images/terror-weapon.png";
+        weapon1Src = "images_webp/metal-weapon4.webp";
+        weapon2Src = "images_webp/terror-weapon.webp";
     }
 
     else if(left === "metal" && right === "utopia") {
-        weapon1Src = "images/metal-weapon3.png";
-        weapon2Src = "images/utopia-weapon2.png";
+        weapon1Src = "images_webp/metal-weapon3.webp";
+        weapon2Src = "images_webp/utopia-weapon2.webp";
     } 
     else if(left === "utopia" && right === "metal") {
-        weapon1Src = "images/utopia-weapon1.png";
-        weapon2Src = "images/metal-weapon4.png";
+        weapon1Src = "images_webp/utopia-weapon1.webp";
+        weapon2Src = "images_webp/metal-weapon4.webp";
     }
 
     else if(left === "metal" && right === "skull") {
-        weapon1Src = "images/skull-weapon2.png";
-        weapon2Src = "images/metal-weapon5.png";
+        weapon1Src = "images_webp/skull-weapon2.webp";
+        weapon2Src = "images_webp/metal-weapon5.webp";
     }
 
     /* ============================
@@ -326,28 +326,28 @@ function updateHalf() {
     ============================ */
     // アクセル × エンジン
     else if (left === "accel" && right === "engine") {
-        weapon1Src = "images/engine-weaponAE.png";
-        weapon2Src = "images/accel-weapon1.png";
+        weapon1Src = "images_webp/engine-weaponAE.webp";
+        weapon2Src = "images_webp/accel-weapon1.webp";
     }
     else if (left === "engine" && right === "accel") {
-        weapon1Src = "images/engine-weaponEA.png";
-        weapon2Src = "images/accel-weapon2.png";
+        weapon1Src = "images_webp/engine-weaponEA.webp";
+        weapon2Src = "images_webp/accel-weapon2.webp";
     }
 
     // エンジン × エクストリーム
     else if (left === "engine" && right === "xtreme") {
-        weapon1Src = "images/engine-weaponEX.png";
-        weapon2Src = "images/xtreme-weapon.png";
+        weapon1Src = "images_webp/engine-weaponEX.webp";
+        weapon2Src = "images_webp/xtreme-weapon.webp";
     }
     else if (left === "xtreme" && right === "engine") {
-        weapon1Src = "images/engine-weaponXE.png";
-        weapon2Src = "images/xtreme-weapon.png";
+        weapon1Src = "images_webp/engine-weaponXE.webp";
+        weapon2Src = "images_webp/xtreme-weapon.webp";
     }
 
     // エンジン × スカル
     else if (left === "engine" && right === "skull") {
-        weapon1Src = "images/skull-weapon2.png";
-        weapon2Src = "images/engine-weaponES.png";
+        weapon1Src = "images_webp/skull-weapon2.webp";
+        weapon2Src = "images_webp/engine-weaponES.webp";
     }
 
     /* ============================
@@ -356,81 +356,81 @@ function updateHalf() {
     // サイクロン × ジョーカー
     else if (left === "cyclone" && right === "joker") {
         weapon1Src = null;
-        weapon2Src = "images/cyclone-weaponCJ.png";
+        weapon2Src = "images_webp/cyclone-weaponCJ.webp";
     }
     else if (left === "joker" && right === "cyclone") {
         weapon1Src = null;
-        weapon2Src = "images/cyclone-weaponJC.png";
+        weapon2Src = "images_webp/cyclone-weaponJC.webp";
     }
 
     // サイクロン × アクセル
     else if (left === "accel" && right === "cyclone") {
-        weapon1Src = "images/accel-weapon1.png";
-        weapon2Src = "images/cyclone-weaponH.png";
+        weapon1Src = "images_webp/accel-weapon1.webp";
+        weapon2Src = "images_webp/cyclone-weaponH.webp";
     }
     else if (left === "cyclone" && right === "accel") {
-        weapon1Src = "images/accel-weapon2.png";
-        weapon2Src = "images/cyclone-weaponH.png";
+        weapon1Src = "images_webp/accel-weapon2.webp";
+        weapon2Src = "images_webp/cyclone-weaponH.webp";
     }
 
     // サイクロン × ヒート
     else if (left === "heat" && right === "cyclone") {
-        weapon1Src = "images/heat-weapon1.png";
-        weapon2Src = "images/cyclone-weaponH.png";
+        weapon1Src = "images_webp/heat-weapon1.webp";
+        weapon2Src = "images_webp/cyclone-weaponH.webp";
     }
     else if (left === "cyclone" && right === "heat") {
-        weapon1Src = "images/heat-weapon2.png";
-        weapon2Src = "images/cyclone-weaponH.png";
+        weapon1Src = "images_webp/heat-weapon2.webp";
+        weapon2Src = "images_webp/cyclone-weaponH.webp";
     }
 
     // サイクロン × エンジン
     else if (left === "engine" && right === "cyclone") {
-        weapon1Src = "images/engine-weapon1.png";
-        weapon2Src = "images/cyclone-weaponH.png";
+        weapon1Src = "images_webp/engine-weapon1.webp";
+        weapon2Src = "images_webp/cyclone-weaponH.webp";
     }
     else if (left === "cyclone" && right === "engine") {
-        weapon1Src = "images/engine-weapon2.png";
-        weapon2Src = "images/cyclone-weaponH.png";
+        weapon1Src = "images_webp/engine-weapon2.webp";
+        weapon2Src = "images_webp/cyclone-weaponH.webp";
     }
 
     // サイクロン × ボム
     else if (left === "bomb" && right === "cyclone") {
-        weapon1Src = "images/bomb-weapon1.png";
-        weapon2Src = "images/cyclone-weaponH.png";
+        weapon1Src = "images_webp/bomb-weapon1.webp";
+        weapon2Src = "images_webp/cyclone-weaponH.webp";
     }
     else if (left === "cyclone" && right === "bomb") {
-        weapon1Src = "images/bomb-weapon2.png";
-        weapon2Src = "images/cyclone-weaponH.png";
+        weapon1Src = "images_webp/bomb-weapon2.webp";
+        weapon2Src = "images_webp/cyclone-weaponH.webp";
     }
 
     // サイクロン × クレイドール
     else if (left === "claydoll" && right === "cyclone") {
-        weapon1Src = "images/claydoll-weapon1.png";
-        weapon2Src = "images/cyclone-weaponH.png";
+        weapon1Src = "images_webp/claydoll-weapon1.webp";
+        weapon2Src = "images_webp/cyclone-weaponH.webp";
     }
     else if (left === "cyclone" && right === "claydoll") {
-        weapon1Src = "images/claydoll-weapon2.png";
-        weapon2Src = "images/cyclone-weaponH.png";
+        weapon1Src = "images_webp/claydoll-weapon2.webp";
+        weapon2Src = "images_webp/cyclone-weaponH.webp";
     }
 
     // サイクロン × アイスエイジ
     else if (left === "iceage" && right === "cyclone") {
-        weapon1Src = "images/iceage-weapon1.png";
-        weapon2Src = "images/cyclone-weaponI.png";
+        weapon1Src = "images_webp/iceage-weapon1.webp";
+        weapon2Src = "images_webp/cyclone-weaponI.webp";
     }
     else if (left === "cyclone" && right === "iceage") {
-        weapon1Src = "images/iceage-weapon2.png";
-        weapon2Src = "images/cyclone-weaponI.png";
+        weapon1Src = "images_webp/iceage-weapon2.webp";
+        weapon2Src = "images_webp/cyclone-weaponI.webp";
     }
 
     // サイクロン × オーシャン
     else if (left === "ocean" && right === "cyclone") {
-        weapon1Src = "images/ocean-weapon1.png";
-        weapon2Src = "images/cyclone-weaponI.png";
+        weapon1Src = "images_webp/ocean-weapon1.webp";
+        weapon2Src = "images_webp/cyclone-weaponI.webp";
     }
     else if (left === "cyclone" && right === "ocean") {
-        weapon1Src = "images/ocean-weapon2.png";
-        weapon2Src = "images/cyclone-weaponI.png";
+        weapon1Src = "images_webp/ocean-weapon2.webp";
+        weapon2Src = "images_webp/cyclone-weaponI.webp";
     }
 
     // サイクロン × テラー
@@ -438,18 +438,18 @@ function updateHalf() {
         (left === "terror" && right === "cyclone") ||
         (left === "cyclone" && right === "terror")
     ) {
-        weapon1Src = "images/cyclone-weaponT.png";
-        weapon2Src = "images/terror-weapon.png";
+        weapon1Src = "images_webp/cyclone-weaponT.webp";
+        weapon2Src = "images_webp/terror-weapon.webp";
     }
 
     // サイクロン × スミロドン
     else if (left === "cyclone" && right === "smilodon") {
-        weapon1Src = "images/cyclone-weapon.png";
-        weapon2Src = "images/smilodon-weapon2.png";
+        weapon1Src = "images_webp/cyclone-weapon.webp";
+        weapon2Src = "images_webp/smilodon-weapon2.webp";
     }
     else if (left === "smilodon" && right === "cyclone") {
-        weapon1Src = "images/cyclone-weapon.png";
-        weapon2Src = "images/smilodon-weapon1.png";
+        weapon1Src = "images_webp/cyclone-weapon.webp";
+        weapon2Src = "images_webp/smilodon-weapon1.webp";
     }
 
     // サイクロン × エクストリーム
@@ -457,21 +457,21 @@ function updateHalf() {
         (left === "xtreme" && right === "cyclone") ||
         (left === "cyclone" && right === "xtreme")
     ) {
-        weapon1Src = "images/xtreme-weapon.png";
-        weapon2Src = "images/cyclone-weapon.png";
+        weapon1Src = "images_webp/xtreme-weapon.webp";
+        weapon2Src = "images_webp/cyclone-weapon.webp";
     }
 
     // 右がサイクロン
     else if (right === "cyclone") {
         const L_hasWeapon = weaponUsers.includes(left);
-        weapon1Src = L_hasWeapon ? `images/${left}-weapon1.png` : null;
-        weapon2Src = "images/cyclone-weapon.png";
+        weapon1Src = L_hasWeapon ? `images_webp/${left}-weapon1.webp` : null;
+        weapon2Src = "images_webp/cyclone-weapon.webp";
     }
     // 左がサイクロン
     else if (left === "cyclone") {
         const R_hasWeapon = weaponUsers.includes(right);
-        weapon1Src = R_hasWeapon ? `images/${right}-weapon2.png` : null;
-        weapon2Src = "images/cyclone-weapon.png";
+        weapon1Src = R_hasWeapon ? `images_webp/${right}-weapon2.webp` : null;
+        weapon2Src = "images_webp/cyclone-weapon.webp";
     }
 
     /* ============================
@@ -483,27 +483,27 @@ function updateHalf() {
         (left === "fang" && right === "terror")
     ) {
         weapon1Src = null;
-        weapon2Src = "images/terror-weaponF.png";
+        weapon2Src = "images_webp/terror-weaponF.webp";
     }
     // テラー × エクストリーム
     else if (
         (left === "xtreme" && right === "terror") ||
         (left === "terror" && right === "xtreme")
     ) {
-        weapon1Src = "images/xtreme-weaponE.png";
-        weapon2Src = "images/terror-weapon.png";
+        weapon1Src = "images_webp/xtreme-weaponE.webp";
+        weapon2Src = "images_webp/terror-weapon.webp";
     }
     // 右がテラー
     else if (right === "terror") {
         const L_hasWeapon = weaponUsers.includes(left);
-        weapon1Src = L_hasWeapon ? `images/${left}-weapon1.png` : null;
-        weapon2Src = "images/terror-weapon.png";
+        weapon1Src = L_hasWeapon ? `images_webp/${left}-weapon1.webp` : null;
+        weapon2Src = "images_webp/terror-weapon.webp";
     }
     // 左がテラー
     else if (left === "terror") {
         const R_hasWeapon = weaponUsers.includes(right);
-        weapon1Src = R_hasWeapon ? `images/${right}-weapon2.png` : null;
-        weapon2Src = "images/terror-weapon.png";
+        weapon1Src = R_hasWeapon ? `images_webp/${right}-weapon2.webp` : null;
+        weapon2Src = "images_webp/terror-weapon.webp";
     }
 
     /* ============================
@@ -512,20 +512,20 @@ function updateHalf() {
     // クレイドール × ジーン
     else if (left === "claydoll" && right === "gene") {
         weapon1Src = null;
-        weapon2Src = "images/claydoll-weaponCG.png";
+        weapon2Src = "images_webp/claydoll-weaponCG.webp";
     }
     else if (left === "gene" && right === "claydoll") {
         weapon1Src = null;
-        weapon2Src = "images/claydoll-weaponGC.png";
+        weapon2Src = "images_webp/claydoll-weaponGC.webp";
     }
     // クレイドール × エクストリーム
     else if (left === "claydoll" && right === "xtreme") {
-        weapon1Src = "images/claydoll-weaponCX.png";
-        weapon2Src = "images/claydoll-weaponX.png";
+        weapon1Src = "images_webp/claydoll-weaponCX.webp";
+        weapon2Src = "images_webp/claydoll-weaponX.webp";
     }
     else if (left === "xtreme" && right === "claydoll") {
-        weapon1Src = "images/claydoll-weaponXC.png";
-        weapon2Src = "images/claydoll-weaponX.png";
+        weapon1Src = "images_webp/claydoll-weaponXC.webp";
+        weapon2Src = "images_webp/claydoll-weaponX.webp";
     }
 
     /* ============================
@@ -537,24 +537,24 @@ function updateHalf() {
         (left === "utopia" && right === "xtreme") ||
         (left === "xtreme" && right === "utopia")
     ) {
-        weapon1Src = "images/xtreme-weaponE.png";
+        weapon1Src = "images_webp/xtreme-weaponE.webp";
         weapon2Src =
         left === "utopia"
-            ? "images/utopia-weapon1.png"
-            : "images/utopia-weapon2.png";
+            ? "images_webp/utopia-weapon1.webp"
+            : "images_webp/utopia-weapon2.webp";
     }
 
     // 左/右がユートピア
     else if (left === "utopia" || right === "utopia") {
         if (left === "utopia") {
-        weapon1Src = "images/utopia-weapon1.png";
+        weapon1Src = "images_webp/utopia-weapon1.webp";
         weapon2Src = weaponUsers.includes(right)
-           ? `images/${right}-weapon2.png`
+           ? `images_webp/${right}-weapon2.webp`
             : null;
         } else {
-        weapon1Src = "images/utopia-weapon2.png";
+        weapon1Src = "images_webp/utopia-weapon2.webp";
         weapon2Src = weaponUsers.includes(left)
-           ? `images/${left}-weapon1.png`
+           ? `images_webp/${left}-weapon1.webp`
             : null;
         }
     }
@@ -564,12 +564,12 @@ function updateHalf() {
     ============================ */
     // エクストリーム × プリズム
     else if (left === "xtreme" && right === "prism") {
-        weapon1Src = "images/prism-weaponXP.png";
-        weapon2Src = "images/xtreme-weapon.png";
+        weapon1Src = "images_webp/prism-weaponXP.webp";
+        weapon2Src = "images_webp/xtreme-weapon.webp";
     }
     else if (left === "prism" && right === "xtreme") {
-        weapon1Src = "images/prism-weaponPX.png";
-        weapon2Src = "images/xtreme-weapon.png";
+        weapon1Src = "images_webp/prism-weaponPX.webp";
+        weapon2Src = "images_webp/xtreme-weapon.webp";
     }
 
     // エクストリーム × ファング
@@ -578,57 +578,57 @@ function updateHalf() {
         (left === "fang" && right === "xtreme")
     ) {
         weapon1Src = null;
-        weapon2Src = "images/xtreme-weaponF.png";
+        weapon2Src = "images_webp/xtreme-weaponF.webp";
     }
 
     // エクストリーム × スカル
     else if (left === "xtreme" && right === "skull") {
-        weapon1Src = "images/skull-weapon2.png";
-        weapon2Src = "images/xtreme-weaponXS.png";
+        weapon1Src = "images_webp/skull-weapon2.webp";
+        weapon2Src = "images_webp/xtreme-weaponXS.webp";
     }
     else if (left === "skull" && right === "xtreme") {
-        weapon1Src = "images/skull-weapon1.png";
-        weapon2Src = "images/xtreme-weaponSX.png";
+        weapon1Src = "images_webp/skull-weapon1.webp";
+        weapon2Src = "images_webp/xtreme-weaponSX.webp";
     }
 
     // エクストリーム × エターナル
     else if (left === "xtreme" && right === "eternal") {
-        weapon1Src = "images/eternal-weapon2.png";
-        weapon2Src = "images/xtreme-weaponE.png";
+        weapon1Src = "images_webp/eternal-weapon2.webp";
+        weapon2Src = "images_webp/xtreme-weaponE.webp";
     }
     else if (left === "eternal" && right === "xtreme") {
-        weapon1Src = "images/eternal-weapon1.png";
-        weapon2Src = "images/xtreme-weaponE.png";
+        weapon1Src = "images_webp/eternal-weapon1.webp";
+        weapon2Src = "images_webp/xtreme-weaponE.webp";
     }
 
     // エクストリーム × ユートピア
     else if (left === "xtreme" && right === "utopia") {
-        weapon1Src = "images/utopia-weapon2.png";
-        weapon2Src = "images/xtreme-weaponE.png";
+        weapon1Src = "images_webp/utopia-weapon2.webp";
+        weapon2Src = "images_webp/xtreme-weaponE.webp";
     }
     else if (left === "utopia" && right === "xtreme") {
-        weapon1Src = "images/utopia-weapon1.png";
-        weapon2Src = "images/xtreme-weaponE.png";
+        weapon1Src = "images_webp/utopia-weapon1.webp";
+        weapon2Src = "images_webp/xtreme-weaponE.webp";
     }
 
     // エクストリーム × バイオレンス
     else if (left === "xtreme" && right === "violence") {
-        weapon1Src = "images/violence-weapon6.png";
-        weapon2Src = "images/xtreme-weapon.png";
+        weapon1Src = "images_webp/violence-weapon6.webp";
+        weapon2Src = "images_webp/xtreme-weapon.webp";
     }
     else if (left === "violence" && right === "xtreme") {
-        weapon1Src = "images/violence-weapon5.png";
-        weapon2Src = "images/xtreme-weapon.png";
+        weapon1Src = "images_webp/violence-weapon5.webp";
+        weapon2Src = "images_webp/xtreme-weapon.webp";
     }
 
     // エクストリーム × スミロドン
     else if (left === "xtreme" && right === "smilodon") {
-        weapon1Src = "images/smilodon-weapon2.png";
-        weapon2Src = "images/xtreme-weaponXSm.png";
+        weapon1Src = "images_webp/smilodon-weapon2.webp";
+        weapon2Src = "images_webp/xtreme-weaponXSm.webp";
     }
     else if (left === "smilodon" && right === "xtreme") {
-        weapon1Src = "images/smilodon-weapon1.png";
-        weapon2Src = "images/xtreme-weaponSmX.png";
+        weapon1Src = "images_webp/smilodon-weapon1.webp";
+        weapon2Src = "images_webp/xtreme-weaponSmX.webp";
     }
 
     // エクストリーム × エクストリーム
@@ -640,34 +640,34 @@ function updateHalf() {
     // 左がエクストリーム
     else if (left === "xtreme") {
         weapon1Src = weaponUsers.includes(right)
-           ? `images/${right}-weapon2.png`
+           ? `images_webp/${right}-weapon2.webp`
             : null;
-        weapon2Src = "images/xtreme-weapon.png";
+        weapon2Src = "images_webp/xtreme-weapon.webp";
     }
 
     // 右がエクストリーム
     else if (right === "xtreme") {
         weapon1Src = weaponUsers.includes(left)
-            ? `images/${left}-weapon1.png`
+            ? `images_webp/${left}-weapon1.webp`
             : null;
-        weapon2Src = "images/xtreme-weapon.png";
+        weapon2Src = "images_webp/xtreme-weapon.webp";
     }
 
     else if (left === "metal") {
     if (right === "dummy") {
-        weapon1Src = "images/metal-weapon1.png"; 
-        weapon2Src = "images/metal-weapon2.png"; 
+        weapon1Src = "images_webp/metal-weapon1.webp"; 
+        weapon2Src = "images_webp/metal-weapon2.webp"; 
     }else if (right === "fang") {
         weapon1Src = null;
-        weapon2Src = "images/fang-weapon2.png";
+        weapon2Src = "images_webp/fang-weapon2.webp";
     }else {
         const R_hasWeapon = weaponUsers.includes(right);
         if (R_hasWeapon) {
-            weapon1Src = `images/${right}-weapon2.png`;
+            weapon1Src = `images_webp/${right}-weapon2.webp`;
         } else {
             weapon1Src = null;
         }
-        weapon2Src = "images/metal-weapon1.png";
+        weapon2Src = "images_webp/metal-weapon1.webp";
         }
     }
 
@@ -677,12 +677,12 @@ function updateHalf() {
         const R_hasWeapon = weaponUsers.includes(right);
 
         if (L_hasWeapon && R_hasWeapon) {
-            weapon1Src = `images/${left}-weapon1.png`;
-            weapon2Src = `images/${right}-weapon2.png`;
+            weapon1Src = `images_webp/${left}-weapon1.webp`;
+            weapon2Src = `images_webp/${right}-weapon2.webp`;
         } else if (L_hasWeapon) {
-            weapon1Src = `images/${left}-weapon1.png`;
+            weapon1Src = `images_webp/${left}-weapon1.webp`;
         } else if (R_hasWeapon) {
-            weapon2Src = `images/${right}-weapon2.png`;
+            weapon2Src = `images_webp/${right}-weapon2.webp`;
         }
     }
 
@@ -698,8 +698,8 @@ function updateHalf() {
     // エクストリーム × ダミー
     if (leftIsDummy && right !== "xtreme") {
         if (rightHasWeapon) {
-            weapon1Src = `images/${right}-weapon1.png`;
-            weapon2Src = `images/${right}-weapon2.png`;
+            weapon1Src = `images_webp/${right}-weapon1.webp`;
+            weapon2Src = `images_webp/${right}-weapon2.webp`;
         } else {
             weapon1Src = null;
             weapon2Src = null;
@@ -707,8 +707,8 @@ function updateHalf() {
     }
     else if (rightIsDummy && left !== "xtreme") {
         if (leftHasWeapon) {
-            weapon1Src = `images/${left}-weapon1.png`;
-            weapon2Src = `images/${left}-weapon2.png`;
+            weapon1Src = `images_webp/${left}-weapon1.webp`;
+            weapon2Src = `images_webp/${left}-weapon2.webp`;
         } else {
             weapon1Src = null;
             weapon2Src = null;
@@ -722,7 +722,7 @@ function updateHalf() {
         (left === "cyclone" && right === "dummy")
     ) {
         weapon1Src = null;
-        weapon2Src = "images/cyclone-weapon.png";
+        weapon2Src = "images_webp/cyclone-weapon.webp";
     }
 
    // テラー × ダミー 
@@ -732,7 +732,7 @@ function updateHalf() {
         (left === "terror" && right === "dummy")
     ) {
         weapon1Src = null;
-        weapon2Src = "images/terror-weapon.png";
+        weapon2Src = "images_webp/terror-weapon.webp";
     }
 
     // ユートピア × ダミー
@@ -741,8 +741,8 @@ function updateHalf() {
         (left === "utopia" && right === "dummy") ||
         (left === "dummy" && right === "utopia")
     ) {
-        weapon1Src = "images/utopia-weapon1.png";
-        weapon2Src = "images/utopia-weapon3.png";
+        weapon1Src = "images_webp/utopia-weapon1.webp";
+        weapon2Src = "images_webp/utopia-weapon3.webp";
     }
 
     // 左/右がダミー
@@ -768,19 +768,19 @@ function updateHalf() {
 
     // ファング分岐
     if(left === "fang" && right === "fang"){
-        eyesSrc = "images/fang-eyes1.png";
-        leftSrc = "images/fang.png";
-        rightSrc = "images/fang.png";
+        eyesSrc = "images_webp/fang-eyes1.webp";
+        leftSrc = "images_webp/fang.webp";
+        rightSrc = "images_webp/fang.webp";
         mufflerSrc = null;
     } else if(left === "fang"){
-        eyesSrc = "images/fang-eyes1.png";
-        leftSrc = "images/fang.png";
-        rightSrc = `images/fang-${right}.png`;
+        eyesSrc = "images_webp/fang-eyes1.webp";
+        leftSrc = "images_webp/fang.webp";
+        rightSrc = `images_webp/fang-${right}.webp`;
         mufflerSrc = null;
     } else if(right === "fang"){
-        eyesSrc = "images/fang-eyes2.png";
-        leftSrc = `images/fang-${left}.png`;
-        rightSrc = "images/fang.png";
+        eyesSrc = "images_webp/fang-eyes2.webp";
+        leftSrc = `images_webp/fang-${left}.webp`;
+        rightSrc = "images_webp/fang.webp";
         mufflerSrc = null;
     }
 
@@ -789,23 +789,23 @@ function updateHalf() {
         (left === "terror"  && right === "skull") ||
         (left === "utopia"  && right === "skull") 
     ) {
-        eyesSrc = "images/normal-eyes.png";
+        eyesSrc = "images_webp/normal-eyes.webp";
         mufflerSrc = null;
-        leftSrc = `images/skull-${left}.png`;
-        rightSrc = "images/skull-skull.png";
+        leftSrc = `images_webp/skull-${left}.webp`;
+        rightSrc = "images_webp/skull-skull.webp";
     }
     else if (
         (left === "skull"   && right === "terror") ||
         (left === "skull"   && right === "utopia")
     ) {
-        eyesSrc = "images/normal-eyes.png";
+        eyesSrc = "images_webp/normal-eyes.webp";
         mufflerSrc = null;
     }
     else if(right === "skull"){
-        eyesSrc = "images/skull-eyes.png";
-        mufflerSrc = "images/skull-muffler.png";
-        leftSrc = `images/skull-${left}.png`;
-        rightSrc = "images/skull-skull.png";
+        eyesSrc = "images_webp/skull-eyes.webp";
+        mufflerSrc = "images_webp/skull-muffler.webp";
+        leftSrc = `images_webp/skull-${left}.webp`;
+        rightSrc = "images_webp/skull-skull.webp";
     }
 
 
@@ -819,10 +819,10 @@ function updateHalf() {
         (left === "utopia" && right === "fang")
     ) {
         if (left === "fang") {
-            eyesSrc = "images/fang-eyes1-caped.png";
+            eyesSrc = "images_webp/fang-eyes1-caped.webp";
         }
         else {
-            eyesSrc = "images/fang-eyes2-caped.png";
+            eyesSrc = "images_webp/fang-eyes2-caped.webp";
         }
     }
 
@@ -832,7 +832,7 @@ function updateHalf() {
         (left === "eternal" && right === "utopia") ||
         (left === "utopia" && right === "eternal")
     ) {
-        eyesSrc = "images/eternal-eyes.png";
+        eyesSrc = "images_webp/eternal-eyes.webp";
     }
 
     else if (
@@ -841,7 +841,7 @@ function updateHalf() {
         (left === "accel" && right === "utopia") ||
         (left === "utopia" && right === "accel")
     ) {
-        eyesSrc = "images/accel-eyes-caped.png";
+        eyesSrc = "images_webp/accel-eyes-caped.webp";
     }
 
     else if (
@@ -850,36 +850,36 @@ function updateHalf() {
         (left === "trial" && right === "utopia") ||
         (left === "utopia" && right === "trial")
     ) {
-        eyesSrc = "images/trial-eyes-caped.png";
+        eyesSrc = "images_webp/trial-eyes-caped.webp";
     }
 
     else if (
         left === "terror" || right === "terror" ||
         left === "utopia" || right === "utopia"
     ) {
-        eyesSrc = "images/normal-eyes-caped.png";
+        eyesSrc = "images_webp/normal-eyes-caped.webp";
     }
 
     else if (
         (left === "accel" && right === "eternal") ||
         (left === "eternal" && right === "accel")
     ) {
-        eyesSrc = "images/eternal-accel-eyes.png";
+        eyesSrc = "images_webp/eternal-accel-eyes.webp";
     }
     else if (
         (left === "trial" && right === "eternal") ||
         (left === "eternal" && right === "trial")
     ) {
-        eyesSrc = "images/eternal-trial-eyes.png";
+        eyesSrc = "images_webp/eternal-trial-eyes.webp";
     }
     else if (left === "accel" || right === "accel") {
-        eyesSrc = "images/accel-eyes.png";
+        eyesSrc = "images_webp/accel-eyes.webp";
     }
     else if (left === "trial" || right === "trial") {
-        eyesSrc = "images/trial-eyes.png";
+        eyesSrc = "images_webp/trial-eyes.webp";
     }
     else if (left === "eternal" || right === "eternal") {
-        eyesSrc = "images/eternal-eyes.png";
+        eyesSrc = "images_webp/eternal-eyes.webp";
     }
 
 
@@ -890,28 +890,28 @@ function updateHalf() {
         (left === "eternal" && right === "terror") ||
         (left === "terror" && right === "eternal")
     ) {
-        capeSrc = "images/terror-cape.png";
+        capeSrc = "images_webp/terror-cape.webp";
     }
     else if (
         (left === "eternal" && right === "utopia") ||
         (left === "utopia" && right === "eternal")
     ) {
-        capeSrc = "images/terror-utopia-cape.png";
+        capeSrc = "images_webp/terror-utopia-cape.webp";
     }
     else if (
         (left === "terror" && right === "utopia") ||
         (left === "utopia" && right === "terror")
     ) {
-        capeSrc = "images/terror-utopia-cape.png";
+        capeSrc = "images_webp/terror-utopia-cape.webp";
     }
     else if (left === "eternal" || right === "eternal") {
-        capeSrc = "images/eternal-cape.png";
+        capeSrc = "images_webp/eternal-cape.webp";
     }
     else if (left === "terror" || right === "terror") {
-        capeSrc = "images/terror-cape.png";
+        capeSrc = "images_webp/terror-cape.webp";
     }
     else if (left === "utopia" || right === "utopia") {
-        capeSrc = "images/utopia-cape.png";
+        capeSrc = "images_webp/utopia-cape.webp";
     }
     else {
         capeSrc = null;
@@ -922,35 +922,35 @@ function updateHalf() {
     // muffler 分岐
     // ============================
     if(!capeSrc){
-        if(left === "cyclone" && right === "cyclone") mufflerSrc="images/cyclone-muffler3.png";
-        else if(left === "cyclone") mufflerSrc="images/cyclone-muffler1.png";
-        else if(right === "cyclone") mufflerSrc="images/cyclone-muffler2.png";
+        if(left === "cyclone" && right === "cyclone") mufflerSrc="images_webp/cyclone-muffler3.webp";
+        else if(left === "cyclone") mufflerSrc="images_webp/cyclone-muffler1.webp";
+        else if(right === "cyclone") mufflerSrc="images_webp/cyclone-muffler2.webp";
     }
     if(!capeSrc){
-        if(left === "nasca3" && right === "nasca3") mufflerSrc="images/cyclone-muffler3.png";
-        else if(left === "nasca3" && right === "cyclone") mufflerSrc="images/cyclone-muffler3.png";
-        else if(left === "cyclone" && right === "nasca3") mufflerSrc="images/cyclone-muffler3.png";
-        else if(left === "nasca3") mufflerSrc="images/cyclone-muffler1.png";
-        else if(right === "nasca3") mufflerSrc="images/cyclone-muffler2.png";
+        if(left === "nasca3" && right === "nasca3") mufflerSrc="images_webp/cyclone-muffler3.webp";
+        else if(left === "nasca3" && right === "cyclone") mufflerSrc="images_webp/cyclone-muffler3.webp";
+        else if(left === "cyclone" && right === "nasca3") mufflerSrc="images_webp/cyclone-muffler3.webp";
+        else if(left === "nasca3") mufflerSrc="images_webp/cyclone-muffler1.webp";
+        else if(right === "nasca3") mufflerSrc="images_webp/cyclone-muffler2.webp";
     }
     if(!capeSrc){
-        if(left === "nasca" && right === "nasca") mufflerSrc="images/nasca-muffler3.png";
-        else if(left === "nasca") mufflerSrc="images/nasca-muffler1.png";
-        else if(right === "nasca") mufflerSrc="images/nasca-muffler2.png";
+        if(left === "nasca" && right === "nasca") mufflerSrc="images_webp/nasca-muffler3.webp";
+        else if(left === "nasca") mufflerSrc="images_webp/nasca-muffler1.webp";
+        else if(right === "nasca") mufflerSrc="images_webp/nasca-muffler2.webp";
     }
 
 
     // ウイングス分岐
     if((left === "bird" && right === "nasca") ||(left === "nasca" && right === "bird")){
-        wingsSrc = "images/bird-nasca-wings.png";
+        wingsSrc = "images_webp/bird-nasca-wings.webp";
     }else if((left === "bird" && right === "nasca3") ||(left === "nasca3" && right === "bird")){
-        wingsSrc = "images/bird-nasca3-wings.png";
+        wingsSrc = "images_webp/bird-nasca3-wings.webp";
     }else if(left === "bird" || right === "bird"){
-        wingsSrc = "images/bird-wings.png";
+        wingsSrc = "images_webp/bird-wings.webp";
     }else if(left === "nasca" || right === "nasca"){
-        wingsSrc = "images/nasca-wings.png";
+        wingsSrc = "images_webp/nasca-wings.webp";
     }else if(left === "nasca3" || right === "nasca3"){
-        wingsSrc = "images/nasca3-wings.png";
+        wingsSrc = "images_webp/nasca3-wings.webp";
     }else {
         wingsSrc = null;
     }
@@ -987,8 +987,7 @@ function updateHalf() {
     updateWeaponsButtonVisibility();
     updateFormName();
     updateSelectors();
-    updateMemoryDescriptions(); 
-    updateWeaponsButton();
+    updateMemoryDescriptions();
 
     const row = document.querySelector(".button-row");
     const weaponBtn = document.getElementById("toggleWeaponsBtn");
@@ -1023,8 +1022,8 @@ function updateWeaponsDisplay() {
 
     const img = toggleWeaponsBtn.querySelector("img");
     img.src = weaponsVisible
-        ? "images/weaponbtnbackground1.png"
-        : "images/weaponbtnbackground2.png";
+        ? "images_webp/weaponbtnbackground1.webp"
+        : "images_webp/weaponbtnbackground2.webp";
 }
 
 function updateWeaponsButtonVisibility() {
@@ -1170,7 +1169,7 @@ function openModal() {
         wrapper.className = "button-wrapper";
 
         const btn = document.createElement("img");
-        btn.src = `images/btn-${f.value}.png`;
+        btn.src = `images_webp/btn-${f.value}.webp`;
         btn.className = "form-thumbnail";
 
         const label = document.createElement("span");
@@ -1179,11 +1178,11 @@ function openModal() {
 
         const selectedFrame = document.createElement("img");
         selectedFrame.className = "selected-frame";
-        selectedFrame.src = "images/frame-selected.png";
+        selectedFrame.src = "images_webp/frame-selected.webp";
 
         const selectedFrame2 = document.createElement("img");
         selectedFrame2.className = "selected-frame2";
-        selectedFrame2.src = "images/frame-selected2.png";
+        selectedFrame2.src = "images_webp/frame-selected2.webp";
 
         if (f.value === primaryValue) {
             wrapper.classList.add("selected");
@@ -1250,14 +1249,14 @@ function openModal() {
 
         const selectedFrame = document.createElement("img");
         selectedFrame.className = "selected-frame";
-        selectedFrame.src = "images/frame-selected.png";
+        selectedFrame.src = "images_webp/frame-selected.webp";
 
         const selectedFrame2 = document.createElement("img");
         selectedFrame2.className = "selected-frame2";
-        selectedFrame2.src = "images/frame-selected2.png";
+        selectedFrame2.src = "images_webp/frame-selected2.webp";
 
         if (slot.enabled && slot.value) {
-            btn.src = `images/btn-${slot.value}.png`;
+            btn.src = `images_webp/btn-${slot.value}.webp`;
             label.textContent = slot.label;
 
             if (slot.value === primaryValue) {
@@ -1281,7 +1280,7 @@ function openModal() {
                 updateMemoryDescriptions();
             });
         } else {
-            btn.src = "images/btn-blank.png";
+            btn.src = "images_webp/btn-blank.webp";
             label.textContent = "???";
             wrapper.classList.add("locked");
         }
@@ -1305,7 +1304,7 @@ function updateSelectors() {
     const leftForm = forms.find(f => f.value === left);
     const rightForm = forms.find(f => f.value === right);
     if (leftForm) {
-        leftBtn.src = `images/btn-${leftForm.value}.png`;
+        leftBtn.src = `images_webp/btn-${leftForm.value}.webp`;
         leftBtn.alt = leftForm.label;
 
         leftLabel.textContent =
@@ -1314,7 +1313,7 @@ function updateSelectors() {
             : leftForm.label;
     }
     if (rightForm) {
-        rightBtn.src = `images/btn-${rightForm.value}.png`;
+        rightBtn.src = `images_webp/btn-${rightForm.value}.webp`;
         rightBtn.alt = rightForm.label;
 
 

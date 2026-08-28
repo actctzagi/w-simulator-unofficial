@@ -32,7 +32,7 @@ body {
     align-items: center;
     text-align: center;
 
-    background-image: url('images/pagebackground.png');
+    background-image: url('images_webp/pagebackground.webp');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -58,7 +58,7 @@ body {
 .header-bg {
   position: absolute;
   inset: 0;
-  background-image: url("images/header1.png");
+  background-image: url("images_webp/header1.webp");
   background-size: cover;
   background-position: center 14%; 
   z-index: 1;
@@ -111,7 +111,7 @@ body {
     transform: scale(0.8);    
     transform-origin: top center; 
 
-    background-image: url('images/viewerbackground.png');
+    background-image: url('images_webp/viewerbackground.webp');
     background-size: cover;       
     background-position: center; 
     background-repeat: no-repeat;
@@ -450,14 +450,14 @@ body {
 }
 
 .frame-left {
-    background-image: url("images/frame-left.png");
+    background-image: url("images_webp/frame-left.webp");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
 }
 
 .frame-right {
-    background-image: url("images/frame-right.png");
+    background-image: url("images_webp/frame-right.webp");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -761,7 +761,7 @@ body {
     max-width: 375px;
     margin: 0 auto;
     margin-top: 20px;
-    background: url("images/info-panel.png") center/cover no-repeat;
+    background: url("images_webp/info-panel.webp") center/cover no-repeat;
     padding: 20px 25px;
 }
 
@@ -866,7 +866,7 @@ body {
   bottom: 0;
   left: 0;
 
-  background-image: url("images/header1.png");
+  background-image: url("images_webp/header1.webp");
   background-size: cover;
   background-position: center 80%; 
   background-repeat: no-repeat;
