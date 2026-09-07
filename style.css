@@ -865,20 +865,22 @@ body {
 ============================ */
 .site-footer {
   position: relative;
-  width: 100vw;
-  height: 70px;
-  margin: 0;                
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
   margin-top: 50px;
-  padding-top: 50px;
-  padding-bottom: 85px;
-  bottom: 0;
-  left: 0;
+  /* 高さは中身に合わせて自動で伸ばす。以前は height:70px + overflow:hidden で
+     無理やり抑えていたが、Android など文字サイズ／フォントメトリクスが違う環境では
+     クレジット行が想定より高くなり、背景画像（205px固定）の下に地の色（白）が
+     はみ出して見えていた。padding だけで余白を作り、下に白が出ないよう
+     background-color も敷く。 */
+  padding: 44px 16px;
 
+  background-color: #0b0b0f;
   background-image: url("images_webp/header1.webp");
   background-size: cover;
-  background-position: center 80%; 
+  background-position: center 80%;
   background-repeat: no-repeat;
-  overflow: hidden;
 }
 
 .site-footer::before {
@@ -933,6 +935,7 @@ body {
 
 .footer-copy {
   text-align: center;
+  position: relative;
   z-index: 2;
   color: #FFFFFF;
   font-family: "Corporate-Logo-Medium-ver3", sans-serif;
