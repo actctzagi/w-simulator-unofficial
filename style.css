@@ -3,14 +3,9 @@
 ============================ */
 @font-face {
   font-family: "Corporate-Logo-Medium-ver3";
-  /* 配布版の .otf は cmap(format 14/異体字セレクタ)テーブルが壊れており、
-     ChromiumのOpenTypeサニタイザ(OTS)に丸ごと弾かれる。→ Android系ブラウザで
-     フォントが当たらずsans-serifに落ちる。修復済みの woff2/woff を先に読ませる。
-     local() はフォントをインストール済みのPC(制作環境)向けのフォールバック。 */
   src: local("Corporate Logo Medium ver3"),
        local("Corporate-Logo-Medium-ver3"),
        url("fonts/Corporate-Logo-Medium-ver3.woff2") format("woff2"),
-       url("fonts/Corporate-Logo-Medium-ver3.woff") format("woff"),
        url("fonts/Corporate-Logo-Medium-ver3.otf") format("opentype");
   font-weight: normal;
   font-style: normal;
@@ -526,14 +521,16 @@ body {
 .modal-content {
     width: 90vw;
     max-width: 400px;
-    max-height: 80vh;
+    height: 80vh;
     background: rgba(0,0,0,0.7);
     padding: 20px;
     border-radius: 7px;
     border: 1px solid white;
     transform: scale(0.5);
     opacity: 0;
-    overflow-y: auto;   /* ← これを追加 */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
     transition: transform 0.4s,
                 opacity 0.4s cubic-bezier(.4,0,.6,1);
 }
@@ -557,6 +554,20 @@ body {
 ============================ */
 .modal-grid {
     margin-top: 10px;
+    flex: 1 1 auto;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-scroll-area {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+}
+
+.modal-pinned-area {
+    flex: 0 0 auto;
 }
 
 .modal-section-title {
@@ -578,7 +589,7 @@ body {
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(9, auto);
     gap: 6px;
-    grid-auto-flow: column;
+    grid-auto-flow: row;
     justify-items: center;
 }
 
@@ -587,7 +598,7 @@ body {
 ============================ */
 .modal-divider {
     margin: 16px 0;
-    border-top: 1px solid rgba(255,255,255,0.3);
+    border-top: 1px solid #707070;
 }
 
 /* ============================
@@ -636,9 +647,19 @@ body {
     padding: 0 2px;    
 }
 
-.button-wrapper.selected,
-.button-wrapper.selected-secondary {
+.button-wrapper.selected {
     border-radius: 7px;
+}
+
+.button-wrapper.selected::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("images_webp/frame-selected.webp");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    pointer-events: none;
+    z-index: 9;
 }
 
 .button-wrapper.hovered {
@@ -649,6 +670,11 @@ body {
 .button-wrapper.locked {
     opacity: 0.4;
     pointer-events: none;
+}
+
+.button-wrapper.dimmed .form-thumbnail,
+.button-wrapper.dimmed .button-label {
+    filter: brightness(50%);
 }
 
 
@@ -703,9 +729,7 @@ body {
     z-index: 10;
 }
 
-.button-wrapper.selected .form-thumbnail,
 .button-wrapper.hovered .form-thumbnail,
-.button-wrapper.selected .button-label,
 .button-wrapper.hovered .button-label {
     filter: brightness(50%);
 }
@@ -715,27 +739,119 @@ body {
     opacity: 1;
 }
 
-.button-wrapper .selected-frame,
-.button-wrapper .selected-frame2 {
+/* ============================
+   左右ターゲット選択セクション（新設）
+============================ */
+.modal-target-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 8px;
+}
+
+.modal-target-section .modal-target-btn {
+    width: 150px;
+    height: 75px;
+}
+
+.modal-target-section .modal-target-btn .button-label {
+    font-size: 15px;
+    max-width: 105px;
+    padding: 0 4px;
+}
+
+.modal-target-btn .target-arrow {
     position: absolute;
-    top: -8%;
-    left: -8%;
-    width: 116%;
-    height: 116%;
-    object-fit: cover;
+    bottom: 100%;
+    left: 53%;
+    margin-bottom: -9px;
+    height: 18px;
+    width: auto;
     pointer-events: none;
-    opacity: 0;
-    z-index: 9;
-    transition: opacity 0.2s;
-    filter: none !important;
+    z-index: 20;
+    filter: none;
+    animation: arrow-bob 1.2s ease-in-out infinite;
 }
 
-.button-wrapper.selected .selected-frame {
-    opacity: 1;
+@keyframes arrow-bob {
+    0%, 100% { transform: translateX(-50%) translateY(-3px); }
+    50% { transform: translateX(-50%) translateY(3px); }
 }
 
-.button-wrapper.selected-secondary .selected-frame2 {
-    opacity: 1;
+.modal-target-btn.side-dimmed .form-thumbnail,
+.modal-target-btn.side-dimmed .button-label {
+    filter: brightness(50%);
+}
+
+.modal-target-swap {
+    width: 24px;
+    height: 24px;
+}
+
+.modal-target-swap:hover {
+    transform: scale(1.1);
+}
+
+.modal-target-swap.dimmed .swap-icon {
+    filter: brightness(50%);
+}
+
+
+/* ============================
+   モーダル内「変身」ボタン
+============================ */
+.modal-henshin-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    margin: 8px auto 0;
+    border: none;
+    padding: 0;
+    background: none;
+    cursor: pointer;
+}
+
+.modal-henshin-btn img {
+    width: 150px;
+    height: auto;
+}
+
+.modal-henshin-btn .btn-text {
+    position: static;
+    margin-top: -18.5px;
+    margin-left: 5px;
+    font-size: 11px;
+    font-weight: bold;
+    color: #fff;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-style: oblique;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+.modal-henshin-btn:hover {
+    transform: scale(1.1);
+}
+
+.modal-henshin-btn:active {
+    transform: scale(0.95);
+}
+
+.modal-henshin-btn.dimmed img,
+.modal-henshin-btn.dimmed .btn-text {
+    filter: brightness(50%);
+}
+
+.modal-henshin-btn:disabled {
+    cursor: default;
+}
+
+.modal-henshin-btn:disabled:hover,
+.modal-henshin-btn:disabled:active {
+    transform: none;
 }
 
 /* ============================
@@ -769,7 +885,7 @@ body {
     max-width: 375px;
     margin: 0 auto;
     margin-top: 20px;
-    background: url("images_webp/info-panel.webp") center/cover no-repeat;
+    background: url("images_webp/info-panel.webp") top center / 100% auto repeat-y;
     padding: 20px 25px;
 }
 
@@ -869,11 +985,6 @@ body {
   box-sizing: border-box;
   margin: 0;
   margin-top: 50px;
-  /* 高さは中身に合わせて自動で伸ばす。以前は height:70px + overflow:hidden で
-     無理やり抑えていたが、Android など文字サイズ／フォントメトリクスが違う環境では
-     クレジット行が想定より高くなり、背景画像（205px固定）の下に地の色（白）が
-     はみ出して見えていた。padding だけで余白を作り、下に白が出ないよう
-     background-color も敷く。 */
   padding: 44px 16px;
 
   background-color: #0b0b0f;

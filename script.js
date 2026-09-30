@@ -2,16 +2,6 @@
    メモリ名
 ============================= */
 const forms = [
-  { value: "terror", label: "テラー" },
-  { value: "taboo", label: "タブー" },
-  { value: "nasca3", label: "ナスカ" },
-  { value: "claydoll", label: "クレイドール" },
-  { value: "smilodon", label: "スミロドン" },
-  { value: "utopia", label: "ユートピア" },
-  { value: "bomb", label: "ボム" },
-  { value: "engine", label: "エンジン" },
-  { value: "trial", label: "トライアル" },
-  { value: "prism", label: "プリズム" },
   { value: "accel", label: "アクセル" },
   { value: "bird", label: "バード" },
   { value: "cyclone", label: "サイクロン" },
@@ -37,7 +27,19 @@ const forms = [
   { value: "weather", label: "ウェザー" },
   { value: "xtreme", label: "エクストリーム" },
   { value: "yesterday", label: "イエスタデイ" },
-  { value: "zone", label: "ゾーン" }
+  { value: "zone", label: "ゾーン" },
+
+  { value: "prism", label: "プリズム" },
+  { value: "engine", label: "エンジン" },
+  { value: "trial", label: "トライアル" },
+  { value: "bomb", label: "ボム" },
+
+  { value: "terror", label: "テラー" },
+  { value: "taboo", label: "タブー" },
+  { value: "nasca3", label: "ナスカ" },
+  { value: "claydoll", label: "クレイドール" },
+  { value: "smilodon", label: "スミロドン" },
+  { value: "utopia", label: "ユートピア" }
 ];
 
 
@@ -51,8 +53,8 @@ const mainModalForms = forms.filter(
 
 const extraModalSlots = [
   { value: "prism", label: "プリズム", enabled: true },
-  { value: "trial", label: "トライアル", enabled: true },
   { value: "engine", label: "エンジン", enabled: true },
+  { value: "trial", label: "トライアル", enabled: true },
 
   { value: "bomb", label: "ボム", enabled: true },
   { value: "terror", label: "テラー", enabled: true },
@@ -71,16 +73,6 @@ const extraModalSlots = [
    メモリ解説文
 ============================= */
 const memoryDescriptions = {
-    utopia: "｢理想郷の記憶｣を持つガイアメモリ。重力操作能力に加えて、触れた人間の感情を吸い取って自らのエネルギーに転換する能力を与える｡",
-    terror: "｢恐怖の記憶｣を持つガイアメモリ。恐怖領域｢テラーフィールド｣を展開し、敵に激しい恐怖心を与える｡",
-    taboo: "｢禁忌の記憶｣を持つガイアメモリ。強烈な破壊光球を発射する能力を与える｡",
-    nasca3: "｢ナスカ文明の記憶｣を持つガイアメモリ。使用者をナスカ文明の剣士に変化させ､飛翔能力と超高速移動能力を与える。レベル3に到達することで更なる進化を果たす｡",
-    claydoll: "｢土偶の記憶｣を持つガイアメモリ。重力エネルギー弾を発射する能力と再生能力を与える｡",
-    smilodon: "｢スミロドンの記憶｣を持つガイアメモリ。鋭い爪と超高速移動能力を与える｡",
-    bomb: "｢爆弾の記憶｣を持つガイアメモリ。分裂・爆発する強力な光弾を放つ｡",
-    engine: "｢ジェット｣｢スチーム｣｢エレクトリック｣、3種のエンジンパワーを引き出せる多機能型メモリ｡",
-    trial: "｢挑戦の記憶｣を持つガイアメモリ。既存のメモリのプログラムに超加速のパッチを当てることで、音速に到達する加速力を与える｡",
-    prism: "｢プリズムの記憶｣を持つガイアメモリ。複数のメモリをリンクさせ、一つのエネルギーへと収束変換する｡",
     accel: "｢加速の記憶｣を持つガイアメモリ。加速能力を与え、高速移動を可能にする｡",
     bird: "｢始祖鳥の記憶｣を持つガイアメモリ。使用者に飛翔能力を与える｡",
     cyclone: "｢疾風の記憶｣を持つガイアメモリ。疾風を引き起こし、風を自由自在に操る能力を与える｡",
@@ -106,7 +98,20 @@ const memoryDescriptions = {
     weather: "｢気象の記憶｣を持つガイアメモリ。雨、竜巻、雷、雪といった全ての気象現象を自由自在に操る｡",
     xtreme: "記憶を持たない特殊なガイアメモリ。他のメモリの能力を取り込み、その力を極限まで引き出す｡",
     yesterday: "｢昨日の記憶｣を持つガイアメモリ。発動された対象の記憶を操作し、昨日と同じ行動を繰り返させる｡",
-    zone: "｢地帯の記憶｣を持つガイアメモリ。任意の対象物を自由に他の場所へ転送する｡"
+    zone: "｢地帯の記憶｣を持つガイアメモリ。任意の対象物を自由に他の場所へ転送する｡",
+
+    prism: "｢プリズムの記憶｣を持つガイアメモリ。複数のメモリをリンクさせ、一つのエネルギーへと収束変換する｡",
+    engine: "｢ジェット｣｢スチーム｣｢エレクトリック｣、3種のエンジンパワーを引き出せる多機能型メモリ｡",
+    trial: "｢挑戦の記憶｣を持つガイアメモリ。既存のメモリのプログラムに超加速のパッチを当てることで、音速に到達する加速力を与える｡",
+    bomb: "｢爆弾の記憶｣を持つガイアメモリ。分裂・爆発する強力な光弾を放つ｡",
+
+    terror: "｢恐怖の記憶｣を持つガイアメモリ。恐怖領域｢テラーフィールド｣を展開し、敵に激しい恐怖心を与える｡",
+    taboo: "｢禁忌の記憶｣を持つガイアメモリ。強烈な破壊光球を発射する能力を与える｡",
+    nasca3: "｢ナスカ文明の記憶｣を持つガイアメモリ。使用者をナスカ文明の剣士に変化させ､飛翔能力と超高速移動能力を与える。レベル3に到達することで更なる進化を果たす｡",
+    claydoll: "｢土偶の記憶｣を持つガイアメモリ。重力エネルギー弾を発射する能力と再生能力を与える｡",
+    smilodon: "｢スミロドンの記憶｣を持つガイアメモリ。鋭い爪と超高速移動能力を与える｡",
+
+    utopia: "｢理想郷の記憶｣を持つガイアメモリ。重力操作能力に加えて、触れた人間の感情を吸い取って自らのエネルギーに転換する能力を与える｡"
 };
 
 /* =============================
@@ -218,12 +223,11 @@ function updateHalf() {
 
     const key = left + "-" + right;
     const weaponUsers = [
-        "prism", "trial", "engine", "bomb", "terror", "taboo", "nasca3", "claydoll", "smilodon", "utopia",
-        "accel", "cyclone", "eternal", "gene", 
-        "heat", "iceage", "key", "luna", "metal", "nasca", 
-        "ocean", "puppeteer", "queen", "rocket", "skull", "trigger", "unicorn", 
-        "violence", "weather", "xtreme", "yesterday", "zone"
+        "prism", "engine", "trial", "bomb", "terror", "taboo", "nasca3", "claydoll", "smilodon", "utopia", 
+        "accel", "cyclone", "eternal", "gene", "heat", "iceage", "key", "luna", "metal", "nasca", "ocean", "puppeteer", "queen", "rocket", "skull", "trigger", "unicorn", "violence", "weather", "xtreme", "yesterday", "zone"
         ];
+    // ナスカ(Lv3)の武器画像はナスカ(通常)と同一絵柄のため、nasca-weapon1/2を流用する
+    const weaponFormKey = (form) => form === "nasca3" ? "nasca" : form;
 
     /* ============================================
        単体画像処理
@@ -258,7 +262,7 @@ function updateHalf() {
        ファング武器分岐
     ============================ */
     if(left === "fang" && right === "metal") {
-        weapon1Src = "images_webp/fang-weapon1.webp";
+        weapon1Src = "images_webp/fang-weaponFM.webp";
         weapon2Src = null;
     }
     else if(left === "fang" && right === "trigger") {
@@ -464,13 +468,13 @@ function updateHalf() {
     // 右がサイクロン
     else if (right === "cyclone") {
         const L_hasWeapon = weaponUsers.includes(left);
-        weapon1Src = L_hasWeapon ? `images_webp/${left}-weapon1.webp` : null;
+        weapon1Src = L_hasWeapon ? `images_webp/${weaponFormKey(left)}-weapon1.webp` : null;
         weapon2Src = "images_webp/cyclone-weapon.webp";
     }
     // 左がサイクロン
     else if (left === "cyclone") {
         const R_hasWeapon = weaponUsers.includes(right);
-        weapon1Src = R_hasWeapon ? `images_webp/${right}-weapon2.webp` : null;
+        weapon1Src = R_hasWeapon ? `images_webp/${weaponFormKey(right)}-weapon2.webp` : null;
         weapon2Src = "images_webp/cyclone-weapon.webp";
     }
 
@@ -496,13 +500,13 @@ function updateHalf() {
     // 右がテラー
     else if (right === "terror") {
         const L_hasWeapon = weaponUsers.includes(left);
-        weapon1Src = L_hasWeapon ? `images_webp/${left}-weapon1.webp` : null;
+        weapon1Src = L_hasWeapon ? `images_webp/${weaponFormKey(left)}-weapon1.webp` : null;
         weapon2Src = "images_webp/terror-weapon.webp";
     }
     // 左がテラー
     else if (left === "terror") {
         const R_hasWeapon = weaponUsers.includes(right);
-        weapon1Src = R_hasWeapon ? `images_webp/${right}-weapon2.webp` : null;
+        weapon1Src = R_hasWeapon ? `images_webp/${weaponFormKey(right)}-weapon2.webp` : null;
         weapon2Src = "images_webp/terror-weapon.webp";
     }
 
@@ -549,12 +553,12 @@ function updateHalf() {
         if (left === "utopia") {
         weapon1Src = "images_webp/utopia-weapon1.webp";
         weapon2Src = weaponUsers.includes(right)
-           ? `images_webp/${right}-weapon2.webp`
+           ? `images_webp/${weaponFormKey(right)}-weapon2.webp`
             : null;
         } else {
         weapon1Src = "images_webp/utopia-weapon2.webp";
         weapon2Src = weaponUsers.includes(left)
-           ? `images_webp/${left}-weapon1.webp`
+           ? `images_webp/${weaponFormKey(left)}-weapon1.webp`
             : null;
         }
     }
@@ -584,11 +588,11 @@ function updateHalf() {
     // エクストリーム × スカル
     else if (left === "xtreme" && right === "skull") {
         weapon1Src = "images_webp/skull-weapon2.webp";
-        weapon2Src = "images_webp/xtreme-weaponXS.webp";
+        weapon2Src = "images_webp/xtreme-weaponXSk.webp";
     }
     else if (left === "skull" && right === "xtreme") {
         weapon1Src = "images_webp/skull-weapon1.webp";
-        weapon2Src = "images_webp/xtreme-weaponSX.webp";
+        weapon2Src = "images_webp/xtreme-weaponSkX.webp";
     }
 
     // エクストリーム × エターナル
@@ -640,7 +644,7 @@ function updateHalf() {
     // 左がエクストリーム
     else if (left === "xtreme") {
         weapon1Src = weaponUsers.includes(right)
-           ? `images_webp/${right}-weapon2.webp`
+           ? `images_webp/${weaponFormKey(right)}-weapon2.webp`
             : null;
         weapon2Src = "images_webp/xtreme-weapon.webp";
     }
@@ -648,7 +652,7 @@ function updateHalf() {
     // 右がエクストリーム
     else if (right === "xtreme") {
         weapon1Src = weaponUsers.includes(left)
-            ? `images_webp/${left}-weapon1.webp`
+            ? `images_webp/${weaponFormKey(left)}-weapon1.webp`
             : null;
         weapon2Src = "images_webp/xtreme-weapon.webp";
     }
@@ -659,11 +663,11 @@ function updateHalf() {
         weapon2Src = "images_webp/metal-weapon2.webp"; 
     }else if (right === "fang") {
         weapon1Src = null;
-        weapon2Src = "images_webp/fang-weapon2.webp";
+        weapon2Src = "images_webp/fang-weaponMF.webp";
     }else {
         const R_hasWeapon = weaponUsers.includes(right);
         if (R_hasWeapon) {
-            weapon1Src = `images_webp/${right}-weapon2.webp`;
+            weapon1Src = `images_webp/${weaponFormKey(right)}-weapon2.webp`;
         } else {
             weapon1Src = null;
         }
@@ -677,12 +681,12 @@ function updateHalf() {
         const R_hasWeapon = weaponUsers.includes(right);
 
         if (L_hasWeapon && R_hasWeapon) {
-            weapon1Src = `images_webp/${left}-weapon1.webp`;
-            weapon2Src = `images_webp/${right}-weapon2.webp`;
+            weapon1Src = `images_webp/${weaponFormKey(left)}-weapon1.webp`;
+            weapon2Src = `images_webp/${weaponFormKey(right)}-weapon2.webp`;
         } else if (L_hasWeapon) {
-            weapon1Src = `images_webp/${left}-weapon1.webp`;
+            weapon1Src = `images_webp/${weaponFormKey(left)}-weapon1.webp`;
         } else if (R_hasWeapon) {
-            weapon2Src = `images_webp/${right}-weapon2.webp`;
+            weapon2Src = `images_webp/${weaponFormKey(right)}-weapon2.webp`;
         }
     }
 
@@ -698,8 +702,8 @@ function updateHalf() {
     // エクストリーム × ダミー
     if (leftIsDummy && right !== "xtreme") {
         if (rightHasWeapon) {
-            weapon1Src = `images_webp/${right}-weapon1.webp`;
-            weapon2Src = `images_webp/${right}-weapon2.webp`;
+            weapon1Src = `images_webp/${weaponFormKey(right)}-weapon1.webp`;
+            weapon2Src = `images_webp/${weaponFormKey(right)}-weapon2.webp`;
         } else {
             weapon1Src = null;
             weapon2Src = null;
@@ -707,8 +711,8 @@ function updateHalf() {
     }
     else if (rightIsDummy && left !== "xtreme") {
         if (leftHasWeapon) {
-            weapon1Src = `images_webp/${left}-weapon1.webp`;
-            weapon2Src = `images_webp/${left}-weapon2.webp`;
+            weapon1Src = `images_webp/${weaponFormKey(left)}-weapon1.webp`;
+            weapon2Src = `images_webp/${weaponFormKey(left)}-weapon2.webp`;
         } else {
             weapon1Src = null;
             weapon2Src = null;
@@ -766,7 +770,8 @@ function updateHalf() {
         weapon2Layer.dataset.hasWeapon = "false";
     }
 
-    // ファング分岐
+    // ファング分岐(単体画像パターンでは左右半身レイヤーを使わないためスキップ)
+    if (!isSingle) {
     if(left === "fang" && right === "fang"){
         eyesSrc = "images_webp/fang-eyes1.webp";
         leftSrc = "images_webp/fang.webp";
@@ -787,7 +792,7 @@ function updateHalf() {
     // スカル分岐
     if (
         (left === "terror"  && right === "skull") ||
-        (left === "utopia"  && right === "skull") 
+        (left === "utopia"  && right === "skull")
     ) {
         eyesSrc = "images_webp/normal-eyes.webp";
         mufflerSrc = null;
@@ -806,6 +811,7 @@ function updateHalf() {
         mufflerSrc = "images_webp/skull-muffler.webp";
         leftSrc = `images_webp/skull-${left}.webp`;
         rightSrc = "images_webp/skull-skull.webp";
+    }
     }
 
 
@@ -1120,32 +1126,209 @@ document.getElementById("swapButton").addEventListener("click", () => {
 /* =============================
    モーダルを開ける
 ============================= */
-let activeSide = "left";
+// モーダル内で仮選択中の組み合わせ（「変身」ボタンを押すまでは確定しない）
+let draftLeft = currentLeft;
+let draftRight = currentRight;
+
+// 一覧セクションで押されたが、まだどちら側に反映するか未確定のメモリ
+let pendingValue = null;
+
+// 選択セクションのボタンが押されて、次に一覧セクションでタップした値を即反映する対象辺（"left" / "right" / null）
+let pendingSide = null;
 
 const leftSelector = document.getElementById("leftSelector");
 const rightSelector = document.getElementById("rightSelector");
 const swapButton = document.getElementById("swapButton");
 
-leftSelector.addEventListener("click", () => { activeSide = "left"; openModal(); });
-rightSelector.addEventListener("click", () => { activeSide = "right"; openModal(); });
+leftSelector.addEventListener("click", () => openModal("left"));
+rightSelector.addEventListener("click", () => openModal("right"));
 
 document.getElementById("closeModal").addEventListener("click", closeModal);
 
 
 
-function openModal() {
-    const leftValue   = currentLeft;
-    const rightValue  = currentRight;
-    const primaryValue = activeSide === "left" ? leftValue : rightValue;
-    const otherValue   = activeSide === "left" ? rightValue : leftValue;
+function openModal(initialSide = null) {
+    draftLeft = currentLeft;
+    draftRight = currentRight;
+    pendingValue = null;
+    pendingSide = initialSide;
 
     const modal = document.getElementById("memoryModal");
     modal.classList.add("show");
     modal.style.display = "block";
 
+    renderModal();
+}
+
+/* ============================
+   左右ターゲット選択ボタン
+============================ */
+function createModalTargetButton(value, side) {
+    const form = forms.find(f => f.value === value);
+
+    const wrapper = document.createElement("div");
+    wrapper.className = "button-wrapper modal-target-btn";
+
+    const btn = document.createElement("img");
+    btn.src = form ? `images_webp/btn-${form.value}.webp` : "images_webp/btn-blank.webp";
+    btn.className = "form-thumbnail";
+
+    const label = document.createElement("span");
+    label.className = "button-label";
+    label.textContent = form
+        ? (form.value === "nasca3" ? "ナスカ (Lv3)" : form.label)
+        : "";
+
+    wrapper.appendChild(btn);
+    wrapper.appendChild(label);
+
+    const eligible = pendingValue !== null && value !== pendingValue;
+    const armedBySide = pendingValue === null && pendingSide === side;
+
+    if (eligible || armedBySide) {
+        wrapper.classList.add("arrow-active");
+
+        const arrow = document.createElement("img");
+        arrow.src = side === "left" ? "images_webp/arrow1.webp?v=2" : "images_webp/arrow2.webp?v=2";
+        arrow.className = "target-arrow " + (side === "left" ? "target-arrow-left" : "target-arrow-right");
+        wrapper.appendChild(arrow);
+    }
+
+    const notEligibleAlreadyHere = pendingValue !== null && value === pendingValue;
+
+    if (
+        (pendingValue === null && pendingSide !== null && pendingSide !== side) ||
+        notEligibleAlreadyHere
+    ) {
+        wrapper.classList.add("side-dimmed");
+    }
+
+    if (eligible) {
+        wrapper.addEventListener("click", () => {
+            if (side === "left") {
+                draftLeft = pendingValue;
+            } else {
+                draftRight = pendingValue;
+            }
+            pendingValue = null;
+            renderModal();
+        });
+    } else if (pendingValue === null) {
+        wrapper.addEventListener("click", () => {
+            pendingSide = (pendingSide === side) ? null : side;
+            renderModal();
+        });
+    }
+
+    return wrapper;
+}
+
+function renderModal() {
+    const leftValue  = draftLeft;
+    const rightValue = draftRight;
+
     const root = document.getElementById("modalGrid");
+
+    const prevScrollArea = root.querySelector(".modal-scroll-area");
+    const prevScrollTop = prevScrollArea ? prevScrollArea.scrollTop : 0;
+
     root.innerHTML = "";
 
+    /* ============================
+       一覧セクション（スクロールエリア）
+    ============================ */
+    const scrollArea = document.createElement("div");
+    scrollArea.className = "modal-scroll-area";
+
+    /* ============================
+       選択中セクション（下部固定エリア）
+    ============================ */
+    const pinnedArea = document.createElement("div");
+    pinnedArea.className = "modal-pinned-area";
+
+
+
+    /* ============================
+       左右ターゲット選択
+    ============================ */
+    const targetSection = document.createElement("div");
+    targetSection.className = "modal-target-section";
+
+    const targetLeftBtn = createModalTargetButton(leftValue, "left");
+
+    const targetSwapButton = document.createElement("button");
+    targetSwapButton.type = "button";
+    targetSwapButton.className = "swap-button modal-target-swap";
+
+    const targetSwapIcon = document.createElement("img");
+    targetSwapIcon.src = "images_webp/swap2.webp";
+    targetSwapIcon.className = "swap-icon";
+    targetSwapIcon.alt = "swap";
+    targetSwapButton.appendChild(targetSwapIcon);
+
+    targetSwapButton.addEventListener("click", () => {
+        const temp = draftLeft;
+        draftLeft = draftRight;
+        draftRight = temp;
+
+        renderModal();
+    });
+
+    const targetRightBtn = createModalTargetButton(rightValue, "right");
+
+    targetSection.appendChild(targetLeftBtn);
+    targetSection.appendChild(targetSwapButton);
+    targetSection.appendChild(targetRightBtn);
+
+
+    /* ============================
+       区切り線（選択中セクションの上端）
+    ============================ */
+    const targetDivider = document.createElement("div");
+    targetDivider.className = "modal-divider";
+
+    pinnedArea.appendChild(targetDivider);
+    pinnedArea.appendChild(targetSection);
+
+
+    /* ============================
+       変身ボタン
+    ============================ */
+    const hasPendingChange = (draftLeft !== currentLeft) || (draftRight !== currentRight);
+    const isGuideMode = pendingValue !== null;
+    const guideText = isGuideMode ? "装填先を選択" : null;
+
+    const henshinButton = document.createElement("button");
+    henshinButton.type = "button";
+    henshinButton.className = "modal-henshin-btn" + (!isGuideMode && !hasPendingChange ? " dimmed" : "");
+    henshinButton.disabled = isGuideMode || !hasPendingChange;
+
+    const henshinBtnImg = document.createElement("img");
+    henshinBtnImg.src = "images_webp/henshinbtnbackground.webp";
+    henshinBtnImg.alt = "変身";
+
+    const henshinBtnText = document.createElement("span");
+    henshinBtnText.className = "btn-text";
+    henshinBtnText.textContent = guideText || "これで決まりだ！";
+
+    henshinButton.appendChild(henshinBtnImg);
+    henshinButton.appendChild(henshinBtnText);
+
+    henshinButton.addEventListener("click", async () => {
+        if (isGuideMode || !hasPendingChange) return;
+
+        currentLeft = draftLeft;
+        currentRight = draftRight;
+
+        await playHenshinEffect(1000);
+        closeModalImmediate();
+        updateHalf();
+        updateSelectors();
+        updateFormName();
+        updateMemoryDescriptions();
+    });
+
+    pinnedArea.appendChild(henshinButton);
 
 
     /* ============================
@@ -1153,8 +1336,8 @@ function openModal() {
     ============================ */
     const titleMain = document.createElement("div");
     titleMain.className = "modal-section-title";
-    titleMain.textContent = "【 AtoZ MEMORIES 】";
-    root.appendChild(titleMain);
+    titleMain.textContent = "【 メモリを選択 】";
+    scrollArea.appendChild(titleMain);
 
 
 
@@ -1176,42 +1359,39 @@ function openModal() {
         label.className = "button-label";
         label.textContent = f.label;
 
-        const selectedFrame = document.createElement("img");
-        selectedFrame.className = "selected-frame";
-        selectedFrame.src = "images_webp/frame-selected.webp";
+        const pointlessForSide = pendingSide !== null && (
+            (pendingSide === "left" && f.value === draftLeft) ||
+            (pendingSide === "right" && f.value === draftRight)
+        );
 
-        const selectedFrame2 = document.createElement("img");
-        selectedFrame2.className = "selected-frame2";
-        selectedFrame2.src = "images_webp/frame-selected2.webp";
-
-        if (f.value === primaryValue) {
-            wrapper.classList.add("selected");
-        } else if (f.value === otherValue && otherValue !== primaryValue) {
-            wrapper.classList.add("selected-secondary");
+        if (f.value === draftLeft && f.value === draftRight) {
+            wrapper.classList.add("dimmed");
+        } else if (pointlessForSide) {
+            wrapper.classList.add("dimmed");
+        } else if (pendingSide !== null) {
+            wrapper.addEventListener("click", () => {
+                if (pendingSide === "left") {
+                    draftLeft = f.value;
+                } else {
+                    draftRight = f.value;
+                }
+                renderModal();
+            });
+        } else {
+            wrapper.addEventListener("click", () => {
+                pendingValue = (pendingValue === f.value) ? null : f.value;
+                renderModal();
+            });
         }
-
-        wrapper.addEventListener("click", async () => {
-            if (activeSide === "left") {
-                currentLeft = f.value;
-            } else {
-                currentRight = f.value;
-            }
-
-            await playHenshinEffect(1000);
-            closeModalImmediate();
-            updateHalf();
-            updateSelectors();
-            updateFormName?.();
-            updateMemoryDescriptions();
-        });
+        if (pendingValue !== null && f.value !== pendingValue) {
+            wrapper.classList.add("dimmed");
+        }
 
         wrapper.appendChild(btn);
         wrapper.appendChild(label);
-        wrapper.appendChild(selectedFrame);
-        wrapper.appendChild(selectedFrame2);
         mainGrid.appendChild(wrapper);
     });
-    root.appendChild(mainGrid);
+    scrollArea.appendChild(mainGrid);
 
 
     /* ============================
@@ -1219,7 +1399,7 @@ function openModal() {
     ============================ */
     const divider = document.createElement("div");
     divider.className = "modal-divider";
-    root.appendChild(divider);
+    scrollArea.appendChild(divider);
 
 
     /* ============================
@@ -1227,8 +1407,8 @@ function openModal() {
     ============================ */
     const titleExtra = document.createElement("div");
     titleExtra.className = "modal-section-title";
-    titleExtra.textContent = "【 EXTRA MEMORIES 】";
-    root.appendChild(titleExtra);
+    titleExtra.textContent = "【 EXTRA 】";
+    scrollArea.appendChild(titleExtra);
 
 
     /* ============================
@@ -1247,38 +1427,37 @@ function openModal() {
         const label = document.createElement("span");
         label.className = "button-label";
 
-        const selectedFrame = document.createElement("img");
-        selectedFrame.className = "selected-frame";
-        selectedFrame.src = "images_webp/frame-selected.webp";
-
-        const selectedFrame2 = document.createElement("img");
-        selectedFrame2.className = "selected-frame2";
-        selectedFrame2.src = "images_webp/frame-selected2.webp";
-
         if (slot.enabled && slot.value) {
             btn.src = `images_webp/btn-${slot.value}.webp`;
             label.textContent = slot.label;
 
-            if (slot.value === primaryValue) {
-                wrapper.classList.add("selected");
-            } else if (slot.value === otherValue && otherValue !== primaryValue) {
-                wrapper.classList.add("selected-secondary");
+            const pointlessForSide = pendingSide !== null && (
+                (pendingSide === "left" && slot.value === draftLeft) ||
+                (pendingSide === "right" && slot.value === draftRight)
+            );
+
+            if (slot.value === draftLeft && slot.value === draftRight) {
+                wrapper.classList.add("dimmed");
+            } else if (pointlessForSide) {
+                wrapper.classList.add("dimmed");
+            } else if (pendingSide !== null) {
+                wrapper.addEventListener("click", () => {
+                    if (pendingSide === "left") {
+                        draftLeft = slot.value;
+                    } else {
+                        draftRight = slot.value;
+                    }
+                    renderModal();
+                });
+            } else {
+                wrapper.addEventListener("click", () => {
+                    pendingValue = (pendingValue === slot.value) ? null : slot.value;
+                    renderModal();
+                });
             }
-
-            wrapper.addEventListener("click", async () => {
-                if (activeSide === "left") {
-                    currentLeft = slot.value;
-                } else {
-                    currentRight = slot.value;
-                }
-
-                await playHenshinEffect(1000);
-                closeModalImmediate();
-                updateHalf();
-                updateSelectors();
-                updateFormName?.();
-                updateMemoryDescriptions();
-            });
+            if (pendingValue !== null && slot.value !== pendingValue) {
+                wrapper.classList.add("dimmed");
+            }
         } else {
             btn.src = "images_webp/btn-blank.webp";
             label.textContent = "???";
@@ -1287,11 +1466,14 @@ function openModal() {
 
         wrapper.appendChild(btn);
         wrapper.appendChild(label);
-        wrapper.appendChild(selectedFrame);
-        wrapper.appendChild(selectedFrame2);
         extraGrid.appendChild(wrapper);
     });
-    root.appendChild(extraGrid);
+    scrollArea.appendChild(extraGrid);
+
+    root.appendChild(scrollArea);
+    root.appendChild(pinnedArea);
+
+    scrollArea.scrollTop = prevScrollTop;
 }
 
 function updateSelectors() {
