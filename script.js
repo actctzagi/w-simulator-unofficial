@@ -912,6 +912,7 @@ function shareToX() {
 #AtoZ運命のシミュレーター
 でこのフォームを見る▼【非公式】
 ${shareUrl}`;
+    track("share_x", { combo: comboKey(currentLeft, currentRight) });
     window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`, "_blank");
 }
 
@@ -997,10 +998,11 @@ function bindTools() {
     $("ckWeapons").checked = weaponsVisible; $("ckAnim").checked = animOn; $("stage").classList.toggle("anim-off", !animOn);
     $("ckWeapons").addEventListener("change", e => {
         setWeapons(e.target.checked);
+        track("toggle_weapon", { state: e.target.checked ? "on" : "off" });
         updateHalf();
         sync();
     });
-    $("ckAnim").addEventListener("change", e => { animOn = e.target.checked; saveSettings(); $("stage").classList.toggle("anim-off", !animOn); updateBlink(); if (animOn) animThaw(); else animFreeze(); });
+    $("ckAnim").addEventListener("change", e => { animOn = e.target.checked; saveSettings(); track("toggle_anim", { state: animOn ? "on" : "off" }); $("stage").classList.toggle("anim-off", !animOn); updateBlink(); if (animOn) animThaw(); else animFreeze(); });
 }
 
 
@@ -1024,6 +1026,7 @@ function histPush() {
     discover();
     const cur = histCurrent();
     if (cur && cur[0] === currentLeft && cur[1] === currentRight) return;
+    track("combo_view", { combo: comboKey(currentLeft, currentRight) });
     hist = hist.slice(0, histIdx + 1);
     hist.push([currentLeft, currentRight]);
     if (hist.length > HIST_MAX) hist.shift();
@@ -1241,7 +1244,7 @@ async function commitViaModal(mutate) {
     bgHold = false;
     if (!animOn) { henshinPlaying = false; syncBg(); return; }
     syncBg();      
-    await window.playHenshinTransition(() => updateHalf(), { from: [fromL, fromR] });
+    await perfSlide(() => updateHalf(), { from: [fromL, fromR] });
 }
 
 
@@ -1562,7 +1565,12 @@ function libBuild() {
 /* タイルをタップした場合 */
 function libInit() {
     $("libTotal").textContent = totalCombos();
-    $("libSearch").addEventListener("input", libBuild);
+    let searchT = 0;
+    $("libSearch").addEventListener("input", () => {
+        libBuild();
+        clearTimeout(searchT);
+        searchT = setTimeout(() => { const n = $("libSearch").value.trim().length; if (n) track("library_search", { query_len: n, results: perspCount }); }, 1500);   // 検索語そのものは送らない（文字数と件数だけ）
+    });
     $("libGrid").addEventListener("click", async e => {
         const t = e.target.closest(".lt"); if (!t) return;
         const l = t.dataset.l, r = t.dataset.r, bm = t.dataset.bm === "1", w = t.dataset.w === "1";
@@ -1595,6 +1603,7 @@ function libInit() {
     const onHash = () => {
         if (window.xferClose) xferClose();
         if (location.hash !== "#library") return;
+        track("library_open");
         libNewSnap = new Set(newSet);
         newSet.clear(); saveNew(); updateNewBadge();
         ctlUI(); $("libSearch").value = ""; libEnsure(); libWrap().scrollTop = 0; perspStatic();
@@ -1731,10 +1740,44 @@ function sync() {
 const applyForm = () => { updateHalf(); sync(); };
 
 
+// 変身アニメの滑らかさを測って送る（端末の機種名は送らず、大まかな区別だけ。1回の訪問で最大3回）
+let perfSent = 0;
+async function perfSlide(fn, opts) {
+    if (perfSent >= 3 || !window.requestAnimationFrame) return window.playHenshinTransition(fn, opts);
+    const ts = []; let on = true;
+    const loop = t => { if (!on) return; ts.push(t); requestAnimationFrame(loop); };
+    requestAnimationFrame(loop);
+    const t0 = performance.now();
+    try { await window.playHenshinTransition(fn, opts); }
+    finally {
+        on = false;
+        try {
+            const dur = performance.now() - t0;
+            if (dur >= 1000 && ts.length > 10 && document.visibilityState === "visible") {   // 途中で押し直された短いものと、裏に回ったものは除く
+                const d = []; for (let i = 1; i < ts.length; i++) d.push(ts[i] - ts[i - 1]);
+                const med = d.slice().sort((a, b) => a - b)[d.length >> 1] || 16.7;
+                const hz = [30, 60, 75, 90, 120, 144].reduce((a, b) => Math.abs(1000 / med - b) < Math.abs(1000 / med - a) ? b : a);
+                const first = ts[0], early = d.filter((x, i) => x > 25 && ts[i + 1] - first < 600).length;
+                const ua = navigator.userAgent || "";
+                const dev = /iPhone|iPad|iPod/.test(ua) ? "ios" : /Android/.test(ua) ? "android" : /Mac/.test(ua) ? ((navigator.maxTouchPoints || 0) > 1 ? "ios" : "mac") : /Win/.test(ua) ? "windows" : "other";
+                perfSent++;
+                track("anim_perf", {
+                    device: dev, hz,
+                    frames: d.length, slow_frames: d.filter(x => x > 25).length, start_slow: early,
+                    dur_ms: Math.round(dur / 100) * 100,
+                    dpr: Math.round((window.devicePixelRatio || 1) * 2) / 2,
+                    cores: Math.min(navigator.hardwareConcurrency || 0, 16),
+                    mem: navigator.deviceMemory || 0
+                });
+            }
+        } catch (e) {}
+    }
+}
+
 // フォームを変える
 async function changeForm(mutate) {
     if (!animOn) { animCancelFrozen(); mutate(); applyForm(); }
-    else await playHenshinTransition(() => { mutate(); applyForm(); });
+    else await perfSlide(() => { mutate(); applyForm(); });
     sync();
 }
 
@@ -1748,6 +1791,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (validForm(left) && validForm(right)) {
         currentLeft  = left;
         currentRight = right;
+        try { if (!sessionStorage.getItem("arrivalSent")) { sessionStorage.setItem("arrivalSent", "1"); track("share_arrival", { combo: comboKey(left, right) }); } } catch (e) {}
     }
     histLoad(); histPush();
     const intro = !params.has("nointro") && !MENU_HASHES.includes(location.hash);
