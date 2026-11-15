@@ -899,7 +899,7 @@ function refreshBm() { const b = $("bookmarkBtn"), on = isBookmarked(currentLeft
 function shareToX() {
     const baseUrl = "https://actctzagi.github.io/w-simulator-unofficial/";
     const weaponsParam = weaponsVisible ? "" : "&w=0";   // 武器表示の状態をリンクに引き継ぐ
-    const shareUrl = `${baseUrl}?left=${encodeURIComponent(currentLeft)}&right=${encodeURIComponent(currentRight)}${weaponsParam}&v=2`;
+    const shareUrl = `${baseUrl}?left=${encodeURIComponent(currentLeft)}&right=${encodeURIComponent(currentRight)}${weaponsParam}&v=6`;
     const comboName = rawName(currentLeft) + rawName(currentRight);
     const text =
 `仮面ライダーW
