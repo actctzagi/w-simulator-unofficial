@@ -2,17 +2,27 @@
 <html lang="ja">
 
 <head>
+<script>
+(function () {
+  var h = document.documentElement;
+  var xm = /^#xfer=([A-Za-z0-9_-]+)$/.exec(location.hash);      
+  if (xm) { window.__xferPending = xm[1]; history.replaceState(null, "", location.pathname + location.search + "#library"); }
+  if (/(^|[?&])nointro(=|&|$)/.test(location.search) || ["#menu", "#about", "#history", "#library"].indexOf(location.hash) >= 0) return;
+  h.classList.add("intro-on", "intro-ui");
+  setTimeout(function () { if (!window.__introStarted) h.classList.remove("intro-on", "intro-ui"); }, 8000);     
+})();
+</script>
 
-<!-- Google tag (gtag.js) -->
+<!-- ▼ Googleアナリティクス -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-CNRSH4BJG3"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-CNRSH4BJG3');
 </script>
 
+<!-- ▼ メタデータ・画像リンク・ファビコン -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>【非公式】仮面ライダーW AtoZ／運命のシミュレーター</title>
@@ -21,173 +31,250 @@
 <meta property="og:url" content="https://actctzagi.github.io/w-simulator-unofficial/">
 <meta property="og:title" content="【非公式】仮面ライダーW AtoZ／運命のシミュレーター">
 <meta property="og:description" content="36本のガイアメモリで1296通りの運命をシミュレート!">
-<meta property="og:image" content="https://actctzagi.github.io/w-simulator-unofficial/images/link2.png?v=4">
+<meta property="og:image" content="https://actctzagi.github.io/w-simulator-unofficial/images/link2.png?v=5">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@actct_zagi">
 <meta name="twitter:title" content="【非公式】仮面ライダーW AtoZ／運命のシミュレーター">
 <meta name="twitter:description" content="36本のガイアメモリで1296通りの運命をシミュレート!">
-<meta name="twitter:image" content="https://actctzagi.github.io/w-simulator-unofficial/images/link2.png?v=4">
+<meta name="twitter:image" content="https://actctzagi.github.io/w-simulator-unofficial/images/link2.png?v=5">
 <link rel="preload" as="font" type="font/woff2" href="fonts/Corporate-Logo-Medium-ver3.woff2" crossorigin>
-<link rel="stylesheet" href="style.css?v=webp24">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Zen+Antique+Soft&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Zen+Antique+Soft&display=swap"></noscript>
+<link rel="stylesheet" href="style.css">
 <link rel="icon" type="image/png" href="images/favicon.png">
 </head>
 
+
+
 <body>
+<!-- ▼ 変身演出 -->
+<div id="introDim"></div>
+<img id="introEffect" src="images_webp/henshin.webp" alt="">
 
-<!-- ▼ ヘッダー  -->
-<header class="site-header">
-  <div class="header-bg"></div>
-  <img src="images_webp/header2.webp" class="header-title" alt="">
-</header>
+<!-- ▼ 描画物 -->
+<div id="stage" class="stage">
 
-<br>
-<br>
-<br>
+  <!-- ▼ 背景画像 -->
+  <div class="nightbox" aria-hidden="true">
+    <div class="ph"></div><div class="ph ph2"></div><div class="lit-layer"></div>
+    <div class="mill"></div>
+    <div class="lit-layer wm-red"></div>
+  </div>
+  <div class="glow" aria-hidden="true"></div>
+  <div class="glow glowc" aria-hidden="true"></div>
+  <div class="glow glowc2" aria-hidden="true"></div>
+  <div class="blk" aria-hidden="true"></div>
 
-<!-- ▼ viewerとフォーム名  -->
-<div class="layout">
-    <div id="viewer-area" class="viewer-area">
-
-        <div class="formNameWrapper">
-            <div class="formNameStatic">仮面ライダーW</div>
-            <div id="formNameDynamic" class="formNameDynamic">サイクロンジョーカー</div>
-        </div>
-
-        <div id="singleLayer" class="layer"><img id="singleImg"></div> 
-        <div id="eyesLayer" class="layer"><img id="eyesImg"></div>
-        <div id="leftHalf" class="layer"><img id="leftImg"></div>
-        <div id="rightHalf" class="layer"><img id="rightImg"></div>
-        <div id="wingsLayer" class="layer"><img id="wingsImg"></div>
-        <div id="capeLayer" class="layer"><img id="capeImg"></div>
-        <div id="mufflerLayer" class="layer"><img id="mufflerImg"></div>
-        <div id="weapon1Layer" class="layer"><img id="weapon1Img"></div>
-        <div id="weapon2Layer" class="layer"><img id="weapon2Img"></div>
+  <!-- ▼ ダブル本体 -->
+  <div id="viewer-area" class="viewer-area">
+        <div id="backgroundLayer" class="layer"></div>
+        <div id="muffler1Layer" class="layer"></div>
+        <div id="muffler2Layer" class="layer"></div>
+        <div id="wings2Layer" class="layer"></div>
+        <div id="wings1Layer" class="layer"></div>
+        <div id="capeLayer" class="layer"></div>
+        <div id="leftHalf" class="layer"></div>
+        <div id="rightHalf" class="layer"></div>
+        <div id="waist1Layer" class="layer"></div>
+        <div id="waist2Layer" class="layer"></div>
+        <div id="partitionLayer" class="layer"></div>
+        <div id="antennaLayer" class="layer"></div>
+        <div id="eyes2Layer" class="layer"></div>
+        <div id="eyes1Layer" class="layer"></div>
+        <div id="neckLayer" class="layer"></div>
+        <div id="driverLayer" class="layer"></div>
+        <div id="weapon2Layer" class="layer"></div>
+        <div id="weapon1Layer" class="layer"></div>
+        <div id="foregroundLayer" class="layer"></div>
         <div id="watermarkLayer" class="layer"><img id="watermarkImg" src="images_webp/watermark.webp"></div>
+        <div id="viewerDim"></div>
+  </div>
+
+  <!-- ▼ クレジット -->
+  <div id="creditBox" aria-hidden="true"><div id="credit"><i class="cbar"></i><div class="ctext"><span>A fan art of Kamen Rider W.</span><span>Created by @actct_zagi, 2026.</span><span>actctzagi.github.io/w-simulator-unofficial</span></div></div></div>
+
+  <!-- ▼ ページロゴ -->
+  <header class="top">
+    <img class="t" src="images_webp/title.webp" alt="【非公式】仮面ライダーW AtoZ／運命のシミュレーター">
+    <a class="m" id="menuBtn" href="#menu" aria-label="メニュー"><i class="gl"></i><i class="hn" aria-hidden="true">NEW!</i></a>
+  </header>
+
+  <!-- ▼ フォーム名 -->
+  <div class="nm" aria-live="polite">
+    <small>仮面ライダーW</small>
+    <b><i class="a" id="nameL"></i><i class="b" id="nameR"></i></b>
+  </div>
+
+  <!-- ▼ 4ボタン -->
+  <div class="tools" id="tools">
+    <input type="checkbox" id="ckWeapons" checked><input type="checkbox" id="ckAnim" checked>
+    <button class="tl" id="bookmarkBtn" type="button" aria-label="ブックマーク" aria-pressed="false">
+      <i class="ic-off ico bmgray" aria-hidden="true"></i>
+      <i class="bmgold" aria-hidden="true"></i>
+    </button>
+    <button class="tl" id="shareBtn" type="button" aria-label="Xにポスト">
+      <i class="ico xic" aria-hidden="true"></i>
+    </button>
+    <label class="tl" id="animBtn" for="ckAnim" aria-label="アニメ：ON／OFF"><span class="ib"><i class="ico pse"></i><i class="ico play"></i><svg class="sl" viewBox="0 0 100 100" aria-hidden="true"><polygon points="92.6,-6 108.2,-6 7.4,106 -8.2,106"/></svg></span></label>
+    <label class="tl" id="weaponBtn" for="ckWeapons" aria-label="武器：ON／OFF"><span class="ib"><i class="ico wpn"></i><svg class="sl" viewBox="0 0 100 100" aria-hidden="true"><polygon points="92.6,-6 108.2,-6 7.4,106 -8.2,106"/></svg></span></label>
+  </div>
+  <div class="fade" aria-hidden="true"></div>
+
+  <!-- ▼ 戻る／進むボタン -->
+  <div class="edge edge-l" id="edgeL" aria-label="ひとつ前に戻る" role="button"><i></i></div>
+  <div class="edge edge-r" id="edgeR" aria-label="ひとつ後に進む" role="button"><i></i></div>
+
+  <!-- ▼ 二大メモリ -->
+  <section class="sheet" id="sheet">
+    <div id="tgt"></div>
+  </section>
+
+  <!-- ▼ メモリ一覧 -->
+  <div class="mm" id="mm" aria-hidden="true">
+    <div class="mm-panel">
+      <div class="mm-bg" data-close></div>
+      <div class="mm-in">
+        <div class="mm-top" data-close></div>
+        <button class="mm-x" type="button" data-close aria-label="閉じる"></button>
+        <div id="mtgt"></div>
+        <div class="mm-list" id="mmList">
+          <div class="lwrap" id="lwrap">
+            <div class="scroll" id="sc"><div class="grid" id="grid"></div></div>
+            <div class="sfade"></div>
+          </div>
+        </div>
+      </div>
     </div>
-
-    <div id="leftPanel" class="side-panel" style="display:none;"></div>
-    <div id="rightPanel" class="side-panel" style="display:none;"></div>
-</div>
-
-<!-- ▼ 武器表示切り替えボタンとXボタン  -->
-<div class="button-row">
-<div id="toggleWeaponsWrapper">
-    <button id="toggleWeaponsBtn">
-        <img src="images_webp/weaponbtnbackground1.webp" alt="武器ボタン">
-        <span class="btn-text">武器を非表示にする</span>
-    </button>
-</div>
-
-<button id="shareBtn">
-  <img src="images_webp/sharebtnbackground.webp">
-  <span class="btn-text">これで決まりだ！</span>
-</button>
-</div>
-
-<!-- ▼ 左右選択ボタンと左右入れ替えボタン  -->
-<div class="form-selector-bar">
-    <button id="leftSelector" class="selector-btn frame-left">
-      <img class="selector-btn-img" src="images_webp/btn-cyclone.webp" alt="サイクロン">
-      <span class="selector-btn-label">サイクロン</span>
-      <div class="memory-description" id="leftMemoryDescription">疾風の記憶を持つガイアメモリ。疾風を引き起こし、風を自由自在に操る能力を与える。</div>
-    </button>
-
-    <button id="swapButton" class="swap-button">
-      <img src="images_webp/swap.webp" class="swap-icon" alt="swap">
-    </button>
-
-    <button id="rightSelector" class="selector-btn frame-right">
-      <img class="selector-btn-img" src="images_webp/btn-joker.webp" alt="ジョーカー">
-      <span class="selector-btn-label">ジョーカー</span>
-      <div class="memory-description" id="rightMemoryDescription">切札の記憶を持つガイアメモリ。運動能力を高め、格闘戦の技術を強化する。</div>
-    </button>
-</div>
-
-<!-- ▼ モーダル  -->
-<div id="memoryModal" class="modal">
-  <div class="modal-content">
-      <span id="closeModal" class="close">×</span>
-      <div id="modalGrid" class="modal-grid"></div>
   </div>
 </div>
 
-<br>
-<br>
-<br>
 
-<!-- ▼ 文章  -->
-<div class="info-panel">
-<p class="info-center">
-【遊び方】
-</p>
-<p>
-▶︎『仮面ライダーW』の非公式シミュレーターです。<br>
-▶︎ ガイアメモリをタップすることで36種類から選べます。<br>
-▶︎ <img src="images_webp/swap.webp" class="inline-icon">を押すと左右のメモリを入れ替えられます。<br>
-▶︎ 同じメモリ同士で組み合わせることもできます。<br>
-<!-- ▶︎ 「ファング」「スカル（左半身に挿した場合）」「????」「?????」「???????」などを使うと全身が変化します。<br>  -->
-▶︎ フォームチェンジの総数は現在1296種類。<br>
-▶︎ 中には<a href="https://note.com/actct_zagi/n/nf2e5860ec232" target="_blank">スペシャルな組み合わせ</a>も……?<br>
-</p>
 
-<br>
-<span class="divider"></span>
-<div class="info-smaller">
-※ 画像が表示されない場合は、10秒ほど待つと表示されます。<br>
-※ ガイアメモリの能力設定は『<a href="https://www.shogakukan.co.jp/books/09105133" target="_blank">仮面ライダーW超全集</a>』p132-133におけるT2ガイアメモリの解説文、および「<a href="https://www.kamen-rider-official.com/zukan/items/mode/categories?utf8=%E2%9C%93&item%5Bkamen_rider_id%5D=11" target="_blank">仮面ライダー図鑑</a>」の各記事に準拠しています｡<br>
-※ このページは非公式・非営利のファンサイトです。無断転載・商用利用などはお控えください。また、このページに掲載しているフォーム・アイテム・エフェクト等のデザインは、2025年12月時点で『仮面ライダーW』および『風都探偵』シリーズに登場しているものを除き、すべてページ制作者の個人的な解釈に基づく二次創作作品です。したがって、ページタイトル・ウォーターマーク・クレジット表記などにおいて「非公式」「UNOFFICIAL」「Fanmade content」の旨を明記しています。<br>
-</div>
+<!-- ▼ メニュー -->
+<nav class="mpanel" id="menu" aria-label="メニュー">
+  <div class="mbar"><b>MENU</b><a class="mx" href="#" aria-label="閉じる"><i></i><i></i><i></i></a></div>
+  <div class="mwrap">
+    <div class="mnav">
+      <a href="#library"><div><span>地球の本棚</span><small>GAIA LIBRARY</small></div><b class="new" id="libNew" hidden>NEW!</b><em>›</em></a>
+      <a href="#about"><div><span>遊び方</span><small>HOW TO PLAY</small></div><em>›</em></a>
+      <a href="#history"><div><span>更新履歴</span><small>UPDATES</small></div><em>›</em></a>
+    </div>
+    <ul class="mnote">
+      <li><span class="nk">※</span>画像が表示されない場合は､ 10秒ほど待つと表示されます｡</li>
+      <li><span class="nk">※</span>ガイアメモリの能力設定は､『<a href="https://www.shogakukan.co.jp/books/09105133" target="_blank">仮面ライダーW超全集</a>』p132-133におけるT2ガイアメモリの解説文､ および「<a href="https://www.kamen-rider-official.com/zukan/items/mode/categories?utf8=%E2%9C%93&item%5Bkamen_rider_id%5D=11" target="_blank">仮面ライダー図鑑</a>」の各記事を参考にしています｡</li>
+      <li><span class="nk">※</span>｢仮面ライダーW UNOFFICIAL AtoZ/運命のシミュレーター｣ は非公式・非営利のファンサイトです。無断転載・商用利用などはお控えください｡ また､ このページに掲載しているフォーム・アイテム・エフェクト等のデザインは､ 2025年12月時点で『仮面ライダーW』および『風都探偵』シリーズに登場しているものを除き､ すべてページ制作者の個人的な解釈に基づく二次創作作品です｡ したがって､ ページタイトル・ウォーターマーク・クレジット表記などにおいて ｢非公式｣｢UNOFFICIAL｣｢A fan art｣｢Fanmade content｣ の旨を明記しています｡</li>
+    </ul>
+  </div>
+</nav>
 
-<span class="divider"></span>
-<details class="history-toggle">
-<summary class="info-smaller">更新履歴</summary>
-<div class="info-smaller">
-・2026/9/30：UIを一部修正。メモリ選択画面を改造。<br>
-・2026/8/27：UIを一部修正。サイトの挙動を軽量化。<br>
-・2025/12/23：ユートピアを追加。<br>
-・2025/12/22：テラーを追加。<br>
-・2025/12/20：クレイドールを追加。<br>
-・2025/12/19：ナスカ (レベル3) を追加。<br>
-・2025/12/18：タブーを追加。<br>
-・2025/12/17：スミロドンを追加。<br>
-・2025/12/16：ボムを追加。<br>
-・2025/12/15：エンジンを追加。<br>
-・2025/12/14：トライアルを追加。<br>
-・2025/12/13：プリズムを追加。<br>
-・2025/12/12：ページ開設。アクセル〜ゾーンを追加。<br>
-</div>
-</details>
+<!-- ▼ 地球の本棚 -->
+<article class="mpanel mpage" id="library" aria-label="地球の本棚">
+  <div class="mbar"><a class="bk" href="#menu" aria-label="戻る"><svg viewBox="0 0 10 18" aria-hidden="true"><path d="M9 1.2L1.6 9L9 16.8" fill="none" stroke="currentColor" stroke-width="2.4"/></svg></a><a class="mx" href="#" aria-label="閉じる"><i></i><i></i><i></i></a></div>
+  <div class="mwrap">
+    <div class="lib-backw" aria-hidden="true"><canvas class="lib-back" id="libBack"></canvas></div>      
+    <h1>地球の本棚<small>GAIA LIBRARY</small></h1>
+    <div class="lib-top">
+      <div class="lib-count"><b id="libCount">0</b><span>/</span><i id="libTotal">1296</i><span id="libSep2" hidden>/</span><i id="libAll" hidden></i><em id="libRate"></em></div>
+    </div>
+    <div class="lib-bar">
+      <div class="lib-sw"><input class="lib-search" id="libSearch" type="search" placeholder="さあ、検索をはじめよう" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="フォームを検索"><button type="button" class="lib-xbtn" id="xferBtn" aria-haspopup="dialog">引き継ぎ</button></div>
+      <div class="lib-ctl" id="libCtl" role="group" aria-label="絞り込みと並び替え">
+        <div class="lib-r1"><button type="button" data-flt="all" class="on">ALL</button><button type="button" data-flt="bm">BOOKMARKS</button></div>
+        <div class="lib-r2"><button type="button" data-sort="new" class="on">NEW</button><button type="button" data-sort="old">OLD</button><button type="button" data-sort="name">NAME</button></div>
+      </div>
+    </div>
+    <div class="lib-grid" id="libGrid"></div>
+    <p class="lib-empty" id="libEmpty" hidden></p>
+  </div>
+  <div class="xf-modal" id="xfModal" role="dialog" aria-modal="true" aria-labelledby="xfTitle" hidden>
+    <div class="xf-card">
+      <button type="button" class="xf-x" id="xferClose" aria-label="閉じる"><i></i><i></i></button>
+      <h2 id="xfTitle">閲覧記録の引き継ぎ</h2>
+      <p class="lib-note">試したフォームとブックマークは、このブラウザ内に保存されています。別の端末やブラウザで続けるには、ここでコードを発行し、移行先で入力してください。</p>
+      <div class="xf-tabs" role="group" aria-label="発行と入力">
+        <button type="button" id="xferMake" aria-pressed="false">引き継ぎコードを発行</button>
+        <button type="button" id="xferOpen" aria-pressed="false">引き継ぎコードを入力</button>
+      </div>
+      <div class="lib-box" id="xferOutBox" hidden>
+        <div class="xf-row" id="xferRow">
+          <div class="xf-txt"><div class="xf-ta" id="xferOutWrap"><textarea id="xferOut" readonly spellcheck="false"></textarea></div><button type="button" id="xferCopy">コピー</button></div>
+          <div class="xf-qr" id="xferQr" aria-label="読み取り用のQRコード"></div>
+        </div>
+      </div>
+      <div class="lib-box" id="xferInBox" hidden>
+        <div class="xf-ta"><textarea id="xferIn" placeholder="コードを貼り付けてください" spellcheck="false" autocapitalize="off" autocomplete="off"></textarea></div>
+        <button type="button" id="xferLoad">読み込む</button>
+      </div>
+      <p class="lib-msg" id="xferMsg" hidden></p>
+    </div>
+  </div>
+</article>
 
-</div>
+<!-- ▼ 遊び方 -->
+<article class="mpanel mpage" id="about" aria-label="遊び方">
+  <div class="mbar"><a class="bk" href="#menu" aria-label="戻る"><svg viewBox="0 0 10 18" aria-hidden="true"><path d="M9 1.2L1.6 9L9 16.8" fill="none" stroke="currentColor" stroke-width="2.4"/></svg></a><a class="mx" href="#" aria-label="閉じる"><i></i><i></i><i></i></a></div>
+  <div class="mwrap">
+    <h1>遊び方<small>HOW TO PLAY</small></h1>
+    <ul>
+      <li>・<span id="memCount">36</span>種類のガイアメモリを組み合わせることで､ <span id="comboCount">1296</span>種類のフォームチェンジを試すことができます｡</li>
+      <li>・画面左をタップすると､ ひとつ前のフォームに戻ります｡</li>
+      <li>・画面右をタップすると､ ひとつ後のフォームに進みます｡</li>
+      <li>・ダブルドライバーをダブルタップすると､ ランダムなメモリ2本で変身します｡</li>
+      <li>・変身したフォームは【<a href="#library">地球の本棚</a>】に記憶されていきます｡ 本棚は<i class="mbk" aria-label="ブックマーク"></i>を長押しすることで開くこともできます｡</li>
+      <li>・中には<a href="https://note.com/actct_zagi/n/nf2e5860ec232" target="_blank">スペシャルな組み合わせ</a>も……?</li>
+    </ul>
+  </div>
+</article>
+
+<!-- ▼ 更新履歴 -->
+<article class="mpanel mpage" id="history" aria-label="更新履歴">
+  <div class="mbar"><a class="bk" href="#menu" aria-label="戻る"><svg viewBox="0 0 10 18" aria-hidden="true"><path d="M9 1.2L1.6 9L9 16.8" fill="none" stroke="currentColor" stroke-width="2.4"/></svg></a><a class="mx" href="#" aria-label="閉じる"><i></i><i></i><i></i></a></div>
+  <div class="mwrap">
+    <h1>更新履歴<small>UPDATES</small></h1>
+    <ul class="mhist">
+      <li><time>2026/11/15</time><span>サイトのデザインを大幅に変更｡<br>変身時のアニメ演出を追加｡<br>｢地球の本棚｣ 機能を追加｡<br>イラスト素材を総改修｡</span></li>
+      <li><time>2026/9/30</time><span>UIを一部修正。<br>メモリ選択画面を改造。</span></li>
+      <li><time>2026/8/27</time><span>UIを一部修正。<br>サイトの挙動を軽量化。</span></li>
+      <li><time>2025/12/23</time><span>ユートピアを追加。</span></li>
+      <li><time>2025/12/22</time><span>テラーを追加。</span></li>
+      <li><time>2025/12/20</time><span>クレイドールを追加。</span></li>
+      <li><time>2025/12/19</time><span>ナスカ (レベル3) を追加。</span></li>
+      <li><time>2025/12/18</time><span>タブーを追加。</span></li>
+      <li><time>2025/12/17</time><span>スミロドンを追加。</span></li>
+      <li><time>2025/12/16</time><span>ボムを追加。</span></li>
+      <li><time>2025/12/15</time><span>エンジンを追加。</span></li>
+      <li><time>2025/12/14</time><span>トライアルを追加。</span></li>
+      <li><time>2025/12/13</time><span>プリズムを追加。</span></li>
+      <li><time>2025/12/12</time><span>ページ開設。<br>アクセル〜ゾーンを追加。</span></li>
+    </ul>
+  </div>
+</article>
+
 
 
 <!-- ▼ フッター  -->
 <footer class="site-footer">
   <div class="footer-credits">
-    <div class="label">シミュレーター作成者：</div>
+    <div class="label">サイト&イラスト制作者：</div>
     <div class="value">
-      ザギザギ（<a href="https://x.com/actct_zagi" target="_blank">@actct_zagi</a>）
+      ザギザギ (<a href="https://x.com/actct_zagi" target="_blank">@actct_zagi</a>)
     </div>
-    <div class="label">イラスト素材作成者：</div>
+    <div class="label">メモリ背景素材作者様：</div>
     <div class="value">
-      ザギザギ（<a href="https://x.com/actct_zagi" target="_blank">@actct_zagi</a>）
-    </div>
-    <div class="label">メモリ背景作成者様：</div>
-    <div class="value">
-      はるりん（<a href="https://twitter.com/Harlin0420/status/1570038259417518080?s=20" target="_blank">@Harlin0420</a>）様
+      はるりん (<a href="https://twitter.com/Harlin0420/status/1570038259417518080?s=20" target="_blank">@Harlin0420</a>) 様
     </div>
   </div>
   <br>
   <div class="footer-copy">
-    Fanmade content by ZAGIZAGI 2025
+   Fanmade content by @actct_zagi 2025-2026
   </div>
-  <br>
 </footer>
 
-<img id="henshinEffect" src="images_webp/henshin.webp">
-<script src="script.js?v=webp26"></script>
+<script src="script.js"></script>
+<script src="henshin-slide.js"></script>
 </body>
-
 </html>
