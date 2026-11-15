@@ -1061,8 +1061,6 @@ function bindEdges() {
 /* =============================
    9. 二大メモリ
 ============================= */
-const INFO_FLIP_MS = 175;
-let infoFlip = false, infoFlipTimer = 0;
 let infoClosed = true;
 
 
@@ -1078,7 +1076,7 @@ function targetsHTML(neutral) {
         return `<div class="tbw"><div class="tb${here ? " dimmed" : ""}${eligible ? " go" : ""}${sel ? " sel" : ""}" data-side="${sd}">${vis}${arrow}</div></div>`;
     };
     const cap = (v, s) => `<div class="cm"><b>${memoryTitleText(labelOf(v))}</b><p>${memoryDescription(v, s)}</p></div>`;
-    return `<div class="tgt${infoClosed ? "" : " open"}${infoFlip ? " flip" : ""}">${one("L", currentLeft)}<span class="sw2" data-swap="1" role="button" aria-label="左右を入れ替える"><i></i></span>${one("R", currentRight)}<div class="cap">${cap(currentLeft, "left")}${cap(currentRight, "right")}</div><button class="info-tg" type="button" data-info="1" aria-label="解説を開く／閉じる"><i></i></button></div>`;
+    return `<div class="tgt${infoClosed ? "" : " open"}">${one("L", currentLeft)}<span class="sw2" data-swap="1" role="button" aria-label="左右を入れ替える"><i></i></span>${one("R", currentRight)}<div class="cap">${cap(currentLeft, "left")}${cap(currentRight, "right")}</div><button class="info-tg" type="button" data-info="1" aria-label="解説を開く／閉じる"></button></div>`;
 }
 
 
@@ -1146,8 +1144,6 @@ function bindTargets() {
     const toggleInfo = () => {
         infoClosed = !infoClosed;
         infoEls().forEach(el => el.classList.toggle("open", !infoClosed));
-        clearTimeout(infoFlipTimer);
-        infoFlipTimer = setTimeout(() => { infoFlip = !infoClosed; infoEls().forEach(el => el.classList.toggle("flip", infoFlip)); }, INFO_FLIP_MS);
     };
     const onTap = (e, onTb) => {
         if (e.target.closest("[data-swap]")) { swapLR(); return; }

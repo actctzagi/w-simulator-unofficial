@@ -49,6 +49,9 @@ const params = {
     flashGlowInnerPx: 7,   // 同・内側の、きつめのにじみ。外側と重ねて、目の近くを強く光らせる
     flashImg: "images_webp/bright-eyes.webp",
     flashImgFang: "images_webp/bright-eyesF.webp",
+    flashBlend: "plus-lighter",  // 発光の重ね方：plus-lighter（加算）／screen（スクリーン）／normal（通常）。加算に対応していない環境では、自動でスクリーンになる
+    flashDriver: true,     // ドライバーの発光（bright-driver）。目と同じタイミング・同じ書式で重ねる
+    flashDriverImg: "images_webp/bright-driver.webp",
 
     /* 操作の受付 */
     interrupt: true,       // 演出の途中で次の操作が来たら、いまの演出をそこで切り上げて、次の演出を始める
@@ -849,15 +852,16 @@ function fitWristWindows(slots, W, cx) {
 /* =====================================================================
    11. 複眼の発光
 ===================================================================== */
-function createFlashImg() {
+const blendValue = m => m === "plus-lighter" && !(window.CSS && CSS.supports && CSS.supports("mix-blend-mode", "plus-lighter")) ? "screen" : m;   // 加算に対応していない環境では、スクリーンにする
+function createFlashImg(kind) {
     if (findSpecial(currentLeft, currentRight).noGlow) return null;   
     const fang = currentLeft === "fang" || currentRight === "fang";
     const img = new Image();
-    img.src = fang ? params.flashImgFang : params.flashImg;
+    img.src = kind === "driver" ? params.flashDriverImg : fang ? params.flashImgFang : params.flashImg;
     Object.assign(img.style, {
         position: "absolute", left: "0", top: "0", width: "100%", height: "100%", objectFit: "contain",
         zIndex: "27", opacity: "0", pointerEvents: "none",         
-        mixBlendMode: "screen",                                    
+        mixBlendMode: blendValue(params.flashBlend),                                    
         filter: [params.flashGlowInnerPx, params.flashGlowPx].filter(px => px > 0).map(px => `drop-shadow(0 0 ${px}px #fff)`).join(" ") || "none",
     });
     return img;
@@ -1139,7 +1143,7 @@ async function playSlide(applyChange, opts = {}) {
 
     henshinPlaying = true;
 
-    let ctl = null, flashEl = null, fanOver = null, fanOverCtx = null, fMx = 0, fMy = 0;
+    let ctl = null, flashEl = null, flashEl2 = null, fanOver = null, fanOverCtx = null, fMx = 0, fMy = 0;
     const srcOf = l => l.img.currentSrc || l.img.src;
     try {
         const oldL = opts.from ? opts.from[0] : currentLeft, oldR = opts.from ? opts.from[1] : currentRight;
@@ -1157,8 +1161,10 @@ async function playSlide(applyChange, opts = {}) {
         await nextFrame();
         const newSnap = snapshotLayers(ALL_LAYERS);
         flashEl = P.flash > 0 && P.slideFlash ? createFlashImg() : null;
-        await decodeAll([...newSnap.map(l => l.img), ...(flashEl ? [flashEl] : [])]);
+        flashEl2 = flashEl && P.flashDriver ? createFlashImg("driver") : null;      // ドライバーの発光。目の発光と同時に出す
+        await decodeAll([...newSnap.map(l => l.img), ...(flashEl ? [flashEl] : []), ...(flashEl2 ? [flashEl2] : [])]);
         if (flashEl) viewer.appendChild(flashEl);
+        if (flashEl2) viewer.appendChild(flashEl2);
         const newMap = {};
         for (const l of newSnap) {
             const o = oldMap[l.id];
@@ -1221,10 +1227,11 @@ async function playSlide(applyChange, opts = {}) {
         let flashWarm = false, settled = false;
         const updateFlash = t => {
             if (!flashEl) return;
-            if (!flashWarm && t >= 120) { flashWarm = true; flashEl.style.opacity = "0.004"; }   
+            if (!flashWarm && t >= 120) { flashWarm = true; flashEl.style.opacity = "0.004"; if (flashEl2) flashEl2.style.opacity = "0.004"; }   
             const f = (t - tLand) / P.flashMs;
             const a = f < 0 || f >= 1 ? (f < 0 && flashWarm ? 0.004 : 0) : Math.min(1, (t - tLand) / P.flashRiseMs) * Math.pow(1 - f, P.flashDecay) * P.flash;
             flashEl.style.opacity = clamp(a);
+            if (flashEl2) flashEl2.style.opacity = clamp(a);
         };
         const render = t => {
             if (settled) { updateFlash(t); return; }    
@@ -1307,6 +1314,7 @@ async function playSlide(applyChange, opts = {}) {
         if (activeCtl === ctl) activeCtl = null;
         cv.remove();
         if (flashEl) flashEl.remove();
+        if (flashEl2) flashEl2.remove();
         if (fanOver) fanOver.remove();
         if (mySeq === slideSeq) {
             slidePrep = false; frozenEarly = false;
